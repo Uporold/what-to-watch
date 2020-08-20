@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import Main from "./main";
 import { fakeMoviesList } from "../../mock";
 
-it(`Should WelcomeScreen render correctly`, () => {
+it(`Should Main render correctly`, () => {
   const tree = renderer.create(<Main movies={fakeMoviesList} />).toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should WelcomeScreen render correctly 1`] = `
+exports[`Should Main render correctly 1`] = `
 Array [
   <section
     className="movie-card"
