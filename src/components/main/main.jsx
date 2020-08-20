@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Main({ movies }) {
+function Main({ movies, onMovieTitleClick }) {
   return (
     <>
       <section className="movie-card">
@@ -149,7 +149,10 @@ function Main({ movies }) {
                     height="175"
                   />
                 </div>
-                <h3 className="small-movie-card__title">
+                <h3
+                  className="small-movie-card__title"
+                  onClick={onMovieTitleClick}
+                >
                   <a className="small-movie-card__link" href="movie-page.html">
                     {movie}
                   </a>
@@ -185,6 +188,7 @@ function Main({ movies }) {
 
 Main.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onMovieTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;
