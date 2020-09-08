@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app";
-import { fakeMoviesList } from "./mock";
+import { movies } from "./mock/mock";
 
 ReactDOM.render(
   // eslint-disable-next-line react/prop-types
-  <App movies={fakeMoviesList} />,
+  <App movies={movies} />,
   document.getElementById("root")
 );

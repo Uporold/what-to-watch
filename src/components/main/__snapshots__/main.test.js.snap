@@ -257,106 +257,140 @@ Array [
       <div
         className="catalog__movies-list"
       >
-        <article
-          className="small-movie-card catalog__movies-card"
+        <div
+          className="catalog__movies-list"
         >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
+          <article
+            className="small-movie-card catalog__movies-card"
             onClick={[Function]}
+            onMouseEnter={[Function]}
           >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
             >
-              Batman
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
+              <img
+                alt="Gangs of new york"
+                height="175"
+                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/gangs_of_new_york.jpg"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="movie-page.html"
+              >
+                Gangs of new york
+              </a>
+            </h3>
+          </article>
+          <article
+            className="small-movie-card catalog__movies-card"
             onClick={[Function]}
+            onMouseEnter={[Function]}
           >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
             >
-              Lord Of The Rings
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
+              <img
+                alt="Moonrise Kingdom"
+                height="175"
+                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/moonrise-kingdom.jpg"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="movie-page.html"
+              >
+                Moonrise Kingdom
+              </a>
+            </h3>
+          </article>
+          <article
+            className="small-movie-card catalog__movies-card"
             onClick={[Function]}
+            onMouseEnter={[Function]}
           >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
             >
-              Star Wars
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
+              <img
+                alt="Pulp Fiction"
+                height="175"
+                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/pulp-fiction.jpg"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="movie-page.html"
+              >
+                Pulp Fiction
+              </a>
+            </h3>
+          </article>
+          <article
+            className="small-movie-card catalog__movies-card"
             onClick={[Function]}
+            onMouseEnter={[Function]}
           >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
             >
-              Deadpool
-            </a>
-          </h3>
-        </article>
+              <img
+                alt="Bronson"
+                height="175"
+                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/bronson.jpg"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="movie-page.html"
+              >
+                Bronson
+              </a>
+            </h3>
+          </article>
+          <article
+            className="small-movie-card catalog__movies-card"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <div
+              className="small-movie-card__image"
+            >
+              <img
+                alt="Midnight Special"
+                height="175"
+                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/midnight-special.jpg"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
+            >
+              <a
+                className="small-movie-card__link"
+                href="movie-page.html"
+              >
+                Midnight Special
+              </a>
+            </h3>
+          </article>
+        </div>
       </div>
       <div
         className="catalog__more"

@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import MoviesList from "../movies-list/movies-list";
 
-function Main({ movies, onMovieTitleClick }) {
+function Main({ movies, onSmallCardMovieClick }) {
   return (
     <>
       <section className="movie-card">
@@ -136,29 +137,10 @@ function Main({ movies, onMovieTitleClick }) {
           </ul>
 
           <div className="catalog__movies-list">
-            {movies.map((movie, index) => (
-              <article
-                key={`${movie}_${index}`}
-                className="small-movie-card catalog__movies-card"
-              >
-                <div className="small-movie-card__image">
-                  <img
-                    src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                    alt="Fantastic Beasts: The Crimes of Grindelwald"
-                    width="280"
-                    height="175"
-                  />
-                </div>
-                <h3
-                  className="small-movie-card__title"
-                  onClick={onMovieTitleClick}
-                >
-                  <a className="small-movie-card__link" href="movie-page.html">
-                    {movie}
-                  </a>
-                </h3>
-              </article>
-            ))}
+            <MoviesList
+              movies={movies}
+              onSmallCardMovieClick={onSmallCardMovieClick}
+            />
           </div>
 
           <div className="catalog__more">
@@ -187,8 +169,14 @@ function Main({ movies, onMovieTitleClick }) {
 }
 
 Main.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      posterImage: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
+  onSmallCardMovieClick: PropTypes.func.isRequired,
 };
 
 export default Main;

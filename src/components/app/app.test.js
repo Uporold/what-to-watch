@@ -1,10 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app";
-import { fakeMoviesList } from "../../mock";
+import { movies } from "../../mock/mock";
 
 it(`Render App`, () => {
-  const tree = renderer.create(<App movies={fakeMoviesList} />).toJSON();
+  const tree = renderer.create(<App movies={movies} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
