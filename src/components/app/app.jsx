@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "../main/main";
 import MoviePage from "../movie-page/movie-page";
+import { projectPropTypes } from "../../utilities/project-prop-types";
 
 /* function App({ movies }) {
   const [currentPage, setPage] = React.useState(`main`);
@@ -48,30 +49,36 @@ class App extends PureComponent {
       currentPage: `main`,
       currentMovie: this.props.movies[0],
     };
-    this.movieTitleClickHandler = this.movieTitleClickHandler.bind(this);
+    // this.movieTitleClickHandler = this.movieTitleClickHandler.bind(this);
   }
 
-  movieTitleClickHandler(movie) {
+  movieCardClickHandler = (movie) => {
     this.setState({
       currentPage: `film`,
       currentMovie: movie,
     });
-  }
+  };
 
-  renderApp(currentPage, currentMovie) {
-    //const { currentPage, currentMovie } = this.state;
+  renderApp(currentPage, currentMovie, movies) {
+    // const { currentPage, currentMovie } = this.state;
 
     if (currentPage === `main`) {
       return (
         <Main
-          movies={this.props.movies}
-          onSmallCardMovieClick={this.movieTitleClickHandler}
+          movies={movies}
+          onSmallCardMovieClick={this.movieCardClickHandler}
         />
       );
     }
 
     if (currentPage === `film`) {
-      return <MoviePage movie={currentMovie} />;
+      return (
+        <MoviePage
+          movie={currentMovie}
+          movies={movies}
+          onSmallCardMovieClick={this.movieCardClickHandler}
+        />
+      );
     }
 
     return null;
@@ -79,42 +86,30 @@ class App extends PureComponent {
 
   render() {
     const { currentPage, currentMovie } = this.state;
+    const { movies } = this.props;
     return (
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            {this.renderApp(currentPage, currentMovie)}
-          </Route>
-          <Route exact path="/dev-film">
-            <MoviePage movie={currentMovie} />;
-          </Route>
-        </Switch>
-      </Router>
+      <>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              {this.renderApp(currentPage, currentMovie, movies)}
+            </Route>
+            <Route exact path={`/films/${currentMovie.id}`}>
+              <MoviePage
+                movie={currentMovie}
+                movies={movies}
+                onSmallCardMovieClick={this.movieCardClickHandler}
+              />
+            </Route>
+          </Switch>
+        </Router>
+      </>
     );
   }
 }
 
 App.propTypes = {
-  movies: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      posterImage: PropTypes.string.isRequired,
-      backgroundImage: PropTypes.string.isRequired,
-      backgroundColor: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      scoresCount: PropTypes.number.isRequired,
-      director: PropTypes.string.isRequired,
-      starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-      runtime: PropTypes.number.isRequired,
-      genre: PropTypes.string.isRequired,
-      released: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-      isFavorite: PropTypes.bool.isRequired,
-      videoLink: PropTypes.string.isRequired,
-      previewVideoLink: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+  movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
 };
 
 export default App;

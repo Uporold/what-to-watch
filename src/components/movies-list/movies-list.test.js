@@ -1,18 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { BrowserRouter as Router } from "react-router-dom";
-import SmallMovieCard from "./small-movie-card";
+import MoviesList from "./movies-list";
 import { movies } from "../../mock/movies";
 
-it(`Should Movie Card render correctly`, () => {
+it(`Should Movies List render correctly`, () => {
   const tree = renderer
     .create(
       <Router>
-        <SmallMovieCard
-          onSmallCardMovieClick={() => {}}
-          movie={movies[0]}
-          onHover={() => {}}
-        />
+        <MoviesList movies={movies} onSmallCardMovieClick={() => {}} />
       </Router>,
       {
         createNodeMock: () => {

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list";
+import { projectPropTypes } from "../../utilities/project-prop-types";
 
 function Main({ movies, onSmallCardMovieClick }) {
   return (
@@ -169,13 +170,7 @@ function Main({ movies, onSmallCardMovieClick }) {
 }
 
 Main.propTypes = {
-  movies: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      posterImage: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired
-  ).isRequired,
+  movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
   onSmallCardMovieClick: PropTypes.func.isRequired,
 };
 

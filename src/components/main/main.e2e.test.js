@@ -1,8 +1,9 @@
 import React from "react";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+import { BrowserRouter as Router } from "react-router-dom";
 import Main from "./main";
-import { movies } from "../../mock/mock";
+import { movies } from "../../mock/movies";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -13,7 +14,9 @@ it(`Should movie title button be pressed`, () => {
   const evt = { preventDefault: jest.fn };
 
   const main = mount(
-    <Main movies={movies} onSmallCardMovieClick={onSmallCardMovieClick} />
+    <Router>
+      <Main movies={movies} onSmallCardMovieClick={onSmallCardMovieClick} />
+    </Router>
   );
 
   const movieTitleButtons = main.find(`.small-movie-card`);

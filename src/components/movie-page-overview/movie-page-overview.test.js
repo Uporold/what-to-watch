@@ -1,15 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
+import MoviePageOverview from "./movie-page-overview";
 import { movies } from "../../mock/movies";
 
-it(`Render App`, () => {
+it(`Should Movie Page Overview render correctly`, () => {
   const tree = renderer
-    .create(<App movies={movies} />, {
-      createNodeMock: () => {
-        return {};
-      },
-    })
+    .create(<MoviePageOverview movie={movies[0]} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

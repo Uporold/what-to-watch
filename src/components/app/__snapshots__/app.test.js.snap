@@ -264,131 +264,131 @@ Array [
             className="small-movie-card catalog__movies-card"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            onMouseOut={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <a
+              className="small-movie-card__link"
+              href="/films/1"
+              onClick={[Function]}
             >
-              <img
-                alt="Gangs of new york"
-                height="175"
-                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/gangs_of_new_york.jpg"
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="movie-page.html"
+              <div
+                className="small-movie-card__image"
+              >
+                <video
+                  height="175"
+                  width="280"
+                />
+              </div>
+              <h3
+                className="small-movie-card__title"
               >
                 Gangs of new york
-              </a>
-            </h3>
+              </h3>
+            </a>
           </article>
           <article
             className="small-movie-card catalog__movies-card"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            onMouseOut={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <a
+              className="small-movie-card__link"
+              href="/films/2"
+              onClick={[Function]}
             >
-              <img
-                alt="Moonrise Kingdom"
-                height="175"
-                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/moonrise-kingdom.jpg"
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="movie-page.html"
+              <div
+                className="small-movie-card__image"
+              >
+                <video
+                  height="175"
+                  width="280"
+                />
+              </div>
+              <h3
+                className="small-movie-card__title"
               >
                 Moonrise Kingdom
-              </a>
-            </h3>
+              </h3>
+            </a>
           </article>
           <article
             className="small-movie-card catalog__movies-card"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            onMouseOut={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <a
+              className="small-movie-card__link"
+              href="/films/3"
+              onClick={[Function]}
             >
-              <img
-                alt="Pulp Fiction"
-                height="175"
-                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/pulp-fiction.jpg"
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="movie-page.html"
+              <div
+                className="small-movie-card__image"
+              >
+                <video
+                  height="175"
+                  width="280"
+                />
+              </div>
+              <h3
+                className="small-movie-card__title"
               >
                 Pulp Fiction
-              </a>
-            </h3>
+              </h3>
+            </a>
           </article>
           <article
             className="small-movie-card catalog__movies-card"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            onMouseOut={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <a
+              className="small-movie-card__link"
+              href="/films/4"
+              onClick={[Function]}
             >
-              <img
-                alt="Bronson"
-                height="175"
-                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/bronson.jpg"
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="movie-page.html"
+              <div
+                className="small-movie-card__image"
+              >
+                <video
+                  height="175"
+                  width="280"
+                />
+              </div>
+              <h3
+                className="small-movie-card__title"
               >
                 Bronson
-              </a>
-            </h3>
+              </h3>
+            </a>
           </article>
           <article
             className="small-movie-card catalog__movies-card"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            onMouseOut={[Function]}
           >
-            <div
-              className="small-movie-card__image"
+            <a
+              className="small-movie-card__link"
+              href="/films/5"
+              onClick={[Function]}
             >
-              <img
-                alt="Midnight Special"
-                height="175"
-                src="https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/midnight-special.jpg"
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-            >
-              <a
-                className="small-movie-card__link"
-                href="movie-page.html"
+              <div
+                className="small-movie-card__image"
+              >
+                <video
+                  height="175"
+                  width="280"
+                />
+              </div>
+              <h3
+                className="small-movie-card__title"
               >
                 Midnight Special
-              </a>
-            </h3>
+              </h3>
+            </a>
           </article>
         </div>
       </div>

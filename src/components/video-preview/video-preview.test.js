@@ -1,15 +1,19 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { BrowserRouter as Router } from "react-router-dom";
-import Main from "./main";
 import { movies } from "../../mock/movies";
+import VideoPreview from "./video-preview";
 
-it(`Should Main render correctly`, () => {
+it(`VideoPreview is rendered correctly`, () => {
+  const { previewVideoLink, previewImage } = movies[0];
+
   const tree = renderer
     .create(
-      <Router>
-        <Main movies={movies} onSmallCardMovieClick={() => {}} />
-      </Router>,
+      <VideoPreview
+        isMuted
+        poster={previewImage}
+        source={previewVideoLink}
+        isPlaying={false}
+      />,
       {
         createNodeMock: () => {
           return {};

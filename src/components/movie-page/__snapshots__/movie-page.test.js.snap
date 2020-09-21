@@ -4,6 +4,11 @@ exports[`Should Movie Page render correctly 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
+    style={
+      Object {
+        "background": "#A6B7AC",
+      }
+    }
   >
     <div
       className="movie-card__hero"
@@ -166,26 +171,29 @@ Array [
                 <a
                   className="movie-nav__link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Overview
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Details
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Reviews
                 </a>
@@ -206,7 +214,7 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                370881
+                Very good
               </span>
               <span
                 className="movie-rating__count"
@@ -259,99 +267,29 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseOut={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            className="small-movie-card__link"
+            href="/films/3"
+            onClick={[Function]}
           >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
             >
-              Fantastic Beasts: The Crimes of Grindelwald
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Bohemian Rhapsody"
-              height="175"
-              src="img/bohemian-rhapsody.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+              <video
+                height="175"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
             >
-              Bohemian Rhapsody
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Macbeth"
-              height="175"
-              src="img/macbeth.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Macbeth
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Aviator"
-              height="175"
-              src="img/aviator.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Aviator
-            </a>
-          </h3>
+              Pulp Fiction
+            </h3>
+          </a>
         </article>
       </div>
     </section>

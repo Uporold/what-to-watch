@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPreview is rendered correctly 1`] = `
+<video
+  height="175"
+  width="280"
+/>
+`;
