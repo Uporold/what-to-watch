@@ -1,10 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Main from "../main/main";
 import MoviePage from "../movie-page/movie-page";
 import { projectPropTypes } from "../../utilities/project-prop-types";
-
+import Main from "../main/main";
 /* function App({ movies }) {
   const [currentPage, setPage] = React.useState(`main`);
   const [currentMovie, setMovie] = React.useState(movies[0]);
@@ -42,65 +41,26 @@ import { projectPropTypes } from "../../utilities/project-prop-types";
 } */
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentPage: `main`,
-      currentMovie: this.props.movies[0],
-    };
-    // this.movieTitleClickHandler = this.movieTitleClickHandler.bind(this);
-  }
-
-  movieCardClickHandler = (movie) => {
-    this.setState({
-      currentPage: `film`,
-      currentMovie: movie,
-    });
-  };
-
-  renderApp(currentPage, currentMovie, movies) {
-    // const { currentPage, currentMovie } = this.state;
-
-    if (currentPage === `main`) {
-      return (
-        <Main
-          movies={movies}
-          onSmallCardMovieClick={this.movieCardClickHandler}
-        />
-      );
-    }
-
-    if (currentPage === `film`) {
-      return (
-        <MoviePage
-          movie={currentMovie}
-          movies={movies}
-          onSmallCardMovieClick={this.movieCardClickHandler}
-        />
-      );
-    }
-
-    return null;
-  }
-
   render() {
-    const { currentPage, currentMovie } = this.state;
     const { movies } = this.props;
+    const getMovieById = (id) => {
+      return movies.find((movie) => movie.id === parseInt(id, 10));
+    };
     return (
       <>
         <Router>
           <Switch>
             <Route exact path="/">
-              {this.renderApp(currentPage, currentMovie, movies)}
+              <Main movies={movies} />
             </Route>
-            <Route exact path={`/films/${currentMovie.id}`}>
-              <MoviePage
-                movie={currentMovie}
-                movies={movies}
-                onSmallCardMovieClick={this.movieCardClickHandler}
-              />
-            </Route>
+            <Route
+              path="/films/:id"
+              render={({ match }) => {
+                const { id } = match.params;
+                const movie = getMovieById(id);
+                return <MoviePage movie={movie} movies={movies} />;
+              }}
+            />
           </Switch>
         </Router>
       </>

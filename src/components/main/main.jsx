@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 
-function Main({ movies, onSmallCardMovieClick }) {
+function Main({ movies }) {
   return (
     <>
       <section className="movie-card">
@@ -138,10 +138,7 @@ function Main({ movies, onSmallCardMovieClick }) {
           </ul>
 
           <div className="catalog__movies-list">
-            <MoviesList
-              movies={movies}
-              onSmallCardMovieClick={onSmallCardMovieClick}
-            />
+            <MoviesList movies={movies} />
           </div>
 
           <div className="catalog__more">
@@ -171,7 +168,6 @@ function Main({ movies, onSmallCardMovieClick }) {
 
 Main.propTypes = {
   movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
-  onSmallCardMovieClick: PropTypes.func.isRequired,
 };
 
 export default Main;

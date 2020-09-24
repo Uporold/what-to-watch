@@ -69,7 +69,7 @@ class MoviePage extends PureComponent {
       backgroundColor,
     } = this.props.movie;
 
-    const { onSmallCardMovieClick, movies, movie } = this.props;
+    const { movies, movie } = this.props;
     const { activeNavBar } = this.state;
     return (
       <>
@@ -189,7 +189,6 @@ class MoviePage extends PureComponent {
 MoviePage.propTypes = {
   movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
   movie: projectPropTypes.MOVIE.isRequired,
-  onSmallCardMovieClick: PropTypes.func.isRequired,
 };
 
 export default MoviePage;
