@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 import MoviePage from "../movie-page/movie-page";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import Main from "../main/main";
@@ -72,4 +73,9 @@ App.propTypes = {
   movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+});
+
+export { App };
+export default connect(mapStateToProps)(App);

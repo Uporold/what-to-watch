@@ -161,10 +161,7 @@ class MoviePage extends PureComponent {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <MoviesList
-              movies={this.getRelatedVideos(movie, movies)}
-              onSmallCardMovieClick={onSmallCardMovieClick}
-            />
+            <MoviesList movies={this.getRelatedVideos(movie, movies)} />
           </section>
 
           <footer className="page-footer">

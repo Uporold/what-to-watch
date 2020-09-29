@@ -27,3 +27,27 @@ export const getSlicedReviews = (reviews) => {
 };
 
 export const movieNavs = [`overview`, `details`, `reviews`];
+
+export const getMoviesGenres = (movies) => {
+  const genres = new Set(
+    movies
+      .map((movie) => movie.genre)
+      .sort((a, b) => {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+      })
+  );
+  return [`All genres`, ...genres];
+};
+
+export const getMoviesByGenre = (movies, genre) => {
+  if (genre === `All genres`) {
+    return movies;
+  }
+  return movies.filter((movie) => movie.genre === genre);
+};
+
+export const extend = (state, newStateValue) => {
+  return { ...state, ...newStateValue };
+};

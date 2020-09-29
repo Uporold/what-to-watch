@@ -6,7 +6,6 @@ exports[`Should Movies List render correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseOut={[Function]}
   >
@@ -32,7 +31,6 @@ exports[`Should Movies List render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseOut={[Function]}
   >
@@ -58,7 +56,6 @@ exports[`Should Movies List render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseOut={[Function]}
   >
@@ -84,7 +81,6 @@ exports[`Should Movies List render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseOut={[Function]}
   >
@@ -110,7 +106,6 @@ exports[`Should Movies List render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseOut={[Function]}
   >
