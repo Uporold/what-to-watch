@@ -1,15 +1,21 @@
 import { movies } from "../mock/movies";
 import { getMoviesByGenre } from "../utilities/util";
+import { DEFAULT_GENRE } from "../utilities/const";
+
+const CUT_LENGTH = 2;
 
 export const initialState = {
   movies,
   moviesByGenre: movies,
-  currentGenre: `All genres`,
+  showedMoviesCount: CUT_LENGTH,
+  currentGenre: DEFAULT_GENRE,
 };
 
 export const ActionType = {
   GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
+  SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   SET_GENRE: `SET_GENRE`,
+  SET_DEFAULT_MOVIES_COUNT: `SET_DEFAULT_MOVIES_COUNT`,
 };
 
 export const ActionCreator = {
@@ -27,6 +33,16 @@ export const ActionCreator = {
       payload: genre,
     };
   },
+
+  showMoreMovies: () => ({
+    type: ActionType.SHOW_MORE_MOVIES,
+    payload: CUT_LENGTH,
+  }),
+
+  setDefaultMoviesCount: () => ({
+    type: ActionType.SET_DEFAULT_MOVIES_COUNT,
+    payload: CUT_LENGTH,
+  }),
 };
 
 export const reducer = (state = initialState, action) => {
@@ -35,6 +51,13 @@ export const reducer = (state = initialState, action) => {
       return { ...state, moviesByGenre: action.payload };
     case ActionType.SET_GENRE:
       return { ...state, currentGenre: action.payload };
+    case ActionType.SHOW_MORE_MOVIES:
+      return {
+        ...state,
+        showedMoviesCount: state.showedMoviesCount + action.payload,
+      };
+    case ActionType.SET_DEFAULT_MOVIES_COUNT:
+      return { ...state, showedMoviesCount: action.payload };
     default:
       return state;
   }

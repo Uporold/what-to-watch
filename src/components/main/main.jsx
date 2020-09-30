@@ -6,9 +6,19 @@ import MoviesList from "../movies-list/movies-list";
 import Genres from "../genres/genres";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import { getMoviesGenres } from "../../utilities/util";
+import ShowMoreButton from "../show-more-button/show-more-button";
+import { DEFAULT_GENRE } from "../../utilities/const";
 
-export const Main = ({ movies, moviesByGenre, currentGenre, onGenreClick }) => {
+export const Main = ({
+  movies,
+  moviesByGenre,
+  currentGenre,
+  onGenreClick,
+  onShowMoreButtonClick,
+  showedMoviesCount,
+}) => {
   const genres = getMoviesGenres(movies);
+  const slicedMovies = moviesByGenre.slice(0, showedMoviesCount);
   return (
     <>
       <section className="movie-card">
@@ -95,13 +105,16 @@ export const Main = ({ movies, moviesByGenre, currentGenre, onGenreClick }) => {
             onGenreClick={onGenreClick}
           />
 
-          <MoviesList movies={moviesByGenre} />
+          <MoviesList movies={slicedMovies} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
+          {(movies.length > slicedMovies.length &&
+            currentGenre === DEFAULT_GENRE) ||
+          (slicedMovies.length < moviesByGenre.length &&
+            currentGenre !== DEFAULT_GENRE) ? (
+            <ShowMoreButton onShowMoreButtonClick={onShowMoreButtonClick} />
+          ) : (
+            ``
+          )}
         </section>
 
         <footer className="page-footer">
@@ -128,17 +141,25 @@ Main.propTypes = {
     .isRequired,
   currentGenre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
+  showedMoviesCount: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentGenre: state.currentGenre,
   moviesByGenre: state.moviesByGenre,
+  showedMoviesCount: state.showedMoviesCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick(genre) {
+    dispatch(ActionCreator.setDefaultMoviesCount());
     dispatch(ActionCreator.getMovies(genre));
     dispatch(ActionCreator.setGenre(genre));
+  },
+
+  onShowMoreButtonClick() {
+    dispatch(ActionCreator.showMoreMovies());
   },
 });
 

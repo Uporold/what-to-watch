@@ -39,3 +39,35 @@ it(`Reducer should return right genre films`, () => {
     moviesByGenre: getMoviesByGenre(movies, `Crime`),
   });
 });
+
+it(`Reducer should show more button increase movies count correctly`, () => {
+  expect(
+    reducer(
+      {
+        showedMoviesCount: 2,
+      },
+      {
+        type: ActionType.SHOW_MORE_MOVIES,
+        payload: 2,
+      }
+    )
+  ).toEqual({
+    showedMoviesCount: 4,
+  });
+});
+
+it(`Reducer should reset movies count correctly`, () => {
+  expect(
+    reducer(
+      {
+        showedMoviesCount: 2,
+      },
+      {
+        type: ActionType.SET_DEFAULT_MOVIES_COUNT,
+        payload: 2,
+      }
+    )
+  ).toEqual({
+    showedMoviesCount: 2,
+  });
+});

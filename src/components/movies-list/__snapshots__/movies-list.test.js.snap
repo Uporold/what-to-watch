@@ -129,5 +129,55 @@ exports[`Should Movies List render correctly 1`] = `
       </h3>
     </a>
   </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseOut={[Function]}
+  >
+    <a
+      className="small-movie-card__link"
+      href="/films/6"
+      onClick={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          height="175"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        Miidnight Special
+      </h3>
+    </a>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseOut={[Function]}
+  >
+    <a
+      className="small-movie-card__link"
+      href="/films/7"
+      onClick={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          height="175"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        Miiidnight Special
+      </h3>
+    </a>
+  </article>
 </div>
 `;

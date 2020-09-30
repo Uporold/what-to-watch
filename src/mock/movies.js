@@ -210,4 +210,54 @@ export const movies = [
       "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
     reviews: [],
   },
+  {
+    name: "Miidnight Special",
+    posterImage:
+      "https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Midnight_Special.jpg",
+    previewImage:
+      "https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/midnight-special.jpg",
+    backgroundImage:
+      "https://htmlacademy-react-3.appspot.com/wtw/static/film/background/Midnight_Special.jpg",
+    backgroundColor: "#828585",
+    description:
+      "A father and son go on the run, pursued by the government and a cult drawn to the child's special powers.",
+    rating: 3.3,
+    scoresCount: 67815,
+    director: "Jeff Nichols",
+    starring: ["Michael Shannon", "Joel Edgerton", "Kirsten Dunst "],
+    runtime: 112,
+    genre: "Action",
+    released: 2016,
+    id: 6,
+    isFavorite: false,
+    videoLink: "http://media.xiph.org/mango/tears_of_steel_1080p.webm",
+    previewVideoLink:
+      "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+    reviews: [],
+  },
+  {
+    name: "Miiidnight Special",
+    posterImage:
+      "https://htmlacademy-react-3.appspot.com/wtw/static/film/poster/Midnight_Special.jpg",
+    previewImage:
+      "https://htmlacademy-react-3.appspot.com/wtw/static/film/preview/midnight-special.jpg",
+    backgroundImage:
+      "https://htmlacademy-react-3.appspot.com/wtw/static/film/background/Midnight_Special.jpg",
+    backgroundColor: "#828585",
+    description:
+      "A father and son go on the run, pursued by the government and a cult drawn to the child's special powers.",
+    rating: 3.3,
+    scoresCount: 67815,
+    director: "Jeff Nichols",
+    starring: ["Michael Shannon", "Joel Edgerton", "Kirsten Dunst "],
+    runtime: 112,
+    genre: "Action",
+    released: 2016,
+    id: 7,
+    isFavorite: false,
+    videoLink: "http://media.xiph.org/mango/tears_of_steel_1080p.webm",
+    previewVideoLink:
+      "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+    reviews: [],
+  },
 ];
