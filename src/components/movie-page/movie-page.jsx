@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import MovieNav from "../movie-nav/movie-nav";
 import MoviePageOverview from "../movie-page-overview/movie-page-overview";
 import MoviePageDetails from "../movie-page-details/movie-page-details";
@@ -114,7 +115,8 @@ class MoviePage extends PureComponent {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button
+                  <Link
+                    to={`/player/${movie.id}`}
                     className="btn btn--play movie-card__button"
                     type="button"
                   >
@@ -122,7 +124,7 @@ class MoviePage extends PureComponent {
                       <use xlinkHref="#play-s" />
                     </svg>
                     <span>Play</span>
-                  </button>
+                  </Link>
                   <button
                     className="btn btn--list movie-card__button"
                     type="button"
