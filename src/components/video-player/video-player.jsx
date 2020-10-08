@@ -1,5 +1,6 @@
 import React, { createRef, PureComponent } from "react";
 import { projectPropTypes } from "../../utilities/project-prop-types";
+import { TIME_IN_SECONDS } from "../../utilities/const";
 
 class VideoPlayer extends PureComponent {
   constructor(props) {
@@ -62,6 +63,23 @@ class VideoPlayer extends PureComponent {
     this.videoRef.current.requestFullscreen();
   }
 
+  getTimeLeft() {
+    const { currentTime, duration } = this.state;
+    const timeLeft = duration - currentTime;
+
+    const formatTime = (time) => {
+      return time < 10 ? `0${time}` : time;
+    };
+
+    const minutes = formatTime(Math.floor(timeLeft / TIME_IN_SECONDS.MINUTE));
+    const seconds = formatTime(Math.floor(timeLeft % TIME_IN_SECONDS.MINUTE));
+    const hours = formatTime(Math.floor(timeLeft / TIME_IN_SECONDS.HOUR));
+
+    return hours > 1
+      ? `${hours}:${minutes}:${seconds}`
+      : `${minutes}:${seconds}`;
+  }
+
   renderPlayButton() {
     return (
       <button
@@ -114,8 +132,9 @@ class VideoPlayer extends PureComponent {
   }
 
   render() {
-    const { isPlaying, duration } = this.state;
+    const { isPlaying, duration, currentTime } = this.state;
     const { movie } = this.props;
+    const togglePosition = (currentTime / duration) * 100;
     return (
       <div className="player">
         <video ref={this.videoRef} className="player__video" />
@@ -126,12 +145,19 @@ class VideoPlayer extends PureComponent {
         <div className="player__controls">
           <div className="player__controls-row">
             <div className="player__time">
-              <progress className="player__progress" value="30" max="100" />
-              <div className="player__toggler" style={{ left: "30%" }}>
+              <progress
+                className="player__progress"
+                value={currentTime}
+                max={duration}
+              />
+              <div
+                className="player__toggler"
+                style={{ left: `${togglePosition}%` }}
+              >
                 Toggler
               </div>
             </div>
-            <div className="player__time-value">{duration}</div>
+            <div className="player__time-value">{this.getTimeLeft()}</div>
           </div>
 
           <div className="player__controls-row">
