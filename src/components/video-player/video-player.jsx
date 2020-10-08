@@ -1,6 +1,7 @@
 import React, { createRef, PureComponent } from "react";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import { TIME_IN_SECONDS } from "../../utilities/const";
+import history from "../../history";
 
 class VideoPlayer extends PureComponent {
   constructor(props) {
@@ -61,6 +62,10 @@ class VideoPlayer extends PureComponent {
 
   onFullscreenClickHandler() {
     this.videoRef.current.requestFullscreen();
+  }
+
+  onExitButtonClickHandler() {
+    history.goBack();
   }
 
   getTimeLeft() {
@@ -139,7 +144,11 @@ class VideoPlayer extends PureComponent {
       <div className="player">
         <video ref={this.videoRef} className="player__video" />
 
-        <button type="button" className="player__exit">
+        <button
+          onClick={this.onExitButtonClickHandler}
+          type="button"
+          className="player__exit"
+        >
           Exit
         </button>
         <div className="player__controls">
