@@ -14,7 +14,7 @@ class SmallMovieCard extends PureComponent {
   }
 
   render() {
-    const { onHover, movie } = this.props;
+    const { movie } = this.props;
     const { isPlaying } = this.state;
     const { id, previewVideoLink, previewImage, name } = movie;
 
@@ -25,7 +25,6 @@ class SmallMovieCard extends PureComponent {
           this.setState({
             isPlaying: true,
           });
-          onHover(movie);
           console.log(`Playing`);
         }}
         onMouseOut={() => {
@@ -98,7 +97,6 @@ SmallMovieCard.propTypes = {
     id: PropTypes.number.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
   }).isRequired,
-  onHover: PropTypes.func.isRequired,
 };
 
 export default SmallMovieCard;
