@@ -8,6 +8,7 @@ import MoviePageReviews from "../movie-page-reviews/movie-page-reviews";
 import MoviesList from "../movies-list/movies-list";
 import { movieNavs } from "../../utilities/util";
 import { projectPropTypes } from "../../utilities/project-prop-types";
+import Footer from "../footer/footer";
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -166,19 +167,7 @@ class MoviePage extends PureComponent {
             <MoviesList movies={this.getRelatedVideos(movie, movies)} />
           </section>
 
-          <footer className="page-footer">
-            <div className="logo">
-              <a href="main.html" className="logo__link logo__link--light">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="copyright">
-              <p>© 2019 What to watch Ltd.</p>
-            </div>
-          </footer>
+          <Footer />
         </div>
       </>
     );
