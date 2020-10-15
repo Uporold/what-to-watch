@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const MovieNav = ({ tabs, currentNav, onNavClickHandler }) => {
+const MovieNav = ({ tabs, currentNav, onNavClick }) => {
+  const onNavClickHandler = (tab) => (evt) => {
+    evt.preventDefault();
+    onNavClick(tab);
+  };
   const renderNavItem = () => {
     return (
       <>
@@ -15,10 +19,7 @@ const MovieNav = ({ tabs, currentNav, onNavClickHandler }) => {
             <a
               href="#"
               className="movie-nav__link"
-              onClick={(evt) => {
-                evt.preventDefault();
-                onNavClickHandler(tab);
-              }}
+              onClick={onNavClickHandler(tab)}
             >
               {tab.charAt(0).toUpperCase() + tab.replace(`-`, ` `).slice(1)}
             </a>
@@ -37,7 +38,7 @@ const MovieNav = ({ tabs, currentNav, onNavClickHandler }) => {
 MovieNav.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentNav: PropTypes.string.isRequired,
-  onNavClickHandler: PropTypes.func.isRequired,
+  onNavClick: PropTypes.func.isRequired,
 };
 
 export default MovieNav;

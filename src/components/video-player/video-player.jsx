@@ -55,18 +55,18 @@ class VideoPlayer extends PureComponent {
     video.ontimeupdate = null;
   }
 
-  onButtonClickHandler() {
+  onFullscreenClickHandler = () => {
+    this.videoRef.current.requestFullscreen();
+  };
+
+  onExitButtonClickHandler = () => {
+    history.goBack();
+  };
+
+  onButtonClickHandler = () => {
     const { isPlaying } = this.state;
     this.setState({ isPlaying: !isPlaying });
-  }
-
-  onFullscreenClickHandler() {
-    this.videoRef.current.requestFullscreen();
-  }
-
-  onExitButtonClickHandler() {
-    history.goBack();
-  }
+  };
 
   getTimeLeft() {
     const { currentTime, duration } = this.state;
@@ -88,9 +88,7 @@ class VideoPlayer extends PureComponent {
   renderPlayButton() {
     return (
       <button
-        onClick={() => {
-          this.onButtonClickHandler();
-        }}
+        onClick={this.onButtonClickHandler}
         type="button"
         className="player__play"
       >
@@ -105,9 +103,7 @@ class VideoPlayer extends PureComponent {
   renderPauseButton() {
     return (
       <button
-        onClick={() => {
-          this.onButtonClickHandler();
-        }}
+        onClick={this.onButtonClickHandler}
         type="button"
         className="player__play"
       >
@@ -122,9 +118,7 @@ class VideoPlayer extends PureComponent {
   renderFullscreenButton() {
     return (
       <button
-        onClick={() => {
-          this.onFullscreenClickHandler();
-        }}
+        onClick={this.onFullscreenClickHandler}
         type="button"
         className="player__full-screen"
       >

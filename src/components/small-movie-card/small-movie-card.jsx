@@ -1,4 +1,4 @@
-import React, { useState, PureComponent } from "react";
+import React, {PureComponent } from "react";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
@@ -13,6 +13,20 @@ class SmallMovieCard extends PureComponent {
     };
   }
 
+  onMouseMoveHandler = (status) => () => {
+    this.setState({
+      isPlaying: status,
+    });
+  };
+
+  // onMouseMoveHandler(status) {
+  //   return () => {
+  //     this.setState({
+  //       isPlaying: status,
+  //     });
+  //   };
+  // }
+
   render() {
     const { movie } = this.props;
     const { isPlaying } = this.state;
@@ -21,18 +35,8 @@ class SmallMovieCard extends PureComponent {
     return (
       <article
         key={`${id}`}
-        onMouseEnter={() => {
-          this.setState({
-            isPlaying: true,
-          });
-          console.log(`Playing`);
-        }}
-        onMouseOut={() => {
-          this.setState({
-            isPlaying: false,
-          });
-          console.log(`Not playing`);
-        }}
+        onMouseEnter={this.onMouseMoveHandler(true)}
+        onMouseOut={this.onMouseMoveHandler(false)}
         className="small-movie-card catalog__movies-card"
       >
         <Link className="small-movie-card__link" to={`/films/${movie.id}`}>

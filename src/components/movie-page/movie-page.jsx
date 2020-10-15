@@ -17,19 +17,17 @@ class MoviePage extends PureComponent {
     this.state = {
       activeNavBar: `overview`,
     };
-
-    this.onNavClickHandler = this.onNavClickHandler.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     this.setDefaultState(prevProps);
   }
 
-  onNavClickHandler(navBar) {
+  onNavClick = (navBar) => {
     this.setState({
       activeNavBar: navBar,
     });
-  }
+  };
 
   setDefaultState(prevProps) {
     const { movie } = this.props;
@@ -153,7 +151,7 @@ class MoviePage extends PureComponent {
                 <MovieNav
                   tabs={movieNavs}
                   currentNav={activeNavBar}
-                  onNavClickHandler={this.onNavClickHandler}
+                  onNavClick={this.onNavClick}
                 />
                 {this.renderActiveMovieNavInfo(activeNavBar)}
               </div>

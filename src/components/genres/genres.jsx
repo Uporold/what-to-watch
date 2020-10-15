@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Genres = ({ genres, currentGenre, onGenreClick }) => {
+  const onGenreClickHandler = (genre) => (evt) => {
+    evt.preventDefault();
+    onGenreClick(genre);
+  };
   return (
     <ul className="catalog__genres-list">
       {genres.map((genre) => (
@@ -14,10 +18,7 @@ const Genres = ({ genres, currentGenre, onGenreClick }) => {
           <a
             href="#"
             className="catalog__genres-link"
-            onClick={(evt) => {
-              evt.preventDefault();
-              onGenreClick(genre);
-            }}
+            onClick={onGenreClickHandler(genre)}
           >
             {genre}
           </a>
