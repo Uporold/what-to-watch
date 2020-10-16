@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { ActionCreator as AppActionCreator } from "../../redux/app/app";
-import {ActionCreator as DataActionCreator} from "../../redux/data/data";
+import { ActionCreator as DataActionCreator } from "../../redux/data/data";
 import MoviesList from "../movies-list/movies-list";
 import Genres from "../genres/genres";
 import { projectPropTypes } from "../../utilities/project-prop-types";
@@ -142,7 +142,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick(genre) {
-    dispatch(AppActionCreator.setDefaultMoviesCount());
+    dispatch(DataActionCreator.setDefaultMoviesCount());
     dispatch(AppActionCreator.setGenre(genre));
   },
 

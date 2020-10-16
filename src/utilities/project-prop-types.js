@@ -20,18 +20,14 @@ export const projectPropTypes = {
     previewVideoLink: PropTypes.string.isRequired,
   }),
 
-  REVIEWS: PropTypes.shape({
-    reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        comment: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-        user: PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string.isRequired,
-        }).isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
+  REVIEW: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  }),
 };
