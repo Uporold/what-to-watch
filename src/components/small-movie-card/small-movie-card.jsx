@@ -1,4 +1,4 @@
-import React, {PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
@@ -13,12 +13,11 @@ class SmallMovieCard extends PureComponent {
     };
   }
 
-  onMouseMoveHandler = (status) => () => {
+  onMouseMoveHandler = (isPlaying) => () => {
     this.setState({
-      isPlaying: status,
+      isPlaying,
     });
   };
-
   // onMouseMoveHandler(status) {
   //   return () => {
   //     this.setState({

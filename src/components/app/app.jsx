@@ -6,6 +6,7 @@ import MoviePage from "../movie-page/movie-page";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import Main from "../main/main";
 import VideoPlayer from "../video-player/video-player";
+import NameSpace from "../../redux/name-space";
 /* function App({ movies }) {
   const [currentPage, setPage] = React.useState(`main`);
   const [currentMovie, setMovie] = React.useState(movies[0]);
@@ -53,7 +54,7 @@ class App extends PureComponent {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Main movies={movies} />
+              <Main />
             </Route>
             <Route
               path="/films/:id"
@@ -83,7 +84,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
+  movies: state[NameSpace.DATA].movies,
 });
 
 export { App };

@@ -1,24 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { ActionCreator } from "../../redux/reducer";
+import { ActionCreator as AppActionCreator } from "../../redux/app/app";
+import {ActionCreator as DataActionCreator} from "../../redux/data/data";
 import MoviesList from "../movies-list/movies-list";
 import Genres from "../genres/genres";
 import { projectPropTypes } from "../../utilities/project-prop-types";
-import { getMoviesGenres } from "../../utilities/util";
+import { getMoviesGenres, getMoviesByGenre } from "../../utilities/util";
 import ShowMoreButton from "../show-more-button/show-more-button";
 import { DEFAULT_GENRE } from "../../utilities/const";
 import Footer from "../footer/footer";
+import NameSpace from "../../redux/name-space";
 
 export const Main = ({
   movies,
-  moviesByGenre,
   currentGenre,
   onGenreClick,
   onShowMoreButtonClick,
   showedMoviesCount,
 }) => {
   const genres = getMoviesGenres(movies);
+  const moviesByGenre = getMoviesByGenre(movies, currentGenre);
   const slicedMovies = moviesByGenre.slice(0, showedMoviesCount);
   return (
     <>
@@ -126,8 +128,6 @@ export const Main = ({
 
 Main.propTypes = {
   movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
-  moviesByGenre: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired)
-    .isRequired,
   currentGenre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
@@ -135,20 +135,19 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  currentGenre: state.currentGenre,
-  moviesByGenre: state.moviesByGenre,
-  showedMoviesCount: state.showedMoviesCount,
+  currentGenre: state[NameSpace.APP].currentGenre,
+  movies: state[NameSpace.DATA].movies,
+  showedMoviesCount: state[NameSpace.DATA].showedMoviesCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick(genre) {
-    dispatch(ActionCreator.setDefaultMoviesCount());
-    dispatch(ActionCreator.getMovies(genre));
-    dispatch(ActionCreator.setGenre(genre));
+    dispatch(AppActionCreator.setDefaultMoviesCount());
+    dispatch(AppActionCreator.setGenre(genre));
   },
 
   onShowMoreButtonClick() {
-    dispatch(ActionCreator.showMoreMovies());
+    dispatch(DataActionCreator.showMoreMovies());
   },
 });
 
