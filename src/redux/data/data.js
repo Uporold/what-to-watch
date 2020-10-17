@@ -1,15 +1,17 @@
-import { createMovie, createReview } from "../adapter/adapter";
+import { createMovie } from "../adapter/adapter";
 
 const CUT_LENGTH = 4;
 
 export const initialState = {
   movies: [],
+  promoMovie: {},
   movieReviews: [],
   showedMoviesCount: CUT_LENGTH,
 };
 
 export const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   SET_DEFAULT_MOVIES_COUNT: `SET_DEFAULT_MOVIES_COUNT`,
@@ -19,6 +21,13 @@ export const ActionCreator = {
   loadMovies: (data) => {
     return {
       type: ActionType.LOAD_MOVIES,
+      payload: data,
+    };
+  },
+
+  loadPromoMovie: (data) => {
+    return {
+      type: ActionType.LOAD_PROMO_MOVIE,
       payload: data,
     };
   },
@@ -49,6 +58,13 @@ export const Operation = {
     });
   },
 
+  loadPromoMovie: () => (dispatch, getState, api) => {
+    return api.get(`/films/promo`).then((response) => {
+      const loadedPromo = createMovie(response.data);
+      dispatch(ActionCreator.loadPromoMovie(loadedPromo));
+    });
+  },
+
   loadMovieReviews: (movieId) => (dispatch, getState, api) => {
     return api.get(`/comments/${movieId}`).then((response) => {
       const loadedComments = response.data.map((comment) => comment);
@@ -61,6 +77,8 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_MOVIES:
       return { ...state, movies: action.payload };
+    case ActionType.LOAD_PROMO_MOVIE:
+      return { ...state, promoMovie: action.payload };
     case ActionType.LOAD_MOVIE_REVIEWS:
       return { ...state, movieReviews: action.payload };
     case ActionType.SHOW_MORE_MOVIES:

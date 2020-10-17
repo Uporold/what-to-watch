@@ -16,9 +16,9 @@ const store = createStore(
 );
 
 store.dispatch(DataOperation.loadMovies());
+store.dispatch(DataOperation.loadPromoMovie());
 
 ReactDOM.render(
-  // eslint-disable-next-line react/prop-types
   <Provider store={store}>
     <App />
   </Provider>,
