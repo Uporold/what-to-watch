@@ -7,6 +7,7 @@ import { projectPropTypes } from "../../utilities/project-prop-types";
 import Main from "../main/main";
 import VideoPlayer from "../video-player/video-player";
 import NameSpace from "../../redux/name-space";
+import history from "../../history";
 /* function App({ movies }) {
   const [currentPage, setPage] = React.useState(`main`);
   const [currentMovie, setMovie] = React.useState(movies[0]);
@@ -51,7 +52,7 @@ class App extends PureComponent {
     };
     return (
       <>
-        <Router>
+        <Router history={history}>
           <Switch>
             <Route exact path="/">
               <Main />
