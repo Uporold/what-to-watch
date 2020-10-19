@@ -4,7 +4,7 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { getSlicedReviews } from "../../utilities/util";
 import { projectPropTypes } from "../../utilities/project-prop-types";
-import NameSpace from "../../redux/name-space";
+import { getMovieReviews } from "../../redux/data/selectors";
 import { Operation } from "../../redux/data/data";
 
 class MoviePageReviews extends PureComponent {
@@ -66,7 +66,7 @@ MoviePageReviews.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  movieReviews: state[NameSpace.DATA].movieReviews,
+  movieReviews: getMovieReviews(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

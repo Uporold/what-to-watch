@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "../header/header";
-import NameSpace from "../../redux/name-space";
+import { getPromoMovie } from "../../redux/data/selectors";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 
 const MoviePromoCard = ({ promoMovie }) => {
@@ -67,7 +67,7 @@ MoviePromoCard.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  promoMovie: state[NameSpace.DATA].promoMovie,
+  promoMovie: getPromoMovie(state),
 });
 
 export { MoviePromoCard };

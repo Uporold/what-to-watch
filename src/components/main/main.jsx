@@ -6,23 +6,27 @@ import { ActionCreator as DataActionCreator } from "../../redux/data/data";
 import MoviesList from "../movies-list/movies-list";
 import Genres from "../genres/genres";
 import { projectPropTypes } from "../../utilities/project-prop-types";
-import { getMoviesGenres, getMoviesByGenre } from "../../utilities/util";
 import ShowMoreButton from "../show-more-button/show-more-button";
 import { DEFAULT_GENRE } from "../../utilities/const";
 import Footer from "../footer/footer";
-import NameSpace from "../../redux/name-space";
 import MoviePromoCard from "../movie-promo-card/movie-promo-card";
+import {
+  getAllGenres,
+  getAllMovies,
+  getShowedMovies,
+  getFilteredMoviesByGenre,
+} from "../../redux/data/selectors";
+import { getActiveGenre } from "../../redux/app/selectors";
 
 export const Main = ({
   movies,
+  moviesByGenre,
+  showedMoviesByGenre,
   currentGenre,
+  genres,
   onGenreClick,
   onShowMoreButtonClick,
-  showedMoviesCount,
 }) => {
-  const genres = getMoviesGenres(movies);
-  const moviesByGenre = getMoviesByGenre(movies, currentGenre);
-  const slicedMovies = moviesByGenre.slice(0, showedMoviesCount);
   return (
     <>
       <MoviePromoCard />
@@ -36,11 +40,11 @@ export const Main = ({
             onGenreClick={onGenreClick}
           />
 
-          <MoviesList movies={slicedMovies} />
+          <MoviesList movies={showedMoviesByGenre} />
 
-          {(movies.length > slicedMovies.length &&
+          {(movies.length > showedMoviesByGenre.length &&
             currentGenre === DEFAULT_GENRE) ||
-          (slicedMovies.length < moviesByGenre.length &&
+          (showedMoviesByGenre.length < moviesByGenre.length &&
             currentGenre !== DEFAULT_GENRE) ? (
             <ShowMoreButton onShowMoreButtonClick={onShowMoreButtonClick} />
           ) : (
@@ -56,16 +60,22 @@ export const Main = ({
 
 Main.propTypes = {
   movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
+  moviesByGenre: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired)
+    .isRequired,
+  showedMoviesByGenre: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired)
+    .isRequired,
   currentGenre: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  showedMoviesCount: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currentGenre: state[NameSpace.APP].currentGenre,
-  movies: state[NameSpace.DATA].movies,
-  showedMoviesCount: state[NameSpace.DATA].showedMoviesCount,
+  currentGenre: getActiveGenre(state),
+  genres: getAllGenres(state),
+  movies: getAllMovies(state),
+  moviesByGenre: getFilteredMoviesByGenre(state),
+  showedMoviesByGenre: getShowedMovies(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
