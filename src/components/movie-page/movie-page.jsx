@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import MovieNav from "../movie-nav/movie-nav";
 import MoviePageOverview from "../movie-page-overview/movie-page-overview";
 import MoviePageDetails from "../movie-page-details/movie-page-details";
@@ -9,7 +8,6 @@ import MoviesList from "../movies-list/movies-list";
 import { movieNavs } from "../../utilities/util";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import Footer from "../footer/footer";
-import Header from "../header/header";
 import MovieCardHero from "../movie-card-hero/movie-card-hero";
 
 class MoviePage extends PureComponent {
@@ -62,14 +60,7 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {
-      backgroundImage,
-      name,
-      genre,
-      released,
-      posterImage,
-      backgroundColor,
-    } = this.props.movie;
+    const { name, posterImage, backgroundColor } = this.props.movie;
 
     const { movies, movie } = this.props;
     const { activeNavBar } = this.state;

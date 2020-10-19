@@ -8,41 +8,6 @@ import Main from "../main/main";
 import VideoPlayer from "../video-player/video-player";
 import NameSpace from "../../redux/name-space";
 import history from "../../history";
-/* function App({ movies }) {
-  const [currentPage, setPage] = React.useState(`main`);
-  const [currentMovie, setMovie] = React.useState(movies[0]);
-  const movieTitleClickHandler = (movie) => {
-    setPage(`film`);
-    setMovie(movie);
-  };
-
-  const render = () => {
-    if (currentPage === `main`) {
-      return (
-        <Main movies={movies} onSmallCardMovieClick={movieTitleClickHandler} />
-      );
-    }
-
-    if (currentPage === `film`) {
-      return <MoviePage movie={currentMovie} />;
-    }
-
-    return null;
-  };
-
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          {render()}
-        </Route>
-        <Route exact path="/dev-film">
-          <MoviePage movie={currentMovie} />;
-        </Route>
-      </Switch>
-    </Router>
-  );
-} */
 
 class App extends PureComponent {
   render() {
@@ -58,6 +23,7 @@ class App extends PureComponent {
               <Main />
             </Route>
             <Route
+              exact
               path="/films/:id"
               render={({ match }) => {
                 const { id } = match.params;
@@ -66,6 +32,7 @@ class App extends PureComponent {
               }}
             />
             <Route
+              exact
               path="/player/:id"
               render={({ match }) => {
                 const { id } = match.params;
