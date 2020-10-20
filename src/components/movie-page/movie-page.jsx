@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import MovieNav from "../movie-nav/movie-nav";
 import MoviePageOverview from "../movie-page-overview/movie-page-overview";
 import MoviePageDetails from "../movie-page-details/movie-page-details";
@@ -9,6 +10,7 @@ import { movieNavs } from "../../utilities/util";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import Footer from "../footer/footer";
 import MovieCardHero from "../movie-card-hero/movie-card-hero";
+import { getAllMovies, getCurrentMovie } from "../../redux/data/selectors";
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -108,4 +110,11 @@ MoviePage.propTypes = {
   movie: projectPropTypes.MOVIE.isRequired,
 };
 
-export default MoviePage;
+const mapStateToProps = (state, { match: { params } }) => ({
+  movie: getCurrentMovie(params.id)(state),
+  movies: getAllMovies(state),
+});
+
+export { MoviePage };
+
+export default connect(mapStateToProps)(MoviePage);

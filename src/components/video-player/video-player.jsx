@@ -1,7 +1,9 @@
 import React, { createRef, PureComponent } from "react";
+import { connect } from "react-redux";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import { TIME_IN_SECONDS } from "../../utilities/const";
 import history from "../../history";
+import { getCurrentMovie } from "../../redux/data/selectors";
 
 class VideoPlayer extends PureComponent {
   constructor(props) {
@@ -179,4 +181,9 @@ VideoPlayer.propTypes = {
   movie: projectPropTypes.MOVIE.isRequired,
 };
 
-export default VideoPlayer;
+const mapStateToProps = (state, { match: { params } }) => ({
+  movie: getCurrentMovie(params.id)(state),
+});
+
+export { VideoPlayer };
+export default connect(mapStateToProps)(VideoPlayer);

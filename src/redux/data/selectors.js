@@ -24,3 +24,8 @@ export const getShowedMovies = createSelector(
   getShowedMoviesCount,
   (movies, count) => movies.slice(0, count)
 );
+
+export const getCurrentMovie = (id) =>
+  createSelector(getAllMovies, (movies) =>
+    movies.find((movie) => movie.id === Number(id))
+  );
