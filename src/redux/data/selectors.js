@@ -8,6 +8,7 @@ export const getPromoMovie = (state) => state[NameSpace.DATA].promoMovie;
 export const getMovieReviews = (state) => state[NameSpace.DATA].movieReviews;
 export const getShowedMoviesCount = (state) =>
   state[NameSpace.DATA].showedMoviesCount;
+export const getLoadingStatus = (state) => state[NameSpace.DATA].isDataLoading;
 
 export const getAllGenres = createSelector(getAllMovies, (movies) =>
   getMoviesGenres(movies)

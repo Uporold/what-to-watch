@@ -62,22 +62,25 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const { name, posterImage, backgroundColor } = this.props.movie;
-
     const { movies, movie } = this.props;
     const { activeNavBar } = this.state;
     return (
       <>
         <section
           className="movie-card movie-card--full"
-          style={{ background: backgroundColor }}
+          style={{ background: movie.backgroundColor }}
         >
           <MovieCardHero movie={movie} />
 
           <div className="movie-card__wrap movie-card__translate-top">
             <div className="movie-card__info">
               <div className="movie-card__poster movie-card__poster--big">
-                <img src={posterImage} alt={name} width="218" height="327" />
+                <img
+                  src={movie.posterImage}
+                  alt={movie.name}
+                  width="218"
+                  height="327"
+                />
               </div>
 
               <div className="movie-card__desc">

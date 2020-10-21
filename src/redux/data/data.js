@@ -7,6 +7,7 @@ export const initialState = {
   promoMovie: {},
   movieReviews: [],
   showedMoviesCount: CUT_LENGTH,
+  isDataLoading: true,
 };
 
 export const ActionType = {
@@ -15,6 +16,7 @@ export const ActionType = {
   LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   SET_DEFAULT_MOVIES_COUNT: `SET_DEFAULT_MOVIES_COUNT`,
+  FINISH_LOADING: `FINISH_LOADING`,
 };
 
 export const ActionCreator = {
@@ -48,6 +50,13 @@ export const ActionCreator = {
     type: ActionType.SET_DEFAULT_MOVIES_COUNT,
     payload: CUT_LENGTH,
   }),
+
+  finishLoading: () => {
+    return {
+      type: ActionType.FINISH_LOADING,
+      payload: false,
+    };
+  },
 };
 
 export const Operation = {
@@ -55,6 +64,7 @@ export const Operation = {
     return api.get(`/films`).then((response) => {
       const loadedMovies = response.data.map((movie) => createMovie(movie));
       dispatch(ActionCreator.loadMovies(loadedMovies));
+      dispatch(ActionCreator.finishLoading());
     });
   },
 
@@ -88,6 +98,8 @@ export const reducer = (state = initialState, action) => {
       };
     case ActionType.SET_DEFAULT_MOVIES_COUNT:
       return { ...state, showedMoviesCount: action.payload };
+    case ActionType.FINISH_LOADING:
+      return { ...state, isDataLoading: action.payload };
     default:
       return state;
   }
