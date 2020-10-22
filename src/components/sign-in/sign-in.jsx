@@ -1,16 +1,40 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, createRef } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Header from "../header/header";
 import Footer from "../footer/footer";
+import { Operation } from "../../redux/user/user";
 
 class SignIn extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.emailRef = createRef();
+    this.passwordRef = createRef();
+  }
+
+  handleSubmit = (evt) => {
+    const { onSubmit } = this.props;
+
+    evt.preventDefault();
+
+    onSubmit({
+      email: this.emailRef.current.value,
+      password: this.passwordRef.current.value,
+    });
+  };
+
   render() {
     return (
       <div className="user-page">
-       <Header />
+        <Header />
 
         <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form">
+          <form
+            action="#"
+            className="sign-in__form"
+            onSubmit={this.handleSubmit}
+          >
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input
@@ -19,6 +43,7 @@ class SignIn extends PureComponent {
                   placeholder="Email address"
                   name="user-email"
                   id="user-email"
+                  ref={this.emailRef}
                 />
                 <label
                   className="sign-in__label visually-hidden"
@@ -34,6 +59,7 @@ class SignIn extends PureComponent {
                   placeholder="Password"
                   name="user-password"
                   id="user-password"
+                  ref={this.passwordRef}
                 />
                 <label
                   className="sign-in__label visually-hidden"
@@ -57,6 +83,16 @@ class SignIn extends PureComponent {
   }
 }
 
-SignIn.propTypes = {};
+SignIn.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
-export default SignIn;
+export { SignIn };
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(authData) {
+    dispatch(Operation.login(authData));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);

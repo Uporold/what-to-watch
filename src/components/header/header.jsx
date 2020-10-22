@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getAuthorizationStatus, getUser } from "../../redux/user/selectors";
 
-const Header = (props) => {
+const Header = ({ authorizationStatus, user }) => {
   return (
     <header className="page-header movie-card__head">
       <div className="logo">
@@ -13,14 +16,40 @@ const Header = (props) => {
       </div>
 
       <div className="user-block">
-        <div className="user-block__avatar">
-          <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
-        </div>
+        {authorizationStatus ? (
+          <div className="user-block__avatar">
+            <img
+              src={user.avatar}
+              alt={user.email}
+              width="63"
+              height="63"
+            />
+          </div>
+        ) : (
+          <Link to="/login" className="user-block__link">
+            Sign in
+          </Link>
+        )}
       </div>
     </header>
   );
 };
 
-Header.propTypes = {};
+Header.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
+  authorizationStatus: PropTypes.bool.isRequired,
+};
 
-export default Header;
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  user: getUser(state),
+});
+
+export { Header };
+
+export default connect(mapStateToProps)(Header);
