@@ -4,14 +4,23 @@ import { createUser } from "../adapter/adapter";
 export const initialState = {
   authorizationStatus: false,
   user: {},
+  isAuthorizationLoading: true,
 };
 
 export const ActionType = {
   SET_AUTHORIZATION_STATUS: `SET_AUTHORIZATION_STATUS`,
   GET_USER_DATA: `GET_USER_DATA`,
+  FINISH_AUTHORIZATION: `FINISH_AUTHORIZATION`,
 };
 
 export const ActionCreator = {
+  finishAuthorizationLoading: () => {
+    return {
+      type: ActionType.FINISH_AUTHORIZATION,
+      payload: false,
+    };
+  },
+
   setAuthorizationStatus: (status) => {
     return {
       type: ActionType.SET_AUTHORIZATION_STATUS,
@@ -33,6 +42,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, authorizationStatus: action.payload };
     case ActionType.GET_USER_DATA:
       return { ...state, user: action.payload };
+    case ActionType.FINISH_AUTHORIZATION:
+      return { ...state, isAuthorizationLoading: action.payload };
     default:
       return state;
   }
@@ -45,9 +56,11 @@ export const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setAuthorizationStatus(true));
         dispatch(ActionCreator.getUserData(createUser(response.data)));
+        dispatch(ActionCreator.finishAuthorizationLoading());
       })
       .catch(() => {
         dispatch(ActionCreator.setAuthorizationStatus(false));
+        dispatch(ActionCreator.finishAuthorizationLoading());
       });
   },
 
