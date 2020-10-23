@@ -7,7 +7,7 @@ import { projectPropTypes } from "../../utilities/project-prop-types";
 const RATING_STARS = [1, 2, 3, 4, 5];
 
 class AddReview extends PureComponent {
-  construct(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
