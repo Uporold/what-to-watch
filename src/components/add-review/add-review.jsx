@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { getCurrentMovie } from "../../redux/data/selectors";
-import { MoviePage } from "../movie-page/movie-page";
 import { projectPropTypes } from "../../utilities/project-prop-types";
+import Header from "../header/header";
+import Breadcrumbs from "../breadcrumbs/breadcrumbs";
 
 const RATING_STARS = [1, 2, 3, 4, 5];
 
@@ -18,8 +19,12 @@ class AddReview extends PureComponent {
 
   render() {
     const { movie } = this.props;
+    console.log(movie);
     return (
-      <section className="movie-card movie-card--full">
+      <section
+        className="movie-card movie-card--full"
+        style={{ background: movie.backgroundColor }}
+      >
         <div className="movie-card__header">
           <div className="movie-card__bg">
             <img src={movie.backgroundImage} alt={movie.name} />
@@ -27,39 +32,9 @@ class AddReview extends PureComponent {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <nav className="breadcrumbs">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">
-                    The Grand Budapest Hotel
-                  </a>
-                </li>
-                <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
-                </li>
-              </ul>
-            </nav>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img
-                  src="img/avatar.jpg"
-                  alt="User avatar"
-                  width="63"
-                  height="63"
-                />
-              </div>
-            </div>
-          </header>
+          <Header>
+            <Breadcrumbs movie={movie} />
+          </Header>
 
           <div className="movie-card__poster movie-card__poster--small">
             <img
@@ -94,7 +69,7 @@ class AddReview extends PureComponent {
               </div>
             </div>
 
-            <div className="add-review__text">
+            <div className="add-review__text" style={{ background: `rgba(255, 255, 255, 0.4)` }}>
               <textarea
                 className="add-review__textarea"
                 name="review-text"
@@ -118,10 +93,10 @@ AddReview.propTypes = {
   movie: projectPropTypes.MOVIE.isRequired,
 };
 
-export { AddReview };
-
 const mapStateToProps = (state, { match: { params } }) => ({
   movie: getCurrentMovie(params.id)(state),
 });
 
-export default connect(mapStateToProps)(MoviePage);
+export { AddReview };
+
+export default connect(mapStateToProps)(AddReview);

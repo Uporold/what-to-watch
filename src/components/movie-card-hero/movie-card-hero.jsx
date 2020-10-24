@@ -40,9 +40,9 @@ const MovieCardHero = ({ movie }) => {
               </svg>
               <span>My list</span>
             </button>
-            <a href="add-review.html" className="btn movie-card__button">
+            <Link to={`/films/${movie.id}/review`} className="btn movie-card__button">
               Add review
-            </a>
+            </Link>
           </div>
         </div>
       </div>

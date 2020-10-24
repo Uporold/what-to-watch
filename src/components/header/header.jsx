@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAuthorizationStatus, getUser } from "../../redux/user/selectors";
 
-const Header = ({ authorizationStatus, user }) => {
+const Header = ({ authorizationStatus, user, children }) => {
   return (
     <header className="page-header movie-card__head">
       <div className="logo">
@@ -15,15 +15,12 @@ const Header = ({ authorizationStatus, user }) => {
         </a>
       </div>
 
+      {children && children}
+
       <div className="user-block">
         {authorizationStatus ? (
           <div className="user-block__avatar">
-            <img
-              src={user.avatar}
-              alt={user.email}
-              width="63"
-              height="63"
-            />
+            <img src={user.avatar} alt={user.email} width="63" height="63" />
           </div>
         ) : (
           <Link to="/login" className="user-block__link">
@@ -43,7 +40,12 @@ Header.propTypes = {
     avatar: PropTypes.string,
   }).isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
+  children: PropTypes.element,
 };
+
+// Header.defaultProps = {
+//   children: ``,
+// };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),

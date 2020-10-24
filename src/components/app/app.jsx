@@ -9,6 +9,7 @@ import history from "../../history";
 import { getLoadingStatus } from "../../redux/data/selectors";
 import LoaderSpinner from "../loader-spinner/loader-spinner";
 import SignIn from "../sign-in/sign-in";
+import AddReview from "../add-review/add-review";
 import {
   getAuthorizationStatus,
   getAuthorizationLoadingStatus,
@@ -34,6 +35,7 @@ const App = ({
                 return !authorizationStatus ? <SignIn /> : <Redirect to="/" />;
               }}
             />
+            <Route exact path="/films/:id/review" component={AddReview} />
           </Switch>
         </Router>
       ) : (
