@@ -90,7 +90,6 @@ export const Operation = {
         rating: review.rating,
       })
       .then(() => {
-        Operation.loadMovieReviews(movieId);
         history.goBack();
       });
   },
