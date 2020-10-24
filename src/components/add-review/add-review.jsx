@@ -1,9 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { getCurrentMovie } from "../../redux/data/selectors";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import Header from "../header/header";
 import Breadcrumbs from "../breadcrumbs/breadcrumbs";
+import { Operation } from "../../redux/data/data";
 
 const RATING_STARS = [1, 2, 3, 4, 5];
 
@@ -12,14 +14,32 @@ class AddReview extends PureComponent {
     super(props);
 
     this.state = {
+      comment: ``,
       stars: 5,
-      review: ``,
     };
   }
 
+  onRatingChange = (event) => {
+    this.setState({ stars: event.target.value });
+  };
+
+  onCommentChange = (event) => {
+    this.setState({ comment: event.target.value });
+  };
+
+  onSubmitFormHandler = (event) => {
+    const { movie, onFormSubmit } = this.props;
+    const { comment, stars } = this.state;
+    event.preventDefault();
+    const review = {
+      comment,
+      rating: stars,
+    };
+    onFormSubmit(movie.id, review);
+  };
+
   render() {
     const { movie } = this.props;
-    console.log(movie);
     return (
       <section
         className="movie-card movie-card--full"
@@ -47,9 +67,13 @@ class AddReview extends PureComponent {
         </div>
 
         <div className="add-review">
-          <form action="#" className="add-review__form">
+          <form
+            action="#"
+            className="add-review__form"
+            onSubmit={this.onSubmitFormHandler}
+          >
             <div className="rating">
-              <div className="rating__stars">
+              <div className="rating__stars" onChange={this.onRatingChange}>
                 {RATING_STARS.map((elem) => {
                   return (
                     <React.Fragment key={elem}>
@@ -69,12 +93,16 @@ class AddReview extends PureComponent {
               </div>
             </div>
 
-            <div className="add-review__text" style={{ background: `rgba(255, 255, 255, 0.4)` }}>
+            <div
+              className="add-review__text"
+              style={{ background: `rgba(255, 255, 255, 0.4)` }}
+            >
               <textarea
                 className="add-review__textarea"
                 name="review-text"
                 id="review-text"
                 placeholder="Review text"
+                onChange={this.onCommentChange}
               />
               <div className="add-review__submit">
                 <button className="add-review__btn" type="submit">
@@ -91,12 +119,19 @@ class AddReview extends PureComponent {
 
 AddReview.propTypes = {
   movie: projectPropTypes.MOVIE.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, { match: { params } }) => ({
   movie: getCurrentMovie(params.id)(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onFormSubmit(movieId, review) {
+    dispatch(Operation.sendReview(movieId, review));
+  },
+});
+
 export { AddReview };
 
-export default connect(mapStateToProps)(AddReview);
+export default connect(mapStateToProps, mapDispatchToProps)(AddReview);

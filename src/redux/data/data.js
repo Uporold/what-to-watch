@@ -1,4 +1,5 @@
 import { createMovie } from "../adapter/adapter";
+import history from "../../history";
 
 const CUT_LENGTH = 4;
 
@@ -80,6 +81,18 @@ export const Operation = {
       const loadedComments = response.data.map((comment) => comment);
       dispatch(ActionCreator.loadMovieReviews(loadedComments));
     });
+  },
+
+  sendReview: (movieId, review) => (dispatch, getState, api) => {
+    return api
+      .post(`/comments/${movieId}`, {
+        comment: review.comment,
+        rating: review.rating,
+      })
+      .then(() => {
+        Operation.loadMovieReviews(movieId);
+        history.goBack();
+      });
   },
 };
 
