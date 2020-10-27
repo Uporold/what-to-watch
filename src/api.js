@@ -19,11 +19,12 @@ export const createAPI = (onUnauthorized) => {
   const onFail = (err) => {
     const { response } = err;
 
-    if (
+    if (response.status === Error.UNAUTHORIZED) {
+      onUnauthorized();
+    } else if (
       response.status === Error.UNAUTHORIZED &&
       err.response.config.method === `post`
     ) {
-      onUnauthorized();
       history.push(`/login`);
     }
 
