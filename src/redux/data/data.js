@@ -93,6 +93,17 @@ export const Operation = {
         history.goBack();
       });
   },
+
+  changeMovieFavoriteStatus: (movieId, isFavorite) => (
+    dispatch,
+    getState,
+    api
+  ) => {
+    return api.post(`/favorite/${movieId}/${isFavorite ? 1 : 0}`).then(() => {
+      dispatch(Operation.loadMovies());
+      dispatch(Operation.loadPromoMovie());
+    });
+  },
 };
 
 export const reducer = (state = initialState, action) => {

@@ -1,11 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import Header from "../header/header";
 import { getPromoMovie } from "../../redux/data/selectors";
 import { projectPropTypes } from "../../utilities/project-prop-types";
+import { getAuthorizationStatus } from "../../redux/user/selectors";
+import { Operation } from "../../redux/data/data";
 
-const MoviePromoCard = ({ promoMovie }) => {
+const MoviePromoCard = ({ promoMovie, onButtonClick }) => {
+  const onButtonClickHandler = (movieId, isFavorite) => (evt) => {
+    evt.preventDefault();
+    onButtonClick(movieId, isFavorite);
+  };
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -48,10 +55,20 @@ const MoviePromoCard = ({ promoMovie }) => {
               <button
                 className="btn btn--list movie-card__button"
                 type="button"
+                onClick={onButtonClickHandler(
+                  promoMovie.id,
+                  !promoMovie.isFavorite
+                )}
               >
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add" />
-                </svg>
+                {!promoMovie.isFavorite ? (
+                  <svg viewBox="0 0 19 20" width="19" height="20">
+                    <use xlinkHref="#add" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 18 14" width="18" height="14">
+                    <use xlinkHref="#in-list" />
+                  </svg>
+                )}
                 <span>My list</span>
               </button>
             </div>
@@ -64,11 +81,19 @@ const MoviePromoCard = ({ promoMovie }) => {
 
 MoviePromoCard.propTypes = {
   promoMovie: projectPropTypes.MOVIE.isRequired,
+  onButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   promoMovie: getPromoMovie(state),
+  // authorizationStatus: getAuthorizationStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onButtonClick(movieId, isFavorite) {
+    dispatch(Operation.changeMovieFavoriteStatus(movieId, isFavorite));
+  },
 });
 
 export { MoviePromoCard };
-export default connect(mapStateToProps)(MoviePromoCard);
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePromoCard);

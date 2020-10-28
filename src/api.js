@@ -21,7 +21,8 @@ export const createAPI = (onUnauthorized) => {
 
     if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
-    } else if (
+    }
+    if (
       response.status === Error.UNAUTHORIZED &&
       err.response.config.method === `post`
     ) {

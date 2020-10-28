@@ -1,10 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Header from "../header/header";
 import { projectPropTypes } from "../../utilities/project-prop-types";
+import { Operation } from "../../redux/data/data";
 
-const MovieCardHero = ({ movie }) => {
+const MovieCardHero = ({ movie, onButtonClick }) => {
   const { backgroundImage, name, genre, released } = movie;
+  const onButtonClickHandler = (movieId, isFavorite) => (evt) => {
+    evt.preventDefault();
+    onButtonClick(movieId, isFavorite);
+  };
   return (
     <div className="movie-card__hero">
       <div className="movie-card__bg">
@@ -34,13 +41,26 @@ const MovieCardHero = ({ movie }) => {
               </svg>
               <span>Play</span>
             </Link>
-            <button className="btn btn--list movie-card__button" type="button">
-              <svg viewBox="0 0 19 20" width="19" height="20">
-                <use xlinkHref="#add" />
-              </svg>
+            <button
+              className="btn btn--list movie-card__button"
+              type="button"
+              onClick={onButtonClickHandler(movie.id, !movie.isFavorite)}
+            >
+              {!movie.isFavorite ? (
+                <svg viewBox="0 0 19 20" width="19" height="20">
+                  <use xlinkHref="#add" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 18 14" width="18" height="14">
+                  <use xlinkHref="#in-list" />
+                </svg>
+              )}
               <span>My list</span>
             </button>
-            <Link to={`/films/${movie.id}/review`} className="btn movie-card__button">
+            <Link
+              to={`/films/${movie.id}/review`}
+              className="btn movie-card__button"
+            >
               Add review
             </Link>
           </div>
@@ -52,6 +72,15 @@ const MovieCardHero = ({ movie }) => {
 
 MovieCardHero.propTypes = {
   movie: projectPropTypes.MOVIE.isRequired,
+  onButtonClick: PropTypes.func.isRequired,
 };
 
-export default MovieCardHero;
+const mapDispatchToProps = (dispatch) => ({
+  onButtonClick(movieId, isFavorite) {
+    dispatch(Operation.changeMovieFavoriteStatus(movieId, isFavorite));
+  },
+});
+
+export { MovieCardHero };
+
+export default connect(null, mapDispatchToProps)(MovieCardHero);
