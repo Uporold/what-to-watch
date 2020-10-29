@@ -14,6 +14,7 @@ import {
   getAuthorizationStatus,
   getAuthorizationLoadingStatus,
 } from "../../redux/user/selectors";
+import MyList from "../my-list/my-list";
 
 const App = ({
   isDataLoading,
@@ -36,6 +37,7 @@ const App = ({
               }}
             />
             <Route exact path="/films/:id/review" component={AddReview} />
+            <Route exact path="/favorites" component={MyList} />
           </Switch>
         </Router>
       ) : (

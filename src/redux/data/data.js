@@ -6,18 +6,22 @@ const CUT_LENGTH = 4;
 export const initialState = {
   movies: [],
   promoMovie: {},
+  favoriteMovies: [],
   movieReviews: [],
   showedMoviesCount: CUT_LENGTH,
   isDataLoading: true,
+  isFavoritesLoading: true,
 };
 
 export const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
+  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
   LOAD_MOVIE_REVIEWS: `LOAD_MOVIE_REVIEWS`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   SET_DEFAULT_MOVIES_COUNT: `SET_DEFAULT_MOVIES_COUNT`,
   FINISH_LOADING: `FINISH_LOADING`,
+  FINISH_FAVORITES_LOADING: `FINISH_FAVORITES_LOADING`,
 };
 
 export const ActionCreator = {
@@ -31,6 +35,13 @@ export const ActionCreator = {
   loadPromoMovie: (data) => {
     return {
       type: ActionType.LOAD_PROMO_MOVIE,
+      payload: data,
+    };
+  },
+
+  loadFavoriteMovies: (data) => {
+    return {
+      type: ActionType.LOAD_FAVORITE_MOVIES,
       payload: data,
     };
   },
@@ -58,6 +69,13 @@ export const ActionCreator = {
       payload: false,
     };
   },
+
+  finishFavoritesLoading: () => {
+    return {
+      type: ActionType.FINISH_FAVORITES_LOADING,
+      payload: false,
+    };
+  },
 };
 
 export const Operation = {
@@ -73,6 +91,14 @@ export const Operation = {
     return api.get(`/films/promo`).then((response) => {
       const loadedPromo = createMovie(response.data);
       dispatch(ActionCreator.loadPromoMovie(loadedPromo));
+    });
+  },
+
+  loadFavoriteMovies: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`).then((response) => {
+      const loadedMovies = response.data.map((movie) => createMovie(movie));
+      dispatch(ActionCreator.loadFavoriteMovies(loadedMovies));
+      dispatch(ActionCreator.finishFavoritesLoading());
     });
   },
 
@@ -112,6 +138,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, movies: action.payload };
     case ActionType.LOAD_PROMO_MOVIE:
       return { ...state, promoMovie: action.payload };
+    case ActionType.LOAD_FAVORITE_MOVIES:
+      return { ...state, favoriteMovies: action.payload };
     case ActionType.LOAD_MOVIE_REVIEWS:
       return { ...state, movieReviews: action.payload };
     case ActionType.SHOW_MORE_MOVIES:
@@ -123,6 +151,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, showedMoviesCount: action.payload };
     case ActionType.FINISH_LOADING:
       return { ...state, isDataLoading: action.payload };
+    case ActionType.FINISH_FAVORITES_LOADING:
+      return { ...state, isFavoritesLoading: action.payload };
     default:
       return state;
   }

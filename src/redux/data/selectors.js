@@ -5,10 +5,14 @@ import { getActiveGenre } from "../app/selectors";
 
 export const getAllMovies = (state) => state[NameSpace.DATA].movies;
 export const getPromoMovie = (state) => state[NameSpace.DATA].promoMovie;
+export const getFavoriteMovies = (state) =>
+  state[NameSpace.DATA].favoriteMovies;
 export const getMovieReviews = (state) => state[NameSpace.DATA].movieReviews;
 export const getShowedMoviesCount = (state) =>
   state[NameSpace.DATA].showedMoviesCount;
 export const getLoadingStatus = (state) => state[NameSpace.DATA].isDataLoading;
+export const getFavoritesLoadingStatus = (state) =>
+  state[NameSpace.DATA].isFavoritesLoading;
 
 export const getAllGenres = createSelector(getAllMovies, (movies) =>
   getMoviesGenres(movies)

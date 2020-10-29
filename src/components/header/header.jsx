@@ -19,9 +19,11 @@ const Header = ({ authorizationStatus, user, children }) => {
 
       <div className="user-block">
         {authorizationStatus ? (
-          <div className="user-block__avatar">
-            <img src={user.avatar} alt={user.email} width="63" height="63" />
-          </div>
+          <Link Link to="/favorites">
+            <div className="user-block__avatar">
+              <img src={user.avatar} alt={user.email} width="63" height="63" />
+            </div>
+          </Link>
         ) : (
           <Link to="/login" className="user-block__link">
             Sign in
@@ -42,10 +44,6 @@ Header.propTypes = {
   authorizationStatus: PropTypes.bool.isRequired,
   children: PropTypes.element,
 };
-
-// Header.defaultProps = {
-//   children: ``,
-// };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
