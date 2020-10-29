@@ -27,7 +27,7 @@ class SignIn extends PureComponent {
   render() {
     return (
       <div className="user-page">
-        <Header />
+        <Header isLoginPage />
 
         <div className="sign-in user-page__content">
           <form

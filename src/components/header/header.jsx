@@ -4,9 +4,19 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAuthorizationStatus, getUser } from "../../redux/user/selectors";
 
-const Header = ({ authorizationStatus, user, children }) => {
+const Header = ({
+  authorizationStatus,
+  user,
+  children,
+  isFavoritesPage,
+  isLoginPage,
+}) => {
   return (
-    <header className="page-header movie-card__head">
+    <header
+      className={`page-header ${
+        isFavoritesPage || isLoginPage ? `user-page__head` : `movie-card__head`
+      }`}
+    >
       <div className="logo">
         <Link to="/" className="logo__link">
           <span className="logo__letter logo__letter--1">W</span>
@@ -14,6 +24,14 @@ const Header = ({ authorizationStatus, user, children }) => {
           <span className="logo__letter logo__letter--3">W</span>
         </Link>
       </div>
+
+      {isFavoritesPage || isLoginPage ? (
+        <h1 className="page-title user-page__title">
+          {isFavoritesPage && `My list`} {isLoginPage && `Sign in`}
+        </h1>
+      ) : (
+        ``
+      )}
 
       {children && children}
 
@@ -25,9 +43,11 @@ const Header = ({ authorizationStatus, user, children }) => {
             </div>
           </Link>
         ) : (
-          <Link to="/login" className="user-block__link">
-            Sign in
-          </Link>
+          !isLoginPage && (
+            <Link to="/login" className="user-block__link">
+              Sign in
+            </Link>
+          )
         )}
       </div>
     </header>
@@ -43,6 +63,13 @@ Header.propTypes = {
   }).isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
   children: PropTypes.element,
+  isFavoritesPage: PropTypes.bool,
+  isLoginPage: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  isFavoritesPage: false,
+  isLoginPage: false,
 };
 
 const mapStateToProps = (state) => ({
