@@ -25,6 +25,6 @@ export const createUser = (data) => {
     id: data.id,
     email: data.email,
     name: data.name,
-    avatar: `https://4.react.pages.academy${data.avatar_url}`,
+    avatar: data.avatar_url,
   };
 };

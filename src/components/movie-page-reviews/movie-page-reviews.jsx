@@ -13,13 +13,6 @@ class MoviePageReviews extends PureComponent {
     loadMovieReviews(movie.id);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   const { movie, loadMovieReviews } = this.props;
-  //   if (prevProps.movie.id !== movie.id) {
-  //     loadMovieReviews(movie.id);
-  //   }
-  // }
-
   render() {
     const { movieReviews } = this.props;
     const slicedReviews = getSlicedReviews(movieReviews);
