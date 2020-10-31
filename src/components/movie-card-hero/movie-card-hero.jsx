@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import { Operation } from "../../redux/data/data";
+import { getAuthorizationStatus } from "../../redux/user/selectors";
 
-const MovieCardHero = ({ movie, onButtonClick }) => {
+const MovieCardHero = ({ movie, onButtonClick, authorizationStatus }) => {
   const { backgroundImage, name, genre, released } = movie;
   const onButtonClickHandler = (movieId, isFavorite) => (evt) => {
     evt.preventDefault();
@@ -57,12 +58,14 @@ const MovieCardHero = ({ movie, onButtonClick }) => {
               )}
               <span>My list</span>
             </button>
-            <Link
-              to={`/films/${movie.id}/review`}
-              className="btn movie-card__button"
-            >
-              Add review
-            </Link>
+            {authorizationStatus && (
+              <Link
+                to={`/films/${movie.id}/review`}
+                className="btn movie-card__button"
+              >
+                Add review
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -73,6 +76,7 @@ const MovieCardHero = ({ movie, onButtonClick }) => {
 MovieCardHero.propTypes = {
   movie: projectPropTypes.MOVIE.isRequired,
   onButtonClick: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -81,6 +85,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+});
+
 export { MovieCardHero };
 
-export default connect(null, mapDispatchToProps)(MovieCardHero);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCardHero);

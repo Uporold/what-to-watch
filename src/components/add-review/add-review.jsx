@@ -122,7 +122,14 @@ AddReview.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, { match: { params } }) => ({
+const mapStateToProps = (
+  state,
+  {
+    routeProps: {
+      match: { params },
+    },
+  }
+) => ({
   movie: getCurrentMovie(params.id)(state),
 });
 

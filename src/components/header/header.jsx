@@ -37,7 +37,7 @@ const Header = ({
 
       <div className="user-block">
         {authorizationStatus ? (
-          <Link Link to="/favorites">
+          <Link to="/favorites">
             <div className="user-block__avatar">
               <img src={user.avatar} alt={user.email} width="63" height="63" />
             </div>

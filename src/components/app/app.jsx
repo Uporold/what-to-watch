@@ -15,6 +15,7 @@ import {
   getAuthorizationLoadingStatus,
 } from "../../redux/user/selectors";
 import MyList from "../my-list/my-list";
+import PrivateRoute from "../private-route/private-route";
 
 const App = ({
   isDataLoading,
@@ -36,8 +37,13 @@ const App = ({
                 return !authorizationStatus ? <SignIn /> : <Redirect to="/" />;
               }}
             />
-            <Route exact path="/films/:id/review" component={AddReview} />
-            <Route exact path="/favorites" component={MyList} />
+
+            <PrivateRoute
+              exact
+              path="/films/:id/review"
+              render={(routeProps) => <AddReview routeProps={routeProps} />}
+            />
+            <PrivateRoute exact path="/favorites" render={() => <MyList />} />
           </Switch>
         </Router>
       ) : (
