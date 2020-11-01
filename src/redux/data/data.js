@@ -22,6 +22,7 @@ export const ActionType = {
   SET_DEFAULT_MOVIES_COUNT: `SET_DEFAULT_MOVIES_COUNT`,
   FINISH_LOADING: `FINISH_LOADING`,
   FINISH_FAVORITES_LOADING: `FINISH_FAVORITES_LOADING`,
+  UPDATE_FAVORITE_STATUS: `UPDATE_FAVORITE_STATUS`,
 };
 
 export const ActionCreator = {
@@ -76,6 +77,13 @@ export const ActionCreator = {
       payload: false,
     };
   },
+
+  updateFavoriteStatus: (movie) => {
+    return {
+      type: ActionType.UPDATE_FAVORITE_STATUS,
+      payload: movie,
+    };
+  },
 };
 
 export const Operation = {
@@ -125,10 +133,13 @@ export const Operation = {
     getState,
     api
   ) => {
-    return api.post(`/favorite/${movieId}/${isFavorite ? 1 : 0}`).then(() => {
-      dispatch(Operation.loadMovies());
-      dispatch(Operation.loadPromoMovie());
-    });
+    return api
+      .post(`/favorite/${movieId}/${isFavorite ? 1 : 0}`, {})
+      .then((response) => {
+        dispatch(
+          ActionCreator.updateFavoriteStatus(createMovie(response.data))
+        );
+      });
   },
 };
 
@@ -153,6 +164,23 @@ export const reducer = (state = initialState, action) => {
       return { ...state, isDataLoading: action.payload };
     case ActionType.FINISH_FAVORITES_LOADING:
       return { ...state, isFavoritesLoading: action.payload };
+    case ActionType.UPDATE_FAVORITE_STATUS: {
+      const favoriteIndex = state.movies.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      return {
+        ...state,
+        movies: [].concat(
+          ...state.movies.slice(0, favoriteIndex),
+          action.payload,
+          ...state.movies.slice(favoriteIndex + 1, state.movies.length)
+        ),
+        promoMovie:
+          state.promoMovie.id === action.payload.id
+            ? action.payload
+            : state.promoMovie,
+      };
+    }
     default:
       return state;
   }
