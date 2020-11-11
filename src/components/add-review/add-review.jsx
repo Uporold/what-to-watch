@@ -1,13 +1,19 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getCurrentMovie } from "../../redux/data/selectors";
+import { getCurrentMovie, getSendingStatus } from "../../redux/data/selectors";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import Header from "../header/header";
 import Breadcrumbs from "../breadcrumbs/breadcrumbs";
-import { Operation } from "../../redux/data/data";
+import { ActionCreator, Operation } from "../../redux/data/data";
 
 const RATING_STARS = [1, 2, 3, 4, 5];
+
+const errorMessageStyle = {
+  display: `flex`,
+  justifyContent: `center`,
+  color: `red`,
+};
 
 class AddReview extends PureComponent {
   constructor(props) {
@@ -39,7 +45,7 @@ class AddReview extends PureComponent {
   };
 
   render() {
-    const { movie } = this.props;
+    const { movie, isSendingError, onTextInputFocus } = this.props;
     return (
       <section
         className="movie-card movie-card--full"
@@ -103,6 +109,7 @@ class AddReview extends PureComponent {
                 id="review-text"
                 placeholder="Review text"
                 onChange={this.onCommentChange}
+                onFocus={onTextInputFocus}
               />
               <div className="add-review__submit">
                 <button className="add-review__btn" type="submit">
@@ -112,6 +119,12 @@ class AddReview extends PureComponent {
             </div>
           </form>
         </div>
+        {isSendingError && (
+          <p style={errorMessageStyle}>
+            An unknown error occurred while sending the message. Try again
+            later.
+          </p>
+        )}
       </section>
     );
   }
@@ -120,6 +133,8 @@ class AddReview extends PureComponent {
 AddReview.propTypes = {
   movie: projectPropTypes.MOVIE.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
+  onTextInputFocus: PropTypes.func.isRequired,
+  isSendingError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (
@@ -131,11 +146,15 @@ const mapStateToProps = (
   }
 ) => ({
   movie: getCurrentMovie(params.id)(state),
+  isSendingError: getSendingStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onFormSubmit(movieId, review) {
     dispatch(Operation.sendReview(movieId, review));
+  },
+  onTextInputFocus() {
+    dispatch(ActionCreator.setSendingStatus(false));
   },
 });
 
