@@ -1,7 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getCurrentMovie, getSendingStatus } from "../../redux/data/selectors";
+import {
+  getCurrentMovie,
+  getSendingErrorStatus,
+  getReviewSendingStatus,
+} from "../../redux/data/selectors";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 import Header from "../header/header";
 import Breadcrumbs from "../breadcrumbs/breadcrumbs";
@@ -21,7 +25,7 @@ class AddReview extends PureComponent {
 
     this.state = {
       comment: ``,
-      stars: 5,
+      stars: 0,
     };
   }
 
@@ -45,7 +49,13 @@ class AddReview extends PureComponent {
   };
 
   render() {
-    const { movie, isSendingError, onTextInputFocus } = this.props;
+    const {
+      movie,
+      isSendingError,
+      onTextInputFocus,
+      isReviewSending,
+    } = this.props;
+    const { comment, stars } = this.state;
     return (
       <section
         className="movie-card movie-card--full"
@@ -89,6 +99,7 @@ class AddReview extends PureComponent {
                         type="radio"
                         name="rating"
                         value={elem}
+                        disabled={isReviewSending}
                       />
                       <label className="rating__label" htmlFor={`star-${elem}`}>
                         Rating {elem}
@@ -112,8 +123,12 @@ class AddReview extends PureComponent {
                 onFocus={onTextInputFocus}
               />
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">
-                  Post
+                <button
+                  className="add-review__btn"
+                  type="submit"
+                  disabled={isReviewSending || comment.length < 50 || stars < 1}
+                >
+                  {isReviewSending ? `Sending...` : `Post`}
                 </button>
               </div>
             </div>
@@ -135,6 +150,7 @@ AddReview.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
   onTextInputFocus: PropTypes.func.isRequired,
   isSendingError: PropTypes.bool.isRequired,
+  isReviewSending: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (
@@ -146,7 +162,8 @@ const mapStateToProps = (
   }
 ) => ({
   movie: getCurrentMovie(params.id)(state),
-  isSendingError: getSendingStatus(state),
+  isSendingError: getSendingErrorStatus(state),
+  isReviewSending: getReviewSendingStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

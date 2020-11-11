@@ -12,6 +12,7 @@ export const initialState = {
   isDataLoading: true,
   isFavoritesLoading: true,
   isSendingError: false,
+  isReviewSending: false,
 };
 
 export const ActionType = {
@@ -94,6 +95,13 @@ export const ActionCreator = {
       payload: status,
     };
   },
+
+  setReviewSendingStatus: (status) => {
+    return {
+      type: ActionType.SET_REVIEW_SENDING_STATUS,
+      payload: status,
+    };
+  },
 };
 
 export const Operation = {
@@ -128,6 +136,7 @@ export const Operation = {
   },
 
   sendReview: (movieId, review) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setReviewSendingStatus(true));
     return api
       .post(`/comments/${movieId}`, {
         comment: review.comment,
@@ -135,10 +144,12 @@ export const Operation = {
       })
       .then(() => {
         dispatch(ActionCreator.setSendingErrorStatus(false));
+        dispatch(ActionCreator.setReviewSendingStatus(false));
         history.goBack();
       })
       .catch(() => {
         dispatch(ActionCreator.setSendingErrorStatus(true));
+        dispatch(ActionCreator.setReviewSendingStatus(false));
       });
   },
 
@@ -197,6 +208,8 @@ export const reducer = (state = initialState, action) => {
     }
     case ActionType.SET_SENDING_ERROR_STATUS:
       return { ...state, isSendingError: action.payload };
+    case ActionType.SET_REVIEW_SENDING_STATUS:
+      return { ...state, isReviewSending: action.payload };
     default:
       return state;
   }
