@@ -24,7 +24,8 @@ export const ActionType = {
   FINISH_LOADING: `FINISH_LOADING`,
   FINISH_FAVORITES_LOADING: `FINISH_FAVORITES_LOADING`,
   UPDATE_FAVORITE_STATUS: `UPDATE_FAVORITE_STATUS`,
-  SET_SENDING_STATUS: `SET_SENDING_STATUS`,
+  SET_SENDING_ERROR_STATUS: `SET_SENDING_ERROR_STATUS`,
+  SET_REVIEW_SENDING_STATUS: `SET_REVIEW_SENDING_STATUS`,
 };
 
 export const ActionCreator = {
@@ -87,9 +88,9 @@ export const ActionCreator = {
     };
   },
 
-  setSendingStatus: (status) => {
+  setSendingErrorStatus: (status) => {
     return {
-      type: ActionType.SET_SENDING_STATUS,
+      type: ActionType.SET_SENDING_ERROR_STATUS,
       payload: status,
     };
   },
@@ -133,11 +134,11 @@ export const Operation = {
         rating: review.rating,
       })
       .then(() => {
-        dispatch(ActionCreator.setSendingStatus(false));
+        dispatch(ActionCreator.setSendingErrorStatus(false));
         history.goBack();
       })
       .catch(() => {
-        dispatch(ActionCreator.setSendingStatus(true));
+        dispatch(ActionCreator.setSendingErrorStatus(true));
       });
   },
 
@@ -194,7 +195,7 @@ export const reducer = (state = initialState, action) => {
             : state.promoMovie,
       };
     }
-    case ActionType.SET_SENDING_STATUS:
+    case ActionType.SET_SENDING_ERROR_STATUS:
       return { ...state, isSendingError: action.payload };
     default:
       return state;

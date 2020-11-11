@@ -154,7 +154,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.sendReview(movieId, review));
   },
   onTextInputFocus() {
-    dispatch(ActionCreator.setSendingStatus(false));
+    dispatch(ActionCreator.setSendingErrorStatus(false));
   },
 });
 
