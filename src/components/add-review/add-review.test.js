@@ -2,33 +2,34 @@ import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import App from "./app";
+import { Router } from "react-router-dom";
+import AddReview from "./add-review";
 import { movies } from "../../mock/movies";
 import NameSpace from "../../redux/name-space";
+import history from "../../history";
 
 const mockStore = configureStore([]);
 
-it(`Render App`, () => {
+it(`Render Add Review page`, () => {
   const store = mockStore({
-    [NameSpace.APP]: {
-      currentGenre: `All genres`,
-    },
     [NameSpace.USER]: {
       authorizationStatus: false,
       isAuthorizationLoading: false,
     },
     [NameSpace.DATA]: {
-      isDataLoading: false,
       movies,
-      promoMovie: movies[0],
+      isSendingError: false,
+      isReviewSending: false,
     },
   });
 
   const tree = renderer
     .create(
-      <Provider store={store}>
-        <App />
-      </Provider>,
+      <Router history={history}>
+        <Provider store={store}>
+          <AddReview routeProps={{ match: { params: { id: 1 } } }} />
+        </Provider>
+      </Router>,
       {
         createNodeMock: () => {
           return {};

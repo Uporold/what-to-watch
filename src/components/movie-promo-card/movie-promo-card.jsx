@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import { getPromoMovie } from "../../redux/data/selectors";
 import { projectPropTypes } from "../../utilities/project-prop-types";
-import { getAuthorizationStatus } from "../../redux/user/selectors";
 import { Operation } from "../../redux/data/data";
 
 const MoviePromoCard = ({ promoMovie, onButtonClick }) => {
@@ -86,7 +85,6 @@ MoviePromoCard.propTypes = {
 
 const mapStateToProps = (state) => ({
   promoMovie: getPromoMovie(state),
-  // authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

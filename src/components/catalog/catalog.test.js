@@ -1,34 +1,32 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import App from "./app";
-import { movies } from "../../mock/movies";
+import configureStore from "redux-mock-store";
+import { Router } from "react-router-dom";
+import Catalog from "./catalog";
 import NameSpace from "../../redux/name-space";
+import history from "../../history";
+import { movies } from "../../mock/movies";
 
 const mockStore = configureStore([]);
 
-it(`Render App`, () => {
+it(`Should render correctly`, () => {
   const store = mockStore({
     [NameSpace.APP]: {
       currentGenre: `All genres`,
     },
-    [NameSpace.USER]: {
-      authorizationStatus: false,
-      isAuthorizationLoading: false,
-    },
     [NameSpace.DATA]: {
-      isDataLoading: false,
       movies,
-      promoMovie: movies[0],
     },
   });
 
   const tree = renderer
     .create(
-      <Provider store={store}>
-        <App />
-      </Provider>,
+      <Router history={history}>
+        <Provider store={store}>
+          <Catalog />
+        </Provider>
+      </Router>,
       {
         createNodeMock: () => {
           return {};

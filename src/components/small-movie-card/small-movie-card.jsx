@@ -18,13 +18,6 @@ class SmallMovieCard extends PureComponent {
       isPlaying,
     });
   };
-  // onMouseMoveHandler(status) {
-  //   return () => {
-  //     this.setState({
-  //       isPlaying: status,
-  //     });
-  //   };
-  // }
 
   render() {
     const { movie } = this.props;
@@ -35,7 +28,7 @@ class SmallMovieCard extends PureComponent {
       <article
         key={`${id}`}
         onMouseEnter={this.onMouseMoveHandler(true)}
-        onMouseOut={this.onMouseMoveHandler(false)}
+        onMouseLeave={this.onMouseMoveHandler(false)}
         className="small-movie-card catalog__movies-card"
       >
         <Link className="small-movie-card__link" to={`/films/${movie.id}`}>
@@ -53,45 +46,6 @@ class SmallMovieCard extends PureComponent {
     );
   }
 }
-
-/* function SmallMovieCard({ movie, onSmallCardMovieClick, onHover }) {
-  const [isPlaying, setPlay] = useState(false);
-  return (
-    <>
-      <article
-        key={`${movie.id}`}
-        onClick={(evt) => {
-          evt.preventDefault();
-          onSmallCardMovieClick(movie);
-        }}
-        onMouseEnter={() => {
-          setPlay(true);
-          onHover(movie);
-          console.log(`Playing`);
-        }}
-        onMouseOut={() => {
-          setPlay(false);
-          console.log(`Not playing`);
-        }}
-        className="small-movie-card catalog__movies-card"
-      >
-        <div className="small-movie-card__image">
-          <VideoPreview
-            isMuted
-            source={movie.previewVideoLink}
-            posterImage={movie.previewImage}
-            isPlaying={isPlaying}
-          />
-        </div>
-        <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="movie-page.html">
-            {movie.name}
-          </a>
-        </h3>
-      </article>
-    </>
-  );
-} */
 
 SmallMovieCard.propTypes = {
   movie: PropTypes.shape({

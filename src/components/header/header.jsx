@@ -60,7 +60,7 @@ Header.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
     avatar: PropTypes.string,
-  }).isRequired,
+  }),
   authorizationStatus: PropTypes.bool.isRequired,
   children: PropTypes.element,
   isFavoritesPage: PropTypes.bool,
@@ -70,6 +70,7 @@ Header.propTypes = {
 Header.defaultProps = {
   isFavoritesPage: false,
   isLoginPage: false,
+  user: null,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render correctly 1`] = `
+<section
+  className="catalog"
+>
+  <h2
+    className="catalog__title visually-hidden"
+  >
+    Catalog
+  </h2>
+  <ul
+    className="catalog__genres-list"
+  >
+    <li
+      className="catalog__genres-item catalog__genres-item--active"
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+        onClick={[Function]}
+      >
+        All genres
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+        onClick={[Function]}
+      >
+        Action
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+        onClick={[Function]}
+      >
+        Adventure
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+        onClick={[Function]}
+      >
+        Crime
+      </a>
+    </li>
+  </ul>
+  <div
+    className="catalog__movies-list"
+  >
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseOut={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/1"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Gangs of new york
+        </h3>
+      </a>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseOut={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/2"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Moonrise Kingdom
+        </h3>
+      </a>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseOut={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/3"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Pulp Fiction
+        </h3>
+      </a>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseOut={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/4"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Bronson
+        </h3>
+      </a>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseOut={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/5"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Midnight Special
+        </h3>
+      </a>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseOut={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/6"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Miidnight Special
+        </h3>
+      </a>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseOut={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/7"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Miiidnight Special
+        </h3>
+      </a>
+    </article>
+  </div>
+  
+</section>
+`;
