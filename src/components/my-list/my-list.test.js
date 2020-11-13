@@ -1,33 +1,40 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { BrowserRouter as Router } from "react-router-dom";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import Main from "./main";
+import { BrowserRouter as Router } from "react-router-dom";
+import MyList from "./my-list";
 import { movies } from "../../mock/movies";
 import NameSpace from "../../redux/name-space";
 
 const mockStore = configureStore([]);
 
-it(`Should Main render correctly`, () => {
+const userData = {
+  id: 1,
+  email: `test@gmail.com`,
+  name: `test`,
+  avatar: `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg`,
+};
+
+it(`Favorites page component render`, () => {
   const store = mockStore({
-    [NameSpace.APP]: {
-      currentGenre: `All genres`,
-    },
     [NameSpace.DATA]: {
-      movies,
-      promoMovie: movies[0],
+      favoriteMovies: movies,
+      isFavoritesLoading: false,
     },
     [NameSpace.USER]: {
-      authorizationStatus: false,
+      authorizationStatus: true,
+      user: userData,
     },
   });
+
+  store.dispatch = jest.fn();
 
   const tree = renderer
     .create(
       <Router>
         <Provider store={store}>
-          <Main />
+          <MyList />
         </Provider>
       </Router>,
       {

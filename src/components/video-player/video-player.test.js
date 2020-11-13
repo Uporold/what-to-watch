@@ -1,22 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { BrowserRouter as Router } from "react-router-dom";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import Main from "./main";
-import { movies } from "../../mock/movies";
+import { BrowserRouter as Router } from "react-router-dom";
+import VideoPlayer from "./video-player";
 import NameSpace from "../../redux/name-space";
+import { movies } from "../../mock/movies";
 
 const mockStore = configureStore([]);
 
-it(`Should Main render correctly`, () => {
+it(`VideoPlayer component render`, () => {
   const store = mockStore({
-    [NameSpace.APP]: {
-      currentGenre: `All genres`,
-    },
     [NameSpace.DATA]: {
       movies,
-      promoMovie: movies[0],
     },
     [NameSpace.USER]: {
       authorizationStatus: false,
@@ -27,7 +23,7 @@ it(`Should Main render correctly`, () => {
     .create(
       <Router>
         <Provider store={store}>
-          <Main />
+          <VideoPlayer match={{ params: { id: 1 } }} />
         </Provider>
       </Router>,
       {

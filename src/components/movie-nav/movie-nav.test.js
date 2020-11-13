@@ -10,7 +10,7 @@ it(`Should Movie Nav render correctly`, () => {
     .create(
       <MovieNav
         currentNav={currentNav}
-        onNavClickHandler={() => {}}
+        onNavClick={() => {}}
         tabs={movieNavs}
       />
     )

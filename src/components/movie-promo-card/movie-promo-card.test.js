@@ -1,21 +1,17 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { BrowserRouter as Router } from "react-router-dom";
 import configureStore from "redux-mock-store";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import Main from "./main";
+import MoviePromoCard from "./movie-promo-card";
 import { movies } from "../../mock/movies";
 import NameSpace from "../../redux/name-space";
 
 const mockStore = configureStore([]);
 
-it(`Should Main render correctly`, () => {
+it(`Movie Promo Card component render`, () => {
   const store = mockStore({
-    [NameSpace.APP]: {
-      currentGenre: `All genres`,
-    },
     [NameSpace.DATA]: {
-      movies,
       promoMovie: movies[0],
     },
     [NameSpace.USER]: {
@@ -27,14 +23,9 @@ it(`Should Main render correctly`, () => {
     .create(
       <Router>
         <Provider store={store}>
-          <Main />
+          <MoviePromoCard />
         </Provider>
-      </Router>,
-      {
-        createNodeMock: () => {
-          return {};
-        },
-      }
+      </Router>
     )
     .toJSON();
 

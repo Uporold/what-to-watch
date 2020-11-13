@@ -8,7 +8,7 @@ it(`Should Movies List render correctly`, () => {
   const tree = renderer
     .create(
       <Router>
-        <MoviesList movies={movies} onSmallCardMovieClick={() => {}} />
+        <MoviesList movies={movies} />
       </Router>,
       {
         createNodeMock: () => {

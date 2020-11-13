@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Movie Page Overview render correctly 1`] = `
+exports[`Should Movie Page Reviews render correctly 1`] = `
 <div
   className="movie-card__reviews movie-card__row"
 >
@@ -16,7 +16,7 @@ exports[`Should Movie Page Overview render correctly 1`] = `
         <p
           className="review__text"
         >
-          I love this movie. This film is a milestone in cinematography. Great Immersive camera-work. This film is an experience and i has already seen it 4 times and I only see more quality of the film.
+          Unfortunately we don't have a reliable way to tell the true ratings of a movie.
         </p>
         <footer
           className="review__details"
@@ -24,26 +24,22 @@ exports[`Should Movie Page Overview render correctly 1`] = `
           <cite
             className="review__author"
           >
-            Max
+            Zak
           </cite>
           <time
             className="review__date"
-            dateTime="2020-08-21"
+            dateTime="2020-07-29"
           >
-            August 21, 2020
+            July 29, 2020
           </time>
         </footer>
       </blockquote>
       <div
         className="review__rating"
       >
-        2.8
+        3.7
       </div>
     </div>
-  </div>
-  <div
-    className="movie-card__reviews-col"
-  >
     <div
       className="review"
     >
@@ -61,20 +57,57 @@ exports[`Should Movie Page Overview render correctly 1`] = `
           <cite
             className="review__author"
           >
-            Isaac
+            Sophie
           </cite>
           <time
             className="review__date"
-            dateTime="2020-08-16"
+            dateTime="2020-08-24"
           >
-            August 16, 2020
+            August 24, 2020
           </time>
         </footer>
       </blockquote>
       <div
         className="review__rating"
       >
-        4.1
+        4.6
+      </div>
+    </div>
+  </div>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        >
+          This movie really touched my heart, it really is the best movie of the year and everyone should see this masterpiece.
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            Corey
+          </cite>
+          <time
+            className="review__date"
+            dateTime="2020-08-07"
+          >
+            August 7, 2020
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        7.4
       </div>
     </div>
   </div>

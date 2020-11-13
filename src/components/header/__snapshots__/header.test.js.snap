@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header tests Render Header on Favorites Page 1`] = `
+<header
+  className="page-header user-page__head"
+>
+  <div
+    className="logo"
+  >
+    <a
+      className="logo__link"
+      href="/"
+      onClick={[Function]}
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </a>
+  </div>
+  <h1
+    className="page-title user-page__title"
+    data-testid="text-content"
+  >
+    My list
+     
+  </h1>
+  <div
+    className="user-block"
+  >
+    <a
+      href="/favorites"
+      onClick={[Function]}
+    >
+      <div
+        className="user-block__avatar"
+      >
+        <img
+          alt="test@gmail.com"
+          height="63"
+          src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg"
+          width="63"
+        />
+      </div>
+    </a>
+  </div>
+</header>
+`;
+
+exports[`Header tests Render Header on Login Page 1`] = `
+<header
+  className="page-header user-page__head"
+>
+  <div
+    className="logo"
+  >
+    <a
+      className="logo__link"
+      href="/"
+      onClick={[Function]}
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </a>
+  </div>
+  <h1
+    className="page-title user-page__title"
+  >
+     
+    Sign in
+  </h1>
+  <div
+    className="user-block"
+  />
+</header>
+`;
+
+exports[`Header tests Render Header on Main Page or Movie Page with login 1`] = `
+<header
+  className="page-header movie-card__head"
+>
+  <div
+    className="logo"
+  >
+    <a
+      className="logo__link"
+      href="/"
+      onClick={[Function]}
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </a>
+  </div>
+  
+  <div
+    className="user-block"
+  >
+    <a
+      href="/favorites"
+      onClick={[Function]}
+    >
+      <div
+        className="user-block__avatar"
+      >
+        <img
+          alt="test@gmail.com"
+          height="63"
+          src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg"
+          width="63"
+        />
+      </div>
+    </a>
+  </div>
+</header>
+`;
+
+exports[`Header tests Render Header on Main Page or Movie Page without login 1`] = `
+<header
+  className="page-header movie-card__head"
+>
+  <div
+    className="logo"
+  >
+    <a
+      className="logo__link"
+      href="/"
+      onClick={[Function]}
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </a>
+  </div>
+  
+  <div
+    className="user-block"
+  >
+    <a
+      className="user-block__link"
+      href="/login"
+      onClick={[Function]}
+    >
+      Sign in
+    </a>
+  </div>
+</header>
+`;
+
+exports[`Header tests Render Header on Review Page 1`] = `
+<header
+  className="page-header movie-card__head"
+>
+  <div
+    className="logo"
+  >
+    <a
+      className="logo__link"
+      href="/"
+      onClick={[Function]}
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </a>
+  </div>
+  
+  <nav
+    className="breadcrumbs"
+  >
+    <ul
+      className="breadcrumbs__list"
+    >
+      <li
+        className="breadcrumbs__item"
+      >
+        <a
+          className="breadcrumbs__link"
+          href="/films/1"
+          onClick={[Function]}
+        >
+          Gangs of new york
+        </a>
+      </li>
+      <li
+        className="breadcrumbs__item"
+      >
+        <a
+          className="breadcrumbs__link"
+        >
+          Add review
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div
+    className="user-block"
+  >
+    <a
+      href="/favorites"
+      onClick={[Function]}
+    >
+      <div
+        className="user-block__avatar"
+      >
+        <img
+          alt="test@gmail.com"
+          height="63"
+          src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg"
+          width="63"
+        />
+      </div>
+    </a>
+  </div>
+</header>
+`;

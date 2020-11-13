@@ -4,7 +4,7 @@ exports[`Should Movie Card render correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onMouseEnter={[Function]}
-  onMouseOut={[Function]}
+  onMouseLeave={[Function]}
 >
   <a
     className="small-movie-card__link"

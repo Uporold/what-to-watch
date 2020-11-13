@@ -21,7 +21,6 @@ class VideoPlayer extends PureComponent {
   componentDidMount() {
     const { videoLink, backgroundImage } = this.props.movie;
     const video = this.videoRef.current;
-    video.play();
 
     video.src = videoLink;
     video.poster = backgroundImage;
@@ -40,7 +39,6 @@ class VideoPlayer extends PureComponent {
   componentDidUpdate() {
     const video = this.videoRef.current;
     const { isPlaying } = this.state;
-
     if (isPlaying) {
       video.play();
     } else {
