@@ -9,8 +9,7 @@ import { getAuthorizationStatus } from "../../redux/user/selectors";
 
 const MovieCardHero = ({ movie, onButtonClick, authorizationStatus }) => {
   const { backgroundImage, name, genre, released } = movie;
-  const onButtonClickHandler = (movieId, isFavorite) => (evt) => {
-    evt.preventDefault();
+  const onButtonClickHandler = (movieId, isFavorite) => () => {
     onButtonClick(movieId, isFavorite);
   };
   return (

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Movie Promo Card component render 1`] = `
+exports[`Movie Promo Card tests Movie Promo Card component render correctly 1`] = `
 <section
   className="movie-card"
 >

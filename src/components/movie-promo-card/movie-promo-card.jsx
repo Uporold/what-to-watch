@@ -8,8 +8,7 @@ import { projectPropTypes } from "../../utilities/project-prop-types";
 import { Operation } from "../../redux/data/data";
 
 const MoviePromoCard = ({ promoMovie, onButtonClick }) => {
-  const onButtonClickHandler = (movieId, isFavorite) => (evt) => {
-    evt.preventDefault();
+  const onButtonClickHandler = (movieId, isFavorite) => () => {
     onButtonClick(movieId, isFavorite);
   };
   return (

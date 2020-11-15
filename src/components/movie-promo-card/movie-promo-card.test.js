@@ -7,27 +7,40 @@ import MoviePromoCard from "./movie-promo-card";
 import { movies } from "../../mock/movies";
 import NameSpace from "../../redux/name-space";
 
-const mockStore = configureStore([]);
+describe(`Movie Promo Card tests`, () => {
+  const mockStore = configureStore([]);
+  let store = null;
+  let moviePromoCardComponent = null;
 
-it(`Movie Promo Card component render`, () => {
-  const store = mockStore({
-    [NameSpace.DATA]: {
-      promoMovie: movies[0],
-    },
-    [NameSpace.USER]: {
-      authorizationStatus: false,
-    },
-  });
+  beforeEach(() => {
+    store = mockStore({
+      [NameSpace.DATA]: {
+        promoMovie: movies[0],
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: false,
+      },
+    });
 
-  const tree = renderer
-    .create(
+    store.dispatch = jest.fn();
+
+    moviePromoCardComponent = renderer.create(
       <Router>
         <Provider store={store}>
-          <MoviePromoCard />
+          <MoviePromoCard movie={movies[0]} />
         </Provider>
       </Router>
-    )
-    .toJSON();
+    );
+  });
 
-  expect(tree).toMatchSnapshot();
+  it(`Movie Promo Card component render correctly`, () => {
+    expect(moviePromoCardComponent.toJSON()).toMatchSnapshot();
+  });
+
+  it(`Should call dispatch when button click`, () => {
+    renderer.act(() => {
+      moviePromoCardComponent.root.findByType(`button`).props.onClick();
+    });
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+  });
 });

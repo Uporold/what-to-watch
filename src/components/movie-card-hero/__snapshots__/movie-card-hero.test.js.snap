@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Movie Card Hero component render correctly 1`] = `
+exports[`Movie Card Hero tests Movie Card Hero component render correctly 1`] = `
 <div
   className="movie-card__hero"
 >

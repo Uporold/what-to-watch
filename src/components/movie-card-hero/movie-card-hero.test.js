@@ -7,24 +7,37 @@ import MovieCardHero from "./movie-card-hero";
 import { movies } from "../../mock/movies";
 import NameSpace from "../../redux/name-space";
 
-const mockStore = configureStore([]);
+describe(`Movie Card Hero tests`, () => {
+  const mockStore = configureStore([]);
+  let store = null;
+  let movieCardHeroComponent = null;
 
-it(`Movie Card Hero component render correctly`, () => {
-  const store = mockStore({
-    [NameSpace.USER]: {
-      authorizationStatus: false,
-    },
-  });
+  beforeEach(() => {
+    store = mockStore({
+      [NameSpace.USER]: {
+        authorizationStatus: false,
+      },
+    });
 
-  const tree = renderer
-    .create(
+    store.dispatch = jest.fn();
+
+    movieCardHeroComponent = renderer.create(
       <Router>
         <Provider store={store}>
           <MovieCardHero movie={movies[0]} />
         </Provider>
       </Router>
-    )
-    .toJSON();
+    );
+  });
 
-  expect(tree).toMatchSnapshot();
+  it(`Movie Card Hero component render correctly`, () => {
+    expect(movieCardHeroComponent.toJSON()).toMatchSnapshot();
+  });
+
+  it(`Should call dispatch when button click`, () => {
+    renderer.act(() => {
+      movieCardHeroComponent.root.findByType(`button`).props.onClick();
+    });
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+  });
 });
