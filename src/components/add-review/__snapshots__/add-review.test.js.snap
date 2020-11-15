@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Add Review page 1`] = `
+exports[`Add Review tests Render Add Review page 1`] = `
 <section
   className="movie-card movie-card--full"
   style={

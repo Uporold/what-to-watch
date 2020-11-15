@@ -8,23 +8,25 @@ import { movies } from "../../mock/movies";
 import NameSpace from "../../redux/name-space";
 import history from "../../history";
 
-const mockStore = configureStore([]);
+describe(`Add Review tests`, () => {
+  const mockStore = configureStore([]);
+  let store = null;
+  let addReviewComponent = null;
 
-it(`Render Add Review page`, () => {
-  const store = mockStore({
-    [NameSpace.USER]: {
-      authorizationStatus: false,
-      isAuthorizationLoading: false,
-    },
-    [NameSpace.DATA]: {
-      movies,
-      isSendingError: false,
-      isReviewSending: false,
-    },
-  });
-
-  const tree = renderer
-    .create(
+  beforeEach(() => {
+    store = mockStore({
+      [NameSpace.USER]: {
+        authorizationStatus: false,
+        isAuthorizationLoading: false,
+      },
+      [NameSpace.DATA]: {
+        movies,
+        isSendingError: false,
+        isReviewSending: false,
+      },
+    });
+    store.dispatch = jest.fn();
+    addReviewComponent = renderer.create(
       <Router history={history}>
         <Provider store={store}>
           <AddReview routeProps={{ match: { params: { id: 1 } } }} />
@@ -35,8 +37,18 @@ it(`Render Add Review page`, () => {
           return {};
         },
       }
-    )
-    .toJSON();
+    );
+  });
 
-  expect(tree).toMatchSnapshot();
+  it(`Render Add Review page`, () => {
+    expect(addReviewComponent.toJSON()).toMatchSnapshot();
+  });
+
+  it(`Should call dispatch when form submit`, () => {
+    const evt = { preventDefault: jest.fn() };
+    renderer.act(() => {
+      addReviewComponent.root.findByType(`form`).props.onSubmit(evt);
+    });
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+  });
 });
