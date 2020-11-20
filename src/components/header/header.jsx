@@ -10,11 +10,14 @@ const Header = ({
   children,
   isFavoritesPage,
   isLoginPage,
+  isErrorPage,
 }) => {
   return (
     <header
       className={`page-header ${
-        isFavoritesPage || isLoginPage ? `user-page__head` : `movie-card__head`
+        isFavoritesPage || isLoginPage || isErrorPage
+          ? `user-page__head`
+          : `movie-card__head`
       }`}
     >
       <div className="logo">
@@ -25,9 +28,10 @@ const Header = ({
         </Link>
       </div>
 
-      {isFavoritesPage || isLoginPage ? (
+      {isFavoritesPage || isLoginPage || isErrorPage ? (
         <h1 className="page-title user-page__title">
-          {isFavoritesPage && `My list`} {isLoginPage && `Sign in`}
+          {isFavoritesPage && `My list`} {isLoginPage && `Sign in`}{" "}
+          {isErrorPage && "Error Page"}
         </h1>
       ) : (
         ``
@@ -65,11 +69,13 @@ Header.propTypes = {
   children: PropTypes.element,
   isFavoritesPage: PropTypes.bool,
   isLoginPage: PropTypes.bool,
+  isErrorPage: PropTypes.bool,
 };
 
 Header.defaultProps = {
   isFavoritesPage: false,
   isLoginPage: false,
+  isErrorPage: false,
   user: null,
 };
 

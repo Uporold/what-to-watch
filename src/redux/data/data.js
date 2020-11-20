@@ -13,6 +13,7 @@ export const initialState = {
   isFavoritesLoading: true,
   isSendingError: false,
   isReviewSending: false,
+  errorMessage: ``,
 };
 
 export const ActionType = {
@@ -27,6 +28,7 @@ export const ActionType = {
   UPDATE_FAVORITE_STATUS: `UPDATE_FAVORITE_STATUS`,
   SET_SENDING_ERROR_STATUS: `SET_SENDING_ERROR_STATUS`,
   SET_REVIEW_SENDING_STATUS: `SET_REVIEW_SENDING_STATUS`,
+  SET_ERROR_MESSAGE: `SET_ERROR_MESSAGE`,
 };
 
 export const ActionCreator = {
@@ -102,6 +104,13 @@ export const ActionCreator = {
       payload: status,
     };
   },
+
+  setErrorMessage: (message) => {
+    return {
+      type: ActionType.SET_ERROR_MESSAGE,
+      payload: message,
+    };
+  },
 };
 
 export const Operation = {
@@ -164,6 +173,15 @@ export const Operation = {
         dispatch(
           ActionCreator.updateFavoriteStatus(createMovie(response.data))
         );
+      })
+      .catch((err) => {
+        if (
+          err.message !== "Request failed with status code 401" &&
+          err.message !== "Network Error"
+        ) {
+          dispatch(ActionCreator.setErrorMessage(err.toJSON().message));
+          history.push("/error");
+        }
       });
   },
 };
@@ -210,6 +228,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, isSendingError: action.payload };
     case ActionType.SET_REVIEW_SENDING_STATUS:
       return { ...state, isReviewSending: action.payload };
+    case ActionType.SET_ERROR_MESSAGE:
+      return { ...state, errorMessage: action.payload };
     default:
       return state;
   }

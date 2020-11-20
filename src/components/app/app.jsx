@@ -16,6 +16,7 @@ import {
 } from "../../redux/user/selectors";
 import MyList from "../my-list/my-list";
 import PrivateRoute from "../private-route/private-route";
+import ErrorPage from "../error-page/error-page";
 
 const App = ({
   isDataLoading,
@@ -44,6 +45,7 @@ const App = ({
               render={(routeProps) => <AddReview routeProps={routeProps} />}
             />
             <PrivateRoute exact path="/favorites" render={() => <MyList />} />
+            <Route exact path="/error" component={ErrorPage} />
           </Switch>
         </Router>
       ) : (
