@@ -37,6 +37,7 @@ exports[`Sign in page component render 1`] = `
     >
        
       Sign in
+       
     </h1>
     <div
       className="user-block"

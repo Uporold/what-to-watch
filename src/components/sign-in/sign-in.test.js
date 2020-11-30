@@ -15,8 +15,6 @@ it(`Sign in page component render`, () => {
     },
   });
 
-  store.dispatch = jest.fn();
-
   const tree = renderer
     .create(
       <Router>
