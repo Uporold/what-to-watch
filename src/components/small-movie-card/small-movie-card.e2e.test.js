@@ -8,20 +8,16 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should card be hovered`, () => {
-  const onCardHover = jest.fn();
-
+it(`Should video preview play and pause on mouse actions`, () => {
   const smallMovieCard = shallow(
-    <SmallMovieCard
-      onSmallCardMovieClick={() => {}}
-      movie={movies[0]}
-      onHover={onCardHover}
-    />
+    <SmallMovieCard onSmallCardMovieClick={() => {}} movie={movies[0]} />
   );
 
   const card = smallMovieCard.find(`.small-movie-card`);
 
-  card.simulate(`mouseenter`, movies[0]);
-  expect(onCardHover.mock.calls.length).toBe(1);
-  expect(onCardHover.mock.calls[0][0]).toMatchObject(movies[0]);
+  card.simulate(`mouseenter`);
+  expect(smallMovieCard.state().isPlaying).toBe(true);
+
+  card.simulate(`mouseleave`);
+  expect(smallMovieCard.state().isPlaying).toBe(false);
 });
