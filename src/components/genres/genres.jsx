@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { getActiveGenre } from "../../redux/app/selectors";
 import { getAllGenres } from "../../redux/data/selectors";
 import { ActionCreator as DataActionCreator } from "../../redux/data/data";
 import { ActionCreator as AppActionCreator } from "../../redux/app/app";
-import {connect} from "react-redux";
 
 const Genres = ({ genres, currentGenre, onGenreClick }) => {
   const onGenreClickHandler = (genre) => (evt) => {
