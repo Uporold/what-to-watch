@@ -31,9 +31,9 @@ exports[`Header tests Render Header on Favorites Page 1`] = `
   </div>
   <h1
     className="page-title user-page__title"
-    data-testid="text-content"
   >
     My list
+     
      
   </h1>
   <div
@@ -92,6 +92,7 @@ exports[`Header tests Render Header on Login Page 1`] = `
   >
      
     Sign in
+     
   </h1>
   <div
     className="user-block"
