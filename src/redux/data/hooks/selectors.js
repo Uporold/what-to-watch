@@ -15,54 +15,54 @@ import {
   getShowedMoviesCount,
 } from "../selectors";
 
-const useAllMovies = () => {
+export const useAllMovies = () => {
   return useSelector(getAllMovies);
 };
 
-const usePromoMovie = () => {
+export const usePromoMovie = () => {
   return useSelector(getPromoMovie);
 };
 
-const useFavoriteMovies = () => {
+export const useFavoriteMovies = () => {
   return useSelector(getFavoriteMovies);
 };
 
-const useMovieReviews = () => {
+export const useMovieReviews = () => {
   return useSelector(getMovieReviews);
 };
 
-const useShovedMoviesCount = () => {
+export const useShovedMoviesCount = () => {
   return useSelector(getShowedMoviesCount);
 };
 
-const useDataLoadingStatus = () => {
+export const useDataLoadingStatus = () => {
   return useSelector(getLoadingStatus);
 };
 
-const useFavoritesLoadingStatus = () => {
+export const useFavoritesLoadingStatus = () => {
   return useSelector(getFavoritesLoadingStatus);
 };
 
-const useSendingErrorStatus = () => {
+export const useSendingErrorStatus = () => {
   return useSelector(getSendingErrorStatus);
 };
 
-const useReviewSendingStatus = () => {
+export const useReviewSendingStatus = () => {
   return useSelector(getReviewSendingStatus);
 };
 
-const useAllGenres = () => {
+export const useAllGenres = () => {
   return useSelector(getAllGenres);
 };
 
-const useFilteredMoviesByGenre = () => {
+export const useFilteredMoviesByGenre = () => {
   return useSelector(getFilteredMoviesByGenre);
 };
 
-const useShowedMovies = () => {
+export const useShowedMovies = () => {
   return useSelector(getShowedMovies);
 };
 
-const useCurrentMovie = (id) => {
+export const useCurrentMovie = (id) => {
   return useSelector(getCurrentMovie(id));
 };

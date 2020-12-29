@@ -1,15 +1,14 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  getCurrentMovie,
-  getSendingErrorStatus,
-  getReviewSendingStatus,
-} from "../../redux/data/selectors";
-import { projectPropTypes } from "../../utilities/project-prop-types";
 import Header from "../../components/header/header";
 import Breadcrumbs from "../../components/breadcrumbs/breadcrumbs";
-import { ActionCreator, Operation } from "../../redux/data/data";
+import {
+  useCurrentMovie,
+  useReviewSendingStatus,
+  useSendingErrorStatus,
+} from "../../redux/data/hooks/selectors";
+import { useSendReview } from "../../redux/data/hooks/useSendReview";
+import { useSetSendingErrorStatus } from "../../redux/data/hooks/useSetSendingErrorStatus";
 
 const RATING_STARS = [1, 2, 3, 4, 5];
 
@@ -19,162 +18,133 @@ const errorMessageStyle = {
   color: `red`,
 };
 
-class AddReview extends PureComponent {
-  constructor(props) {
-    super(props);
+const AddReview = ({ routeProps }) => {
+  const [comment, setComment] = useState(``);
+  const [stars, setStars] = useState(5);
 
-    this.state = {
-      comment: ``,
-      stars: 0,
-    };
-  }
+  const sendReview = useSendReview();
+  const isReviewSending = useReviewSendingStatus();
+  const isSendingError = useSendingErrorStatus();
+  const setSendingErrorStatus = useSetSendingErrorStatus();
+  const movie = useCurrentMovie(routeProps.match.params.id);
 
-  onRatingChange = (event) => {
-    this.setState({ stars: event.target.value });
+  const onCommentChange = (event) => {
+    setComment(event.target.value);
   };
 
-  onCommentChange = (event) => {
-    this.setState({ comment: event.target.value });
+  const onRatingChange = (event) => {
+    setStars(event.target.value);
   };
 
-  onSubmitFormHandler = (event) => {
-    const { movie, onFormSubmit } = this.props;
-    const { comment, stars } = this.state;
+  const onTextInputFocus = (status) => () => {
+    setSendingErrorStatus(status);
+  };
+
+  const onSubmitFormHandler = (event) => {
     event.preventDefault();
     const review = {
       comment,
       rating: stars,
     };
-    onFormSubmit(movie.id, review);
+    sendReview(movie.id, review);
   };
 
-  render() {
-    const {
-      movie,
-      isSendingError,
-      onTextInputFocus,
-      isReviewSending,
-    } = this.props;
-    const { comment, stars } = this.state;
-    return (
-      <section
-        className="movie-card movie-card--full"
-        style={{ background: movie.backgroundColor }}
-      >
-        <div className="movie-card__header">
-          <div className="movie-card__bg">
-            <img src={movie.backgroundImage} alt={movie.name} />
-          </div>
-
-          <h1 className="visually-hidden">WTW</h1>
-
-          <Header>
-            <Breadcrumbs movie={movie} />
-          </Header>
-
-          <div className="movie-card__poster movie-card__poster--small">
-            <img
-              src={movie.posterImage}
-              alt={movie.name}
-              width="218"
-              height="327"
-            />
-          </div>
+  return (
+    <section
+      className="movie-card movie-card--full"
+      style={{ background: movie.backgroundColor }}
+    >
+      <div className="movie-card__header">
+        <div className="movie-card__bg">
+          <img src={movie.backgroundImage} alt={movie.name} />
         </div>
 
-        <div className="add-review">
-          <form
-            action="#"
-            className="add-review__form"
-            onSubmit={this.onSubmitFormHandler}
+        <h1 className="visually-hidden">WTW</h1>
+
+        <Header>
+          <Breadcrumbs movie={movie} />
+        </Header>
+
+        <div className="movie-card__poster movie-card__poster--small">
+          <img
+            src={movie.posterImage}
+            alt={movie.name}
+            width="218"
+            height="327"
+          />
+        </div>
+      </div>
+
+      <div className="add-review">
+        <form
+          action="#"
+          className="add-review__form"
+          onSubmit={onSubmitFormHandler}
+        >
+          <div className="rating">
+            <div className="rating__stars">
+              {RATING_STARS.map((elem) => {
+                return (
+                  <React.Fragment key={elem}>
+                    <input
+                      className="rating__input"
+                      id={`star-${elem}`}
+                      type="radio"
+                      name="rating"
+                      value={elem}
+                      onChange={onRatingChange}
+                      disabled={isReviewSending}
+                    />
+                    <label className="rating__label" htmlFor={`star-${elem}`}>
+                      Rating {elem}
+                    </label>
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </div>
+
+          <div
+            className="add-review__text"
+            style={{ background: `rgba(255, 255, 255, 0.4)` }}
           >
-            <div className="rating">
-              <div className="rating__stars" onChange={this.onRatingChange}>
-                {RATING_STARS.map((elem) => {
-                  return (
-                    <React.Fragment key={elem}>
-                      <input
-                        className="rating__input"
-                        id={`star-${elem}`}
-                        type="radio"
-                        name="rating"
-                        value={elem}
-                        disabled={isReviewSending}
-                      />
-                      <label className="rating__label" htmlFor={`star-${elem}`}>
-                        Rating {elem}
-                      </label>
-                    </React.Fragment>
-                  );
-                })}
-              </div>
+            <textarea
+              className="add-review__textarea"
+              name="review-text"
+              id="review-text"
+              placeholder="Review text"
+              onChange={onCommentChange}
+              onFocus={onTextInputFocus}
+            />
+            <div className="add-review__submit">
+              <button
+                className="add-review__btn"
+                type="submit"
+                disabled={isReviewSending || comment.length < 50 || stars < 1}
+              >
+                {isReviewSending ? `Sending...` : `Post`}
+              </button>
             </div>
-
-            <div
-              className="add-review__text"
-              style={{ background: `rgba(255, 255, 255, 0.4)` }}
-            >
-              <textarea
-                className="add-review__textarea"
-                name="review-text"
-                id="review-text"
-                placeholder="Review text"
-                onChange={this.onCommentChange}
-                onFocus={onTextInputFocus}
-              />
-              <div className="add-review__submit">
-                <button
-                  className="add-review__btn"
-                  type="submit"
-                  disabled={isReviewSending || comment.length < 50 || stars < 1}
-                >
-                  {isReviewSending ? `Sending...` : `Post`}
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-        {isSendingError && (
-          <p style={errorMessageStyle}>
-            An unknown error occurred while sending the message. Try again
-            later.
-          </p>
-        )}
-      </section>
-    );
-  }
-}
-
-AddReview.propTypes = {
-  movie: projectPropTypes.MOVIE.isRequired,
-  onFormSubmit: PropTypes.func.isRequired,
-  onTextInputFocus: PropTypes.func.isRequired,
-  isSendingError: PropTypes.bool.isRequired,
-  isReviewSending: PropTypes.bool.isRequired,
+          </div>
+        </form>
+      </div>
+      {isSendingError && (
+        <p style={errorMessageStyle}>
+          An unknown error occurred while sending the message. Try again later.
+        </p>
+      )}
+    </section>
+  );
 };
 
-const mapStateToProps = (
-  state,
-  {
-    routeProps: {
-      match: { params },
-    },
-  }
-) => ({
-  movie: getCurrentMovie(params.id)(state),
-  isSendingError: getSendingErrorStatus(state),
-  isReviewSending: getReviewSendingStatus(state),
-});
+AddReview.propTypes = {
+  routeProps: PropTypes.shape({
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }),
+    }),
+  }).isRequired,
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  onFormSubmit(movieId, review) {
-    dispatch(Operation.sendReview(movieId, review));
-  },
-  onTextInputFocus() {
-    dispatch(ActionCreator.setSendingErrorStatus(false));
-  },
-});
-
-export { AddReview };
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
+export default AddReview;
