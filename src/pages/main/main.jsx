@@ -1,7 +1,7 @@
 import React from "react";
-import Footer from "../footer/footer";
-import MoviePromoCard from "../movie-promo-card/movie-promo-card";
-import Catalog from "../catalog/catalog";
+import Footer from "../../components/footer/footer";
+import MoviePromoCard from "../../components/movie-promo-card/movie-promo-card";
+import Catalog from "../../components/catalog/catalog";
 
 export const Main = () => {
   return (
