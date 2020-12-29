@@ -1,14 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Header from "../header/header";
-import Footer from "../footer/footer";
-import MoviesList from "../movies-list/movies-list";
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/footer";
+import MoviesList from "../../components/movies-list/movies-list";
 import {
   getFavoriteMovies,
   getFavoritesLoadingStatus,
 } from "../../redux/data/selectors";
-import LoaderSpinner from "../loader-spinner/loader-spinner";
+import LoaderSpinner from "../../components/loader-spinner/loader-spinner";
 import { Operation } from "../../redux/data/data";
 import { projectPropTypes } from "../../utilities/project-prop-types";
 

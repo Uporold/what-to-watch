@@ -1,8 +1,8 @@
 import React, { PureComponent, createRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Header from "../header/header";
-import Footer from "../footer/footer";
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/footer";
 import { Operation } from "../../redux/user/user";
 
 class SignIn extends PureComponent {

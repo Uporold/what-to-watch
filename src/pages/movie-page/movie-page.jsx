@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import MoviesList from "../movies-list/movies-list";
+import MoviesList from "../../components/movies-list/movies-list";
 import { projectPropTypes } from "../../utilities/project-prop-types";
-import Footer from "../footer/footer";
-import MovieCardHero from "../movie-card-hero/movie-card-hero";
+import Footer from "../../components/footer/footer";
+import MovieCardHero from "../../components/movie-card-hero/movie-card-hero";
 import { getAllMovies, getCurrentMovie } from "../../redux/data/selectors";
-import MoviePageInfo from "../movie-page-info/movie-page-info";
+import MoviePageInfo from "../../components/movie-page-info/movie-page-info";
 
 const getRelatedVideos = (movie, movies) => {
   return movies

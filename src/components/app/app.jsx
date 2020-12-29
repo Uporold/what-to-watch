@@ -2,21 +2,21 @@ import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import MoviePage from "../movie-page/movie-page";
-import Main from "../main/main";
-import VideoPlayer from "../video-player/video-player";
+import MoviePage from "../../pages/movie-page/movie-page";
+import Main from "../../pages/main/main";
+import VideoPlayer from "../../pages/video-player/video-player";
 import history from "../../history";
 import { getLoadingStatus } from "../../redux/data/selectors";
 import LoaderSpinner from "../loader-spinner/loader-spinner";
-import SignIn from "../sign-in/sign-in";
-import AddReview from "../add-review/add-review";
+import SignIn from "../../pages/sign-in/sign-in";
+import AddReview from "../../pages/add-review/add-review";
 import {
   getAuthorizationStatus,
   getAuthorizationLoadingStatus,
 } from "../../redux/user/selectors";
-import MyList from "../my-list/my-list";
+import MyList from "../../pages/my-list/my-list";
 import PrivateRoute from "../private-route/private-route";
-import ErrorPage from "../error-page/error-page";
+import ErrorPage from "../../pages/error-page/error-page";
 
 const App = ({
   isDataLoading,

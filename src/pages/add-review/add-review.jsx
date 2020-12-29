@@ -7,8 +7,8 @@ import {
   getReviewSendingStatus,
 } from "../../redux/data/selectors";
 import { projectPropTypes } from "../../utilities/project-prop-types";
-import Header from "../header/header";
-import Breadcrumbs from "../breadcrumbs/breadcrumbs";
+import Header from "../../components/header/header";
+import Breadcrumbs from "../../components/breadcrumbs/breadcrumbs";
 import { ActionCreator, Operation } from "../../redux/data/data";
 
 const RATING_STARS = [1, 2, 3, 4, 5];

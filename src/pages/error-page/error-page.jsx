@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import NameSpace from "../../redux/name-space";
-import Header from "../header/header";
-import Footer from "../footer/footer";
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/footer";
 
 const ErrorPage = ({ errorMessage }) => {
   return (
