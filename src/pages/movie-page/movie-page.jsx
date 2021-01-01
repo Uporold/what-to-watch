@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import MoviesList from "../../components/movies-list/movies-list";
-import { projectPropTypes } from "../../utilities/project-prop-types";
 import Footer from "../../components/footer/footer";
 import MovieCardHero from "../../components/movie-card-hero/movie-card-hero";
-import { getAllMovies, getCurrentMovie } from "../../redux/data/selectors";
 import MoviePageInfo from "../../components/movie-page-info/movie-page-info";
+import {
+  useCurrentMovie,
+  useAllMovies,
+} from "../../redux/data/hooks/selectors";
 
 const getRelatedVideos = (movie, movies) => {
   return movies
@@ -14,7 +15,9 @@ const getRelatedVideos = (movie, movies) => {
     .slice(0, 4);
 };
 
-const MoviePage = ({ movie, movies }) => {
+const MoviePage = ({ match }) => {
+  const movie = useCurrentMovie(match.params.id);
+  const movies = useAllMovies();
   return (
     <>
       <section
@@ -38,15 +41,11 @@ const MoviePage = ({ movie, movies }) => {
 };
 
 MoviePage.propTypes = {
-  movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
-  movie: projectPropTypes.MOVIE.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
 };
 
-const mapStateToProps = (state, { match: { params } }) => ({
-  movie: getCurrentMovie(params.id)(state),
-  movies: getAllMovies(state),
-});
-
-export { MoviePage };
-
-export default connect(mapStateToProps)(MoviePage);
+export default MoviePage;
