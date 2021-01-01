@@ -12,7 +12,7 @@ import {
   getFilteredMoviesByGenre,
   getFavoritesLoadingStatus,
   getSendingErrorStatus,
-  getShowedMoviesCount,
+  getShowedMoviesCount, getErrorMessage,
 } from "../selectors";
 
 export const useAllMovies = () => {
@@ -66,3 +66,7 @@ export const useShowedMovies = () => {
 export const useCurrentMovie = (id) => {
   return useSelector(getCurrentMovie(id));
 };
+
+export const useErrorMessage = () => {
+  return useSelector(getErrorMessage);
+}
