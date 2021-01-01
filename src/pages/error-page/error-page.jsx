@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import NameSpace from "../../redux/name-space";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
+import { useErrorMessage } from "../../redux/data/hooks/selectors";
 
-const ErrorPage = ({ errorMessage }) => {
+const ErrorPage = () => {
+  const errorMessage = useErrorMessage();
   return (
     <>
       <div className="user-page">
@@ -22,14 +21,4 @@ const ErrorPage = ({ errorMessage }) => {
   );
 };
 
-ErrorPage.propTypes = {
-  errorMessage: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  errorMessage: state[NameSpace.DATA].errorMessage,
-});
-
-export { ErrorPage };
-
-export default connect(mapStateToProps, null)(ErrorPage);
+export default ErrorPage;
