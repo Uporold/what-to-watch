@@ -1,65 +1,42 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 import MoviesList from "../../components/movies-list/movies-list";
-import {
-  getFavoriteMovies,
-  getFavoritesLoadingStatus,
-} from "../../redux/data/selectors";
 import LoaderSpinner from "../../components/loader-spinner/loader-spinner";
-import { Operation } from "../../redux/data/data";
-import { projectPropTypes } from "../../utilities/project-prop-types";
+import { useLoadFavoriteMovies } from "../../redux/data/hooks/useLoadFavoriteMovies";
+import {
+  useFavoriteMovies,
+  useFavoritesLoadingStatus,
+} from "../../redux/data/hooks/selectors";
 
-class MyList extends PureComponent {
-  componentDidMount() {
-    const { loadFavoriteMovies } = this.props;
+const MyList = () => {
+  const loadFavoriteMovies = useLoadFavoriteMovies();
+  const isFavoritesLoading = useFavoritesLoadingStatus();
+  const favoriteMovies = useFavoriteMovies();
+
+  useEffect(() => {
     loadFavoriteMovies();
-  }
+  }, [loadFavoriteMovies]);
 
-  render() {
-    const { favoriteMovies, isFavoritesLoading } = this.props;
-    return (
-      <>
-        {!isFavoritesLoading ? (
-          <div className="user-page">
-            <Header isFavoritesPage />
+  return (
+    <>
+      {!isFavoritesLoading ? (
+        <div className="user-page">
+          <Header isFavoritesPage />
 
-            <section className="catalog">
-              <h2 className="catalog__title visually-hidden">Catalog</h2>
+          <section className="catalog">
+            <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-              <MoviesList movies={favoriteMovies} />
-            </section>
+            <MoviesList movies={favoriteMovies} />
+          </section>
 
-            <Footer />
-          </div>
-        ) : (
-          <LoaderSpinner />
-        )}
-      </>
-    );
-  }
-}
-
-MyList.propTypes = {
-  favoriteMovies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired)
-    .isRequired,
-  isFavoritesLoading: PropTypes.bool.isRequired,
-  loadFavoriteMovies: PropTypes.func.isRequired,
+          <Footer />
+        </div>
+      ) : (
+        <LoaderSpinner />
+      )}
+    </>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  favoriteMovies: getFavoriteMovies(state),
-  isFavoritesLoading: getFavoritesLoadingStatus(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadFavoriteMovies() {
-    dispatch(Operation.loadFavoriteMovies());
-  },
-});
-
-export { MyList };
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyList);
+export default MyList;
