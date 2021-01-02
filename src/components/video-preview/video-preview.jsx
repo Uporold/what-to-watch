@@ -1,50 +1,40 @@
-import React, { PureComponent, createRef } from "react";
+import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 
-class VideoPreview extends PureComponent {
-  constructor(props) {
-    super(props);
+const VideoPreview = ({ isPlaying, isMuted, source, poster }) => {
+  const videoPreviewRef = useRef();
+  const previewPlayTimeoutRef = useRef(null);
 
-    this._videoPreviewRef = createRef();
-    this._previewPlayTimeout = null;
-  }
-
-  componentDidMount() {
-    const { source, isMuted, poster } = this.props;
-    const video = this._videoPreviewRef.current;
-
+  useEffect(() => {
+    const video = videoPreviewRef.current;
     video.src = source;
     video.muted = isMuted;
     video.poster = poster;
-  }
 
-  componentDidUpdate() {
-    const video = this._videoPreviewRef.current;
+    return () => {
+      video.src = ``;
+      video.muted = null;
+      video.poster = ``;
 
-    if (this.props.isPlaying) {
-      this._previewPlayTimeout = setTimeout(() => {
+      clearTimeout(previewPlayTimeoutRef.current);
+    };
+  }, [isMuted, poster, source]);
+
+  useEffect(() => {
+    const video = videoPreviewRef.current;
+
+    if (isPlaying) {
+      previewPlayTimeoutRef.current = setTimeout(() => {
         video.play();
       }, 1000);
     } else {
       video.load();
-      clearTimeout(this._previewPlayTimeout);
+      clearTimeout(previewPlayTimeoutRef.current);
     }
-  }
+  });
 
-  componentWillUnmount() {
-    const video = this._videoPreviewRef.current;
-
-    video.src = ``;
-    video.muted = null;
-    video.poster = ``;
-
-    clearTimeout(this._previewPlayTimeout);
-  }
-
-  render() {
-    return <video width="280" height="175" ref={this._videoPreviewRef} />;
-  }
-}
+  return <video width="280" height="175" ref={videoPreviewRef} />;
+};
 
 VideoPreview.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
