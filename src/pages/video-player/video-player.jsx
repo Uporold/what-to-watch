@@ -1,75 +1,61 @@
-import React, { createRef, PureComponent } from "react";
-import { connect } from "react-redux";
-import { projectPropTypes } from "../../utilities/project-prop-types";
+import React, { useRef, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { TIME_IN_SECONDS } from "../../utilities/const";
 import history from "../../history";
-import { getCurrentMovie } from "../../redux/data/selectors";
+import { useCurrentMovie } from "../../redux/data/hooks/selectors";
 
-class VideoPlayer extends PureComponent {
-  constructor(props) {
-    super(props);
+const VideoPlayer = ({ match }) => {
+  const videoRef = useRef();
+  const movie = useCurrentMovie(match.params.id);
 
-    this.videoRef = createRef();
+  const [isPlaying, setPlayStatus] = useState(true);
+  const [duration, changeDuration] = useState(null);
+  const [currentTime, setTime] = useState(null);
 
-    this.state = {
-      isPlaying: true,
-      duration: null,
-      currentTime: null,
-    };
-  }
+  const togglePosition = (currentTime / duration) * 100;
 
-  componentDidMount() {
-    const { videoLink, backgroundImage } = this.props.movie;
-    const video = this.videoRef.current;
+  useEffect(() => {
+    const video = videoRef.current;
+    const { videoLink, backgroundImage } = movie;
 
     video.src = videoLink;
     video.poster = backgroundImage;
 
-    video.onloadedmetadata = () =>
-      this.setState({
-        duration: video.duration,
-      });
+    video.onloadedmetadata = () => changeDuration(video.duration);
 
-    video.ontimeupdate = () =>
-      this.setState({
-        currentTime: Math.floor(video.currentTime),
-      });
-  }
+    video.ontimeupdate = () => setTime(Math.floor(video.currentTime));
 
-  componentDidUpdate() {
-    const video = this.videoRef.current;
-    const { isPlaying } = this.state;
+    // componentWillUnmount
+    return () => {
+      video.src = ``;
+      video.poster = ``;
+      video.onloadedmetadata = null;
+      video.ontimeupdate = null;
+    };
+  }, [movie]);
+
+  useEffect(() => {
+    const video = videoRef.current;
     if (isPlaying) {
       video.play();
     } else {
       video.pause();
     }
-  }
+  });
 
-  componentWillUnmount() {
-    const video = this.videoRef.current;
-
-    video.src = ``;
-    video.poster = ``;
-    video.onloadedmetadata = null;
-    video.ontimeupdate = null;
-  }
-
-  onFullscreenClickHandler = () => {
-    this.videoRef.current.requestFullscreen();
+  const onFullscreenClickHandler = () => {
+    videoRef.current.requestFullscreen();
   };
 
-  onExitButtonClickHandler = () => {
+  const onExitButtonClickHandler = () => {
     history.goBack();
   };
 
-  onButtonClickHandler = () => {
-    const { isPlaying } = this.state;
-    this.setState({ isPlaying: !isPlaying });
+  const onButtonClickHandler = () => {
+    setPlayStatus(!isPlaying);
   };
 
-  getTimeLeft() {
-    const { currentTime, duration } = this.state;
+  const getTimeLeft = () => {
     const timeLeft = duration - currentTime;
 
     const formatTime = (time) => {
@@ -83,12 +69,12 @@ class VideoPlayer extends PureComponent {
     return hours > 1
       ? `${hours}:${minutes}:${seconds}`
       : `${minutes}:${seconds}`;
-  }
+  };
 
-  renderPlayButton() {
+  const renderPlayButton = () => {
     return (
       <button
-        onClick={this.onButtonClickHandler}
+        onClick={onButtonClickHandler}
         type="button"
         className="player__play"
       >
@@ -98,12 +84,12 @@ class VideoPlayer extends PureComponent {
         <span>Play</span>
       </button>
     );
-  }
+  };
 
-  renderPauseButton() {
+  const renderPauseButton = () => {
     return (
       <button
-        onClick={this.onButtonClickHandler}
+        onClick={onButtonClickHandler}
         type="button"
         className="player__play"
       >
@@ -113,12 +99,12 @@ class VideoPlayer extends PureComponent {
         <span>Pause</span>
       </button>
     );
-  }
+  };
 
-  renderFullscreenButton() {
+  const renderFullscreenButton = () => {
     return (
       <button
-        onClick={this.onFullscreenClickHandler}
+        onClick={onFullscreenClickHandler}
         type="button"
         className="player__full-screen"
       >
@@ -128,60 +114,54 @@ class VideoPlayer extends PureComponent {
         <span>Full screen</span>
       </button>
     );
-  }
+  };
 
-  render() {
-    const { isPlaying, duration, currentTime } = this.state;
-    const { movie } = this.props;
-    const togglePosition = (currentTime / duration) * 100;
-    return (
-      <div className="player">
-        <video ref={this.videoRef} className="player__video" />
+  return (
+    <div className="player">
+      <video ref={videoRef} className="player__video" />
 
-        <button
-          onClick={this.onExitButtonClickHandler}
-          type="button"
-          className="player__exit"
-        >
-          Exit
-        </button>
-        <div className="player__controls">
-          <div className="player__controls-row">
-            <div className="player__time">
-              <progress
-                className="player__progress"
-                value={currentTime}
-                max={duration}
-              />
-              <div
-                className="player__toggler"
-                style={{ left: `${togglePosition}%` }}
-              >
-                Toggler
-              </div>
+      <button
+        onClick={onExitButtonClickHandler}
+        type="button"
+        className="player__exit"
+      >
+        Exit
+      </button>
+      <div className="player__controls">
+        <div className="player__controls-row">
+          <div className="player__time">
+            <progress
+              className="player__progress"
+              value={currentTime}
+              max={duration}
+            />
+            <div
+              className="player__toggler"
+              style={{ left: `${togglePosition}%` }}
+            >
+              Toggler
             </div>
-            <div className="player__time-value">{this.getTimeLeft()}</div>
           </div>
+          <div className="player__time-value">{getTimeLeft()}</div>
+        </div>
 
-          <div className="player__controls-row">
-            {isPlaying ? this.renderPauseButton() : this.renderPlayButton()}
-            <div className="player__name">{movie.name}</div>
+        <div className="player__controls-row">
+          {isPlaying ? renderPauseButton() : renderPlayButton()}
+          <div className="player__name">{movie.name}</div>
 
-            {this.renderFullscreenButton()}
-          </div>
+          {renderFullscreenButton()}
         </div>
       </div>
-    );
-  }
-}
-
-VideoPlayer.propTypes = {
-  movie: projectPropTypes.MOVIE.isRequired,
+    </div>
+  );
 };
 
-const mapStateToProps = (state, { match: { params } }) => ({
-  movie: getCurrentMovie(params.id)(state),
-});
+VideoPlayer.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
 
-export { VideoPlayer };
-export default connect(mapStateToProps)(VideoPlayer);
+export default VideoPlayer;
