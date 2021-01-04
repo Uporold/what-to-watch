@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 export const getRatingLevel = (rating) => {
   let test = null;
   if (rating >= 0 && rating < 3) {
@@ -50,4 +52,12 @@ export const getMoviesByGenre = (movies, genre) => {
 
 export const extend = (state, newStateValue) => {
   return { ...state, ...newStateValue };
+};
+
+export const usePrevious = (value) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
 };

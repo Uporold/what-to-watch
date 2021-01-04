@@ -6,6 +6,7 @@ import VideoPreview from "../video-preview/video-preview";
 const SmallMovieCard = memo(({ movie }) => {
   const [isPlaying, setPlayingStatus] = useState(false);
   const { id, previewVideoLink, previewImage, name } = movie;
+
   const onMouseMoveHandler = (status) => () => {
     setPlayingStatus(status);
   };

@@ -10,8 +10,11 @@ import AddReview from "../../pages/add-review/add-review";
 import MyList from "../../pages/my-list/my-list";
 import PrivateRoute from "../private-route/private-route";
 import ErrorPage from "../../pages/error-page/error-page";
-import {useAuthorizationLoadingStatus, useAuthorizationStatus} from "../../redux/user/hooks/selectors";
-import {useDataLoadingStatus} from "../../redux/data/hooks/selectors";
+import {
+  useAuthorizationLoadingStatus,
+  useAuthorizationStatus,
+} from "../../redux/user/hooks/selectors";
+import { useDataLoadingStatus } from "../../redux/data/hooks/selectors";
 
 const App = () => {
   const authorizationStatus = useAuthorizationStatus();

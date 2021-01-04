@@ -6,6 +6,7 @@ const MovieNav = ({ tabs, currentNav, onNavClick }) => {
     evt.preventDefault();
     onNavClick(tab);
   };
+
   const renderNavItem = () => {
     return (
       <>
