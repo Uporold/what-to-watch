@@ -1,20 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import MovieNav from "../movie-nav/movie-nav";
-import { movieNavs, usePrevious } from "../../utilities/util";
+import { getSlicedReviews, movieNavs, usePrevious } from "../../utilities/util";
 import MoviePageOverview from "../movie-page-overview/movie-page-overview";
 import MoviePageDetails from "../movie-page-details/movie-page-details";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews";
 import { projectPropTypes } from "../../utilities/project-prop-types";
+import { useLoadMovieReviews } from "../../redux/data/hooks/useLoadMovieReviews";
+import { useMovieReviews } from "../../redux/data/hooks/selectors";
 
 const MoviePageInfo = ({ movie }) => {
   const [activeNavBar, setActiveNavBar] = useState(`overview`);
   const previousMovieId = usePrevious(movie.id);
+  const movieReviews = useMovieReviews();
+
+  const loadMovieReviews = useLoadMovieReviews();
+
+  const slicedReviews = useMemo(() => getSlicedReviews(movieReviews), [
+    movieReviews.length,
+  ]);
 
   useEffect(() => {
     if (previousMovieId && previousMovieId !== movie.id) {
       setActiveNavBar(`overview`);
     }
-  }, [movie.id, previousMovieId]);
+    loadMovieReviews(movie.id);
+  }, [loadMovieReviews, movie.id, previousMovieId]);
 
   const renderActiveMovieNavInfo = (navBar) => {
     switch (navBar) {
@@ -25,7 +35,7 @@ const MoviePageInfo = ({ movie }) => {
         return <MoviePageDetails movie={movie} />;
 
       case `reviews`:
-        return <MoviePageReviews movie={movie} />;
+        return <MoviePageReviews movie={movie} slicedReviews={slicedReviews} />;
 
       default:
         return <MoviePageOverview movie={movie} />;

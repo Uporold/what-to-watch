@@ -21,11 +21,13 @@ export const getRatingLevel = (rating) => {
 };
 
 export const getSlicedReviews = (reviews) => {
-  const sliceBorderIndex = Math.ceil(reviews.length / 2);
-  const firstColumn = reviews.slice(0, sliceBorderIndex);
-  const secondColumn = reviews.slice(sliceBorderIndex, reviews.length);
-
-  return [firstColumn, secondColumn];
+  if (reviews.length !== 0) {
+    const sliceBorderIndex = Math.ceil(reviews.length / 2);
+    const firstColumn = reviews.slice(0, sliceBorderIndex);
+    const secondColumn = reviews.slice(sliceBorderIndex, reviews.length);
+    return [firstColumn, secondColumn];
+  }
+  return [];
 };
 
 export const movieNavs = [`overview`, `details`, `reviews`];
