@@ -1,16 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import Header from "../header/header";
-import { getPromoMovie } from "../../redux/data/selectors";
-import { projectPropTypes } from "../../utilities/project-prop-types";
-import { Operation } from "../../redux/data/data";
+import { useChangeMovieFavoriteStatus } from "../../redux/data/hooks/useChangeMovieFavoriteStatus";
+import { usePromoMovie } from "../../redux/data/hooks/selectors";
 
-const MoviePromoCard = ({ promoMovie, onButtonClick }) => {
+const MoviePromoCard = () => {
+  const promoMovie = usePromoMovie();
+  const changeMovieFavoriteStatus = useChangeMovieFavoriteStatus();
+
   const onButtonClickHandler = (movieId, isFavorite) => () => {
-    onButtonClick(movieId, isFavorite);
+    changeMovieFavoriteStatus(movieId, isFavorite);
   };
+
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -77,20 +78,4 @@ const MoviePromoCard = ({ promoMovie, onButtonClick }) => {
   );
 };
 
-MoviePromoCard.propTypes = {
-  promoMovie: projectPropTypes.MOVIE.isRequired,
-  onButtonClick: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  promoMovie: getPromoMovie(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onButtonClick(movieId, isFavorite) {
-    dispatch(Operation.changeMovieFavoriteStatus(movieId, isFavorite));
-  },
-});
-
-export { MoviePromoCard };
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePromoCard);
+export default MoviePromoCard;
