@@ -1,15 +1,13 @@
 import React, { memo } from "react";
+import PropTypes from "prop-types";
 import { useSetDefaultMoviesCount } from "../../redux/data/hooks/useSetDefaultMoviesCount";
 import { useSetGenre } from "../../redux/app/hooks/useSetGenre";
 import { useAllGenres } from "../../redux/data/hooks/selectors";
-import { useActiveGenre } from "../../redux/app/hooks/selectors";
 
-const Genres = memo(() => {
+const Genres = memo(({ currentGenre }) => {
   const genres = useAllGenres();
   const setDefaultMoviesCount = useSetDefaultMoviesCount();
   const setGenre = useSetGenre();
-  const currentGenre = useActiveGenre();
-
   const onGenreClickHandler = (genre) => (evt) => {
     evt.preventDefault();
     setDefaultMoviesCount();
@@ -37,5 +35,9 @@ const Genres = memo(() => {
     </ul>
   );
 });
+
+Genres.propTypes = {
+  currentGenre: PropTypes.string.isRequired,
+};
 
 export default Genres;
