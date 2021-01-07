@@ -9,7 +9,7 @@ import {
   useAllMovies,
 } from "../../redux/data/hooks/selectors";
 
-const getRelatedVideos = (movie, movies) => {
+const getRelatedMovies = (movie, movies) => {
   return movies
     .filter((item) => item.genre === movie.genre && item.id !== movie.id)
     .slice(0, 4);
@@ -31,7 +31,7 @@ const MoviePage = ({ match }) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MoviesList movies={getRelatedVideos(movie, movies)} />
+          <MoviesList movies={getRelatedMovies(movie, movies)} />
         </section>
 
         <Footer />

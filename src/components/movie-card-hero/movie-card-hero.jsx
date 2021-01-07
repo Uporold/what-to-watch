@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import Header from "../header/header";
 import { projectPropTypes } from "../../utilities/project-prop-types";
-import { Operation } from "../../redux/data/data";
-import { getAuthorizationStatus } from "../../redux/user/selectors";
+import { useAuthorizationStatus } from "../../redux/user/hooks/selectors";
+import { useChangeMovieFavoriteStatus } from "../../redux/data/hooks/useChangeMovieFavoriteStatus";
 
-const MovieCardHero = ({ movie, onButtonClick, authorizationStatus }) => {
+const MovieCardHero = ({ movie }) => {
   const { backgroundImage, name, genre, released } = movie;
+  const authorizationStatus = useAuthorizationStatus();
+  const changeMovieFavoriteStatus = useChangeMovieFavoriteStatus();
+
   const onButtonClickHandler = (movieId, isFavorite) => () => {
-    onButtonClick(movieId, isFavorite);
+    changeMovieFavoriteStatus(movieId, isFavorite);
   };
+
   return (
     <div className="movie-card__hero">
       <div className="movie-card__bg">
@@ -74,20 +76,6 @@ const MovieCardHero = ({ movie, onButtonClick, authorizationStatus }) => {
 
 MovieCardHero.propTypes = {
   movie: projectPropTypes.MOVIE.isRequired,
-  onButtonClick: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.bool.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onButtonClick(movieId, isFavorite) {
-    dispatch(Operation.changeMovieFavoriteStatus(movieId, isFavorite));
-  },
-});
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-export { MovieCardHero };
-
-export default connect(mapStateToProps, mapDispatchToProps)(MovieCardHero);
+export default MovieCardHero;
