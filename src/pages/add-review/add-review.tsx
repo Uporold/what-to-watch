@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { RouteComponentProps } from "react-router";
 import Header from "../../components/header/header";
 import Breadcrumbs from "../../components/breadcrumbs/breadcrumbs";
 import {
@@ -18,29 +18,36 @@ const errorMessageStyle = {
   color: `red`,
 };
 
-const AddReview = ({ routeProps }) => {
-  const [comment, setComment] = useState(``);
-  const [stars, setStars] = useState(5);
+interface MatchParams {
+  id: string;
+}
 
+interface Props {
+  routeProps: RouteComponentProps<MatchParams>;
+}
+
+const AddReview: React.FC<Props> = ({ routeProps }): JSX.Element => {
+  const [comment, setComment] = useState<string>(``);
+  const [stars, setStars] = useState<number>(5);
   const sendReview = useSendReview();
   const isReviewSending = useReviewSendingStatus();
   const isSendingError = useSendingErrorStatus();
   const setSendingErrorStatus = useSetSendingErrorStatus();
   const movie = useCurrentMovie(routeProps.match.params.id);
 
-  const onCommentChange = (event) => {
+  const onCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
   };
 
-  const onRatingChange = (event) => {
-    setStars(event.target.value);
+  const onRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setStars(+event.target.value);
   };
 
-  const onTextInputFocus = (status) => () => {
-    setSendingErrorStatus(status);
+  const onTextInputFocus = () => {
+    setSendingErrorStatus(false);
   };
 
-  const onSubmitFormHandler = (event) => {
+  const onSubmitFormHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const review = {
       comment,
@@ -135,16 +142,6 @@ const AddReview = ({ routeProps }) => {
       )}
     </section>
   );
-};
-
-AddReview.propTypes = {
-  routeProps: PropTypes.shape({
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }),
-    }),
-  }).isRequired,
 };
 
 export default AddReview;
