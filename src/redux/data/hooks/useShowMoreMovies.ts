@@ -1,11 +1,11 @@
-import { useCallback } from "react";
 import { useDispatch } from "react-redux";
+import { useCallback } from "react";
 import { ActionCreator } from "../data";
 
-export const useSetDefaultMoviesCount = () => {
+export const useShowMoreMovies = (): (() => void) => {
   const dispatch = useDispatch();
 
   return useCallback(() => {
-    dispatch(ActionCreator.setDefaultMoviesCount());
+    dispatch(ActionCreator.showMoreMovies());
   }, [dispatch]);
 };
