@@ -4,15 +4,16 @@ import {
   getAuthorizationLoadingStatus,
   getUser,
 } from "../selectors";
+import { UserLogged } from "../../../utilities/types";
 
-export const useAuthorizationStatus = () => {
+export const useAuthorizationStatus = (): boolean => {
   return useSelector(getAuthorizationStatus);
 };
 
-export const useAuthorizationLoadingStatus = () => {
+export const useAuthorizationLoadingStatus = (): boolean => {
   return useSelector(getAuthorizationLoadingStatus);
 };
 
-export const useUser = () => {
+export const useUser = (): UserLogged => {
   return useSelector(getUser);
 };

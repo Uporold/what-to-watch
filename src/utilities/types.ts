@@ -33,3 +33,12 @@ export interface User {
   name: string;
   avatar: string;
 }
+
+export interface UserLogged extends User {
+  email: string;
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
+}
