@@ -12,61 +12,58 @@ import {
   getFilteredMoviesByGenre,
   getFavoritesLoadingStatus,
   getSendingErrorStatus,
-  getShowedMoviesCount, getErrorMessage,
+  getErrorMessage,
 } from "../selectors";
+import { Movie, Review } from "../../../utilities/types";
 
-export const useAllMovies = () => {
+export const useAllMovies = (): Array<Movie> => {
   return useSelector(getAllMovies);
 };
 
-export const usePromoMovie = () => {
+export const usePromoMovie = (): Movie => {
   return useSelector(getPromoMovie);
 };
 
-export const useFavoriteMovies = () => {
+export const useFavoriteMovies = (): Array<Movie> => {
   return useSelector(getFavoriteMovies);
 };
 
-export const useMovieReviews = () => {
+export const useMovieReviews = (): Array<Review> => {
   return useSelector(getMovieReviews);
 };
 
-export const useShovedMoviesCount = () => {
-  return useSelector(getShowedMoviesCount);
-};
-
-export const useDataLoadingStatus = () => {
+export const useDataLoadingStatus = (): boolean => {
   return useSelector(getLoadingStatus);
 };
 
-export const useFavoritesLoadingStatus = () => {
+export const useFavoritesLoadingStatus = (): boolean => {
   return useSelector(getFavoritesLoadingStatus);
 };
 
-export const useSendingErrorStatus = () => {
+export const useSendingErrorStatus = (): boolean => {
   return useSelector(getSendingErrorStatus);
 };
 
-export const useReviewSendingStatus = () => {
+export const useReviewSendingStatus = (): boolean => {
   return useSelector(getReviewSendingStatus);
 };
 
-export const useAllGenres = () => {
+export const useAllGenres = (): Array<string> => {
   return useSelector(getAllGenres);
 };
 
-export const useFilteredMoviesByGenre = () => {
+export const useFilteredMoviesByGenre = (): Array<Movie> => {
   return useSelector(getFilteredMoviesByGenre);
 };
 
-export const useShowedMovies = () => {
+export const useShowedMovies = (): Array<Movie> => {
   return useSelector(getShowedMovies);
 };
 
-export const useCurrentMovie = (id) => {
+export const useCurrentMovie = (id: string): Movie => {
   return useSelector(getCurrentMovie(id));
 };
 
-export const useErrorMessage = () => {
+export const useErrorMessage = (): string => {
   return useSelector(getErrorMessage);
-}
+};

@@ -1,3 +1,22 @@
+export interface Movie {
+  name: string;
+  posterImage: string;
+  backgroundImage: string;
+  backgroundColor: string;
+  description: string;
+  rating: number;
+  scoresCount: number;
+  director: string;
+  starring: Array<string>;
+  runtime: number;
+  genre: string;
+  released: number;
+  id: number;
+  isFavorite: boolean;
+  videoLink: string;
+  previewVideoLink: string;
+}
+
 export interface Review extends ReviewPure {
   id: number;
   user: User;
