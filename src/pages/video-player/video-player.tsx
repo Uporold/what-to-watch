@@ -1,50 +1,65 @@
-import React, { useRef, useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
+import { RouteComponentProps } from "react-router";
 import { TIME_IN_SECONDS } from "../../utilities/const";
 import history from "../../history";
 import { useCurrentMovie } from "../../redux/data/hooks/selectors";
 
-const VideoPlayer = ({ match }) => {
-  const videoRef = useRef();
+interface MatchParams {
+  id: string;
+}
+
+type Props = RouteComponentProps<MatchParams>;
+
+const VideoPlayer: React.FC<Props> = ({ match }): JSX.Element => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const movie = useCurrentMovie(match.params.id);
 
   const [isPlaying, setPlayStatus] = useState(true);
-  const [duration, changeDuration] = useState(null);
-  const [currentTime, setTime] = useState(null);
+  const [duration, changeDuration] = useState<number>(0);
+  const [currentTime, setTime] = useState<number>(0);
 
   const togglePosition = (currentTime / duration) * 100;
 
-  useEffect(() => {
+  // componentDidMount
+  useLayoutEffect(() => {
     const video = videoRef.current;
     const { videoLink, backgroundImage } = movie;
+    if (video !== null) {
+      video.src = videoLink;
+      video.poster = backgroundImage;
 
-    video.src = videoLink;
-    video.poster = backgroundImage;
+      video.onloadedmetadata = () => changeDuration(video.duration);
 
-    video.onloadedmetadata = () => changeDuration(video.duration);
+      video.ontimeupdate = () => setTime(Math.floor(video.currentTime));
 
-    video.ontimeupdate = () => setTime(Math.floor(video.currentTime));
-
-    // componentWillUnmount
-    return () => {
-      video.src = ``;
-      video.poster = ``;
-      video.onloadedmetadata = null;
-      video.ontimeupdate = null;
-    };
+      // componentWillUnmount
+      return () => {
+        video.src = ``;
+        video.poster = ``;
+        video.onloadedmetadata = null;
+        video.ontimeupdate = null;
+      };
+    }
+    return () => null;
   }, [movie]);
 
-  useEffect(() => {
+  // componentDidUpdate
+  useLayoutEffect(() => {
     const video = videoRef.current;
-    if (isPlaying) {
-      video.play();
-    } else {
-      video.pause();
+    if (video !== null) {
+      const playPromise = video.play();
+      if (isPlaying && playPromise !== undefined) {
+        playPromise.then((_) => console.log("video played auto"));
+      } else {
+        video.pause();
+      }
     }
   });
 
   const onFullscreenClickHandler = () => {
-    videoRef.current.requestFullscreen();
+    if (videoRef.current !== null) {
+      videoRef.current.requestFullscreen();
+    }
   };
 
   const onExitButtonClickHandler = () => {
@@ -58,7 +73,7 @@ const VideoPlayer = ({ match }) => {
   const getTimeLeft = () => {
     const timeLeft = duration - currentTime;
 
-    const formatTime = (time) => {
+    const formatTime = (time: number) => {
       return time < 10 ? `0${time}` : time;
     };
 
@@ -154,14 +169,6 @@ const VideoPlayer = ({ match }) => {
       </div>
     </div>
   );
-};
-
-VideoPlayer.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
 };
 
 export default VideoPlayer;
