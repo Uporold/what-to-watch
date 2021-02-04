@@ -9,7 +9,7 @@ import {
   useFavoritesLoadingStatus,
 } from "../../redux/data/hooks/selectors";
 
-const MyList = () => {
+const MyList: React.FC = (): JSX.Element => {
   const loadFavoriteMovies = useLoadFavoriteMovies();
   const isFavoritesLoading = useFavoritesLoadingStatus();
   const favoriteMovies = useFavoriteMovies();
