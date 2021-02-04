@@ -1,9 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
-import { projectPropTypes } from "../../utilities/project-prop-types";
+import { Movie } from "../../utilities/types";
 
-const MoviesList = ({ movies }) => {
+interface Props {
+  movies: Array<Movie>;
+}
+
+const MoviesList: React.FC<Props> = ({ movies }): JSX.Element => {
   return (
     <div className="catalog__movies-list">
       {movies.map((movie) => (
@@ -11,10 +14,6 @@ const MoviesList = ({ movies }) => {
       ))}
     </div>
   );
-};
-
-MoviesList.propTypes = {
-  movies: PropTypes.arrayOf(projectPropTypes.MOVIE.isRequired).isRequired,
 };
 
 export default MoviesList;

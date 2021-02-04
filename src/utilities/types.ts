@@ -1,6 +1,7 @@
 export interface Movie {
   name: string;
   posterImage: string;
+  previewImage: string;
   backgroundImage: string;
   backgroundColor: string;
   description: string;
