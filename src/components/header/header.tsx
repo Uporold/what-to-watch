@@ -1,12 +1,25 @@
 import React, { memo } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
   useAuthorizationStatus,
   useUser,
 } from "../../redux/user/hooks/selectors";
 
-const Header = memo(
+interface Props {
+  isFavoritesPage?: boolean;
+  isLoginPage?: boolean;
+  isErrorPage?: boolean;
+  children?: React.ReactNode;
+}
+
+const defaultProps: Props = {
+  isFavoritesPage: false,
+  isLoginPage: false,
+  isErrorPage: false,
+  children: null,
+};
+
+const Header: React.FC<Props> = memo(
   ({ children, isFavoritesPage, isLoginPage, isErrorPage }) => {
     const authorizationStatus = useAuthorizationStatus();
     const user = useUser();
@@ -59,21 +72,9 @@ const Header = memo(
         </div>
       </header>
     );
-  }
+  },
 );
 
-Header.propTypes = {
-  children: PropTypes.element,
-  isFavoritesPage: PropTypes.bool,
-  isLoginPage: PropTypes.bool,
-  isErrorPage: PropTypes.bool,
-};
-
-Header.defaultProps = {
-  isFavoritesPage: false,
-  isLoginPage: false,
-  isErrorPage: false,
-  children: null,
-};
+Header.defaultProps = defaultProps;
 
 export default Header;
