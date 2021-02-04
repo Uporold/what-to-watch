@@ -3,18 +3,18 @@ import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 import { useLogin } from "../../redux/user/hooks/useLogin";
 
-const SignIn = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+const SignIn: React.FC = (): JSX.Element => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = useLogin();
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
 
     onSubmit({
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
+      email: (emailRef.current as HTMLInputElement).value,
+      password: (passwordRef.current as HTMLInputElement).value,
     });
   };
 
