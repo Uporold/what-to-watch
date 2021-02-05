@@ -2,8 +2,13 @@ import React from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 import { projectPropTypes } from "../../utilities/project-prop-types";
+import {Review} from "../../utilities/types";
 
-const MoviePageReviews = ({ slicedReviews }) => {
+interface Props {
+  slicedReviews: [Array<Review>, Array<Review>];
+}
+
+const MoviePageReviews: React.FC<Props> = ({ slicedReviews }): JSX.Element => {
   return (
     <div className="movie-card__reviews movie-card__row">
       {slicedReviews.map((slicedReview, index) => {
@@ -33,11 +38,6 @@ const MoviePageReviews = ({ slicedReviews }) => {
       })}
     </div>
   );
-};
-
-MoviePageReviews.propTypes = {
-  slicedReviews: PropTypes.arrayOf(PropTypes.arrayOf(projectPropTypes.REVIEW))
-    .isRequired,
 };
 
 export default MoviePageReviews;

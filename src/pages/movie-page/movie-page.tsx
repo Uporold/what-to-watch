@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { RouteComponentProps } from "react-router";
 import MoviesList from "../../components/movies-list/movies-list";
 import Footer from "../../components/footer/footer";
 import MovieCardHero from "../../components/movie-card-hero/movie-card-hero";
@@ -8,14 +8,21 @@ import {
   useCurrentMovie,
   useAllMovies,
 } from "../../redux/data/hooks/selectors";
+import { Movie } from "../../utilities/types";
 
-const getRelatedMovies = (movie, movies) => {
+interface MatchParams {
+  id: string;
+}
+
+type Props = RouteComponentProps<MatchParams>;
+
+const getRelatedMovies = (movie: Movie, movies: Array<Movie>) => {
   return movies
     .filter((item) => item.genre === movie.genre && item.id !== movie.id)
     .slice(0, 4);
 };
 
-const MoviePage = ({ match }) => {
+const MoviePage: React.FC<Props> = ({ match }): JSX.Element => {
   const movie = useCurrentMovie(match.params.id);
   const movies = useAllMovies();
   return (
@@ -38,14 +45,6 @@ const MoviePage = ({ match }) => {
       </div>
     </>
   );
-};
-
-MoviePage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
 };
 
 export default MoviePage;

@@ -1,8 +1,12 @@
 import React from "react";
 import { getRatingLevel } from "../../utilities/util";
-import { projectPropTypes } from "../../utilities/project-prop-types";
+import { Movie } from "../../utilities/types";
 
-const MoviePageOverview = ({ movie }) => {
+interface Props {
+  movie: Movie;
+}
+
+const MoviePageOverview: React.FC<Props> = ({ movie }): JSX.Element => {
   const { rating, scoresCount, description, director, starring } = movie;
   const ratingLevel = getRatingLevel(rating);
   return (
@@ -27,10 +31,6 @@ const MoviePageOverview = ({ movie }) => {
       </div>
     </>
   );
-};
-
-MoviePageOverview.propTypes = {
-  movie: projectPropTypes.MOVIE.isRequired,
 };
 
 export default MoviePageOverview;

@@ -4,20 +4,24 @@ import { getSlicedReviews, movieNavs, usePrevious } from "../../utilities/util";
 import MoviePageOverview from "../movie-page-overview/movie-page-overview";
 import MoviePageDetails from "../movie-page-details/movie-page-details";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews";
-import { projectPropTypes } from "../../utilities/project-prop-types";
 import { useLoadMovieReviews } from "../../redux/data/hooks/useLoadMovieReviews";
 import { useMovieReviews } from "../../redux/data/hooks/selectors";
+import { Movie, Review } from "../../utilities/types";
 
-const MoviePageInfo = ({ movie }) => {
-  const [activeNavBar, setActiveNavBar] = useState(`overview`);
+interface Props {
+  movie: Movie;
+}
+
+const MoviePageInfo: React.FC<Props> = ({ movie }): JSX.Element => {
+  const [activeNavBar, setActiveNavBar] = useState<string>(`overview`);
   const previousMovieId = usePrevious(movie.id);
   const movieReviews = useMovieReviews();
 
   const loadMovieReviews = useLoadMovieReviews();
 
   const slicedReviews = useMemo(() => getSlicedReviews(movieReviews), [
-    movieReviews.length,
-  ]);
+    movieReviews,
+  ]) as [Array<Review>, Array<Review>]; // temp.remove
 
   useEffect(() => {
     if (previousMovieId && previousMovieId !== movie.id) {
@@ -26,7 +30,7 @@ const MoviePageInfo = ({ movie }) => {
     loadMovieReviews(movie.id);
   }, [loadMovieReviews, movie.id, previousMovieId]);
 
-  const renderActiveMovieNavInfo = (navBar) => {
+  const renderActiveMovieNavInfo = (navBar: string) => {
     switch (navBar) {
       case `overview`:
         return <MoviePageOverview movie={movie} />;
@@ -35,7 +39,7 @@ const MoviePageInfo = ({ movie }) => {
         return <MoviePageDetails movie={movie} />;
 
       case `reviews`:
-        return <MoviePageReviews movie={movie} slicedReviews={slicedReviews} />;
+        return <MoviePageReviews slicedReviews={slicedReviews} />;
 
       default:
         return <MoviePageOverview movie={movie} />;
@@ -65,10 +69,6 @@ const MoviePageInfo = ({ movie }) => {
       </div>
     </div>
   );
-};
-
-MoviePageInfo.propTypes = {
-  movie: projectPropTypes.MOVIE.isRequired,
 };
 
 export default MoviePageInfo;
