@@ -11,7 +11,7 @@ import {
 import { useShowMoreMovies } from "../../redux/data/hooks/useShowMoreMovies";
 import { useActiveGenre } from "../../redux/app/hooks/selectors";
 
-const Catalog = () => {
+const Catalog: React.FC = (): JSX.Element => {
   const movies = useAllMovies();
   const currentGenre = useActiveGenre();
   const moviesByGenre = useFilteredMoviesByGenre();

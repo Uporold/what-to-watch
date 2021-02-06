@@ -3,7 +3,7 @@ import Footer from "../../components/footer/footer";
 import MoviePromoCard from "../../components/movie-promo-card/movie-promo-card";
 import Catalog from "../../components/catalog/catalog";
 
-export const Main = () => {
+export const Main: React.FC = (): JSX.Element => {
   return (
     <>
       <MoviePromoCard />
