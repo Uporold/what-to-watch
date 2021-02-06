@@ -4,11 +4,11 @@ import Header from "../header/header";
 import { useChangeMovieFavoriteStatus } from "../../redux/data/hooks/useChangeMovieFavoriteStatus";
 import { usePromoMovie } from "../../redux/data/hooks/selectors";
 
-const MoviePromoCard = () => {
+const MoviePromoCard: React.FC = (): JSX.Element => {
   const promoMovie = usePromoMovie();
   const changeMovieFavoriteStatus = useChangeMovieFavoriteStatus();
 
-  const onButtonClickHandler = (movieId, isFavorite) => () => {
+  const onButtonClickHandler = (movieId: number, isFavorite: boolean) => () => {
     changeMovieFavoriteStatus(movieId, isFavorite);
   };
 
@@ -56,7 +56,7 @@ const MoviePromoCard = () => {
                 type="button"
                 onClick={onButtonClickHandler(
                   promoMovie.id,
-                  !promoMovie.isFavorite
+                  !promoMovie.isFavorite,
                 )}
               >
                 {!promoMovie.isFavorite ? (
