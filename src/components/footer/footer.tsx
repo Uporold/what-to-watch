@@ -1,6 +1,6 @@
 import React from "react";
 
-const Footer = () => {
+const Footer: React.FC = (): JSX.Element => {
   return (
     <footer className="page-footer">
       <div className="logo">
