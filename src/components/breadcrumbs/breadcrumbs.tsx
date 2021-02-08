@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { projectPropTypes } from "../../utilities/project-prop-types";
+import { Movie } from "../../utilities/types";
 
-const Breadcrumbs = ({ movie }) => {
+interface Props {
+  movie: Movie;
+}
+
+const Breadcrumbs: React.FC<Props> = ({ movie }): JSX.Element => {
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
@@ -17,10 +21,6 @@ const Breadcrumbs = ({ movie }) => {
       </ul>
     </nav>
   );
-};
-
-Breadcrumbs.propTypes = {
-  movie: projectPropTypes.MOVIE.isRequired,
 };
 
 export default Breadcrumbs;
