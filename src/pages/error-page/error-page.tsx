@@ -3,7 +3,7 @@ import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 import { useErrorMessage } from "../../redux/data/hooks/selectors";
 
-const ErrorPage = () => {
+const ErrorPage: React.FC = (): JSX.Element => {
   const errorMessage = useErrorMessage();
   return (
     <>
