@@ -1,7 +1,7 @@
 import React from "react";
-import { projectPropTypes } from "../../utilities/project-prop-types";
+import { Movie } from "../../utilities/types";
 
-const getRuntime = (runtime) => {
+const getRuntime = (runtime: number) => {
   const hours =
     Math.floor(runtime / 60) > 0 ? `${Math.floor(runtime / 60)}h` : "";
   const minutes = runtime % 60 > 0 ? `${runtime % 60}m` : "";
@@ -9,7 +9,11 @@ const getRuntime = (runtime) => {
   return `${hours} ${minutes}`;
 };
 
-const MoviePageDetails = ({ movie }) => {
+interface Props {
+  movie: Movie;
+}
+
+const MoviePageDetails: React.FC<Props> = ({ movie }): JSX.Element => {
   const { director, starring, runtime, genre, released } = movie;
   return (
     <div className="movie-card__text movie-card__row">
@@ -44,10 +48,6 @@ const MoviePageDetails = ({ movie }) => {
       </div>
     </div>
   );
-};
-
-MoviePageDetails.propTypes = {
-  movie: projectPropTypes.MOVIE.isRequired,
 };
 
 export default MoviePageDetails;
