@@ -1,16 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../header/header";
-import { projectPropTypes } from "../../utilities/project-prop-types";
 import { useAuthorizationStatus } from "../../redux/user/hooks/selectors";
 import { useChangeMovieFavoriteStatus } from "../../redux/data/hooks/useChangeMovieFavoriteStatus";
+import { Movie } from "../../utilities/types";
 
-const MovieCardHero = ({ movie }) => {
+interface Props {
+  movie: Movie;
+}
+
+const MovieCardHero: React.FC<Props> = ({ movie }): JSX.Element => {
   const { backgroundImage, name, genre, released } = movie;
   const authorizationStatus = useAuthorizationStatus();
   const changeMovieFavoriteStatus = useChangeMovieFavoriteStatus();
 
-  const onButtonClickHandler = (movieId, isFavorite) => () => {
+  const onButtonClickHandler = (movieId: number, isFavorite: boolean) => () => {
     changeMovieFavoriteStatus(movieId, isFavorite);
   };
 
@@ -72,10 +76,6 @@ const MovieCardHero = ({ movie }) => {
       </div>
     </div>
   );
-};
-
-MovieCardHero.propTypes = {
-  movie: projectPropTypes.MOVIE.isRequired,
 };
 
 export default MovieCardHero;
