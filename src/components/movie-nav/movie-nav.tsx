@@ -1,8 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const MovieNav = ({ tabs, currentNav, onNavClick }) => {
-  const onNavClickHandler = (tab) => (evt) => {
+interface Props {
+  tabs: Array<string>;
+  currentNav: string;
+  onNavClick: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const MovieNav: React.FC<Props> = ({
+  tabs,
+  currentNav,
+  onNavClick,
+}): JSX.Element => {
+  const onNavClickHandler = (tab: string) => (evt: React.MouseEvent) => {
     evt.preventDefault();
     onNavClick(tab);
   };
@@ -34,12 +43,6 @@ const MovieNav = ({ tabs, currentNav, onNavClick }) => {
       <ul className="movie-nav__list">{renderNavItem()}</ul>
     </nav>
   );
-};
-
-MovieNav.propTypes = {
-  tabs: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  currentNav: PropTypes.string.isRequired,
-  onNavClick: PropTypes.func.isRequired,
 };
 
 export default MovieNav;
