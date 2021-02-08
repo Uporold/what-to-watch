@@ -49,7 +49,7 @@ const VideoPlayer: React.FC<Props> = ({ match }): JSX.Element => {
     if (video !== null) {
       const playPromise = video.play();
       if (isPlaying && playPromise !== undefined) {
-        playPromise.then((_) => console.log("video played auto"));
+        playPromise.then(() => console.log("video played auto"));
       } else {
         video.pause();
       }
