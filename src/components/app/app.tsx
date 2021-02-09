@@ -16,7 +16,7 @@ import {
 } from "../../redux/user/hooks/selectors";
 import { useDataLoadingStatus } from "../../redux/data/hooks/selectors";
 
-const App = () => {
+const App: React.FC = (): JSX.Element => {
   const authorizationStatus = useAuthorizationStatus();
   const isAuthorizationLoading = useAuthorizationLoadingStatus();
   const isDataLoading = useDataLoadingStatus();
