@@ -1,5 +1,6 @@
 import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { RouteComponentProps } from "react-router";
 import MoviePage from "../../pages/movie-page/movie-page";
 import Main from "../../pages/main/main";
 import VideoPlayer from "../../pages/video-player/video-player";
@@ -16,10 +17,15 @@ import {
 } from "../../redux/user/hooks/selectors";
 import { useDataLoadingStatus } from "../../redux/data/hooks/selectors";
 
+interface MatchParams {
+  id: string;
+}
+
 const App: React.FC = (): JSX.Element => {
   const authorizationStatus = useAuthorizationStatus();
   const isAuthorizationLoading = useAuthorizationLoadingStatus();
   const isDataLoading = useDataLoadingStatus();
+
   return (
     <>
       {!isDataLoading && !isAuthorizationLoading ? (
@@ -39,7 +45,11 @@ const App: React.FC = (): JSX.Element => {
             <PrivateRoute
               exact
               path="/films/:id/review"
-              render={(routeProps) => <AddReview routeProps={routeProps} />}
+              render={(routeProps) => (
+                <AddReview
+                  routeProps={routeProps as RouteComponentProps<MatchParams>}
+                />
+              )}
             />
             <PrivateRoute exact path="/favorites" render={() => <MyList />} />
             <Route exact path="/error" component={ErrorPage} />
