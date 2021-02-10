@@ -17,10 +17,6 @@ import {
 } from "../../redux/user/hooks/selectors";
 import { useDataLoadingStatus } from "../../redux/data/hooks/selectors";
 
-interface MatchParams {
-  id: string;
-}
-
 const App: React.FC = (): JSX.Element => {
   const authorizationStatus = useAuthorizationStatus();
   const isAuthorizationLoading = useAuthorizationLoadingStatus();
@@ -45,13 +41,9 @@ const App: React.FC = (): JSX.Element => {
             <PrivateRoute
               exact
               path="/films/:id/review"
-              render={(routeProps) => (
-                <AddReview
-                  routeProps={routeProps as RouteComponentProps<MatchParams>}
-                />
-              )}
+              component={AddReview}
             />
-            <PrivateRoute exact path="/favorites" render={() => <MyList />} />
+            <PrivateRoute exact path="/favorites" component={MyList} />
             <Route exact path="/error" component={ErrorPage} />
           </Switch>
         </Router>

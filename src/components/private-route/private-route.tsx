@@ -1,18 +1,13 @@
 import React from "react";
-import {
-  Route,
-  Redirect,
-  RouteProps,
-  RouteChildrenProps,
-} from "react-router-dom";
+import { Route, Redirect, RouteProps } from "react-router-dom";
 import { useAuthorizationStatus } from "../../redux/user/hooks/selectors";
 
 interface Props extends RouteProps {
-  render: (routeProps: RouteChildrenProps) => React.ReactNode;
+  component: any;
 }
 
 const PrivateRoute: React.FC<Props> = (props): JSX.Element => {
-  const { render, path, exact } = props;
+  const { component: Component, path, exact } = props;
   const authorizationStatus = useAuthorizationStatus();
   return (
     <Route
@@ -20,7 +15,7 @@ const PrivateRoute: React.FC<Props> = (props): JSX.Element => {
       exact={exact}
       render={(routeProps) => {
         return authorizationStatus ? (
-          render(routeProps)
+          <Component routeProps={routeProps} />
         ) : (
           <Redirect to="/login" />
         );
