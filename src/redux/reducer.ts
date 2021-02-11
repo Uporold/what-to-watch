@@ -9,3 +9,7 @@ export default combineReducers({
   [NameSpace.APP]: app,
   [NameSpace.USER]: user,
 });
+
+export type InferActionsTypes<T> = T extends { [key: string]: infer U }
+  ? U
+  : never;
