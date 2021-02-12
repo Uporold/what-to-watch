@@ -1,20 +1,29 @@
+import { AxiosResponse } from "axios";
 import { createMovie } from "../adapter/adapter";
 import history from "../../history";
+import { Movie, MovieBackend, Review, ReviewPure } from "../../utilities/types";
+// eslint-disable-next-line import/no-cycle
+import { BaseThunkActionType, InferActionsTypes } from "../reducer";
 
 const CUT_LENGTH = 4;
 
+type UserActionTypes = ReturnType<InferActionsTypes<typeof ActionCreator>>;
+type ThunkActionType = BaseThunkActionType<UserActionTypes>;
+
 export const initialState = {
-  movies: [],
-  promoMovie: {},
-  favoriteMovies: [],
-  movieReviews: [],
-  showedMoviesCount: CUT_LENGTH,
-  isDataLoading: true,
-  isFavoritesLoading: true,
-  isSendingError: false,
-  isReviewSending: false,
-  errorMessage: ``,
+  movies: [] as Array<Movie>,
+  promoMovie: {} as Movie,
+  favoriteMovies: [] as Array<Movie>,
+  movieReviews: [] as Array<Review>,
+  showedMoviesCount: CUT_LENGTH as number,
+  isDataLoading: true as boolean,
+  isFavoritesLoading: true as boolean,
+  isSendingError: false as boolean,
+  isReviewSending: false as boolean,
+  errorMessage: `` as string,
 };
+
+type InitialStateType = typeof initialState;
 
 export const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
@@ -29,31 +38,31 @@ export const ActionType = {
   SET_SENDING_ERROR_STATUS: `SET_SENDING_ERROR_STATUS`,
   SET_REVIEW_SENDING_STATUS: `SET_REVIEW_SENDING_STATUS`,
   SET_ERROR_MESSAGE: `SET_ERROR_MESSAGE`,
-};
+} as const;
 
 export const ActionCreator = {
-  loadMovies: (data) => {
+  loadMovies: (data: Array<Movie>) => {
     return {
       type: ActionType.LOAD_MOVIES,
       payload: data,
     };
   },
 
-  loadPromoMovie: (data) => {
+  loadPromoMovie: (data: Movie) => {
     return {
       type: ActionType.LOAD_PROMO_MOVIE,
       payload: data,
     };
   },
 
-  loadFavoriteMovies: (data) => {
+  loadFavoriteMovies: (data: Array<Movie>) => {
     return {
       type: ActionType.LOAD_FAVORITE_MOVIES,
       payload: data,
     };
   },
 
-  loadMovieReviews: (data) => {
+  loadMovieReviews: (data: Array<Review>) => {
     return {
       type: ActionType.LOAD_MOVIE_REVIEWS,
       payload: data,
@@ -84,28 +93,28 @@ export const ActionCreator = {
     };
   },
 
-  updateFavoriteStatus: (movie) => {
+  updateFavoriteStatus: (movie: Movie) => {
     return {
       type: ActionType.UPDATE_FAVORITE_STATUS,
       payload: movie,
     };
   },
 
-  setSendingErrorStatus: (status) => {
+  setSendingErrorStatus: (status: boolean) => {
     return {
       type: ActionType.SET_SENDING_ERROR_STATUS,
       payload: status,
     };
   },
 
-  setReviewSendingStatus: (status) => {
+  setReviewSendingStatus: (status: boolean) => {
     return {
       type: ActionType.SET_REVIEW_SENDING_STATUS,
       payload: status,
     };
   },
 
-  setErrorMessage: (message) => {
+  setErrorMessage: (message: string) => {
     return {
       type: ActionType.SET_ERROR_MESSAGE,
       payload: message,
@@ -114,37 +123,51 @@ export const ActionCreator = {
 };
 
 export const Operation = {
-  loadMovies: () => (dispatch, getState, api) => {
+  loadMovies: (): ThunkActionType => (dispatch, getState, api) => {
     return api.get(`/films`).then((response) => {
-      const loadedMovies = response.data.map((movie) => createMovie(movie));
+      const loadedMovies = response.data.map((movie: MovieBackend) =>
+        createMovie(movie),
+      );
       dispatch(ActionCreator.loadMovies(loadedMovies));
       dispatch(ActionCreator.finishLoading());
     });
   },
 
-  loadPromoMovie: () => (dispatch, getState, api) => {
+  loadPromoMovie: (): ThunkActionType => (dispatch, getState, api) => {
     return api.get(`/films/promo`).then((response) => {
       const loadedPromo = createMovie(response.data);
       dispatch(ActionCreator.loadPromoMovie(loadedPromo));
     });
   },
 
-  loadFavoriteMovies: () => (dispatch, getState, api) => {
-    return api.get(`/favorite`).then((response) => {
-      const loadedMovies = response.data.map((movie) => createMovie(movie));
-      dispatch(ActionCreator.loadFavoriteMovies(loadedMovies));
-      dispatch(ActionCreator.finishFavoritesLoading());
-    });
+  loadFavoriteMovies: (): ThunkActionType => (dispatch, getState, api) => {
+    return api
+      .get(`/favorite`)
+      .then((response: AxiosResponse<Array<MovieBackend>>) => {
+        const loadedMovies = response.data.map((movie) => createMovie(movie));
+        dispatch(ActionCreator.loadFavoriteMovies(loadedMovies));
+        dispatch(ActionCreator.finishFavoritesLoading());
+      });
   },
 
-  loadMovieReviews: (movieId) => (dispatch, getState, api) => {
-    return api.get(`/comments/${movieId}`).then((response) => {
-      const loadedComments = response.data.map((comment) => comment);
-      dispatch(ActionCreator.loadMovieReviews(loadedComments));
-    });
+  loadMovieReviews: (movieId: number): ThunkActionType => (
+    dispatch,
+    getState,
+    api,
+  ) => {
+    return api
+      .get(`/comments/${movieId}`)
+      .then((response: AxiosResponse<Array<Review>>) => {
+        const loadedComments = response.data.map((comment) => comment);
+        dispatch(ActionCreator.loadMovieReviews(loadedComments));
+      });
   },
 
-  sendReview: (movieId, review) => (dispatch, getState, api) => {
+  sendReview: (movieId: number, review: ReviewPure): ThunkActionType => (
+    dispatch,
+    getState,
+    api,
+  ) => {
     dispatch(ActionCreator.setReviewSendingStatus(true));
     return api
       .post(`/comments/${movieId}`, {
@@ -162,16 +185,15 @@ export const Operation = {
       });
   },
 
-  changeMovieFavoriteStatus: (movieId, isFavorite) => (
-    dispatch,
-    getState,
-    api
-  ) => {
+  changeMovieFavoriteStatus: (
+    movieId: number,
+    isFavorite: boolean,
+  ): ThunkActionType => (dispatch, getState, api) => {
     return api
       .post(`/favorite/${movieId}/${isFavorite ? 1 : 0}`, {})
       .then((response) => {
         dispatch(
-          ActionCreator.updateFavoriteStatus(createMovie(response.data))
+          ActionCreator.updateFavoriteStatus(createMovie(response.data)),
         );
       })
       .catch((err) => {
@@ -186,7 +208,10 @@ export const Operation = {
   },
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (
+  state = initialState,
+  action: UserActionTypes,
+): InitialStateType => {
   switch (action.type) {
     case ActionType.LOAD_MOVIES:
       return { ...state, movies: action.payload };
@@ -208,15 +233,10 @@ export const reducer = (state = initialState, action) => {
     case ActionType.FINISH_FAVORITES_LOADING:
       return { ...state, isFavoritesLoading: action.payload };
     case ActionType.UPDATE_FAVORITE_STATUS: {
-      const favoriteIndex = state.movies.findIndex(
-        (item) => item.id === action.payload.id
-      );
       return {
         ...state,
-        movies: [].concat(
-          ...state.movies.slice(0, favoriteIndex),
-          action.payload,
-          ...state.movies.slice(favoriteIndex + 1, state.movies.length)
+        movies: state.movies.map((item) =>
+          item.id === action.payload.id ? action.payload : item,
         ),
         promoMovie:
           state.promoMovie.id === action.payload.id

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./components/app/app";
-import reducer from "./redux/reducer";
+import { rootReducer } from "./redux/reducer";
 import { createAPI } from "./api";
 import { Operation as DataOperation } from "./redux/data/data";
 import { Operation as UserOperation, ActionCreator } from "./redux/user/user";
@@ -27,8 +27,8 @@ const onUnauthorized = (err) => {
 const api = createAPI(onUnauthorized);
 
 const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))),
 );
 
 store.dispatch(DataOperation.loadMovies());
@@ -39,5 +39,5 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
