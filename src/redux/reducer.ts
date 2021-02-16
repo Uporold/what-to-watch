@@ -1,8 +1,11 @@
 import { Action, combineReducers } from "redux";
 import { AxiosInstance } from "axios";
 import { ThunkAction } from "redux-thunk";
+// eslint-disable-next-line import/no-cycle
 import { reducer as data, ActionCreator as DataActions } from "./data/data";
+// eslint-disable-next-line import/no-cycle
 import { reducer as app, ActionCreator as AppActions } from "./app/app";
+// eslint-disable-next-line import/no-cycle
 import { reducer as user, ActionCreator as UserActions } from "./user/user";
 
 export const rootReducer = combineReducers({
