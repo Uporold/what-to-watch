@@ -33,7 +33,8 @@ const AddReview: React.FC<Props> = ({ routeProps }): JSX.Element => {
   const isReviewSending = useReviewSendingStatus();
   const isSendingError = useSendingErrorStatus();
   const setSendingErrorStatus = useSetSendingErrorStatus();
-  const movie = useCurrentMovie(routeProps.match.params.id);
+  const movieId = Number(routeProps.match.params.id);
+  const movie = useCurrentMovie(movieId);
 
   const onCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);

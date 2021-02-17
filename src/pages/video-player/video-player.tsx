@@ -12,7 +12,8 @@ type Props = RouteComponentProps<MatchParams>;
 
 const VideoPlayer: React.FC<Props> = ({ match }): JSX.Element => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const movie = useCurrentMovie(match.params.id);
+  const movieId = Number(match.params.id);
+  const movie = useCurrentMovie(movieId);
 
   const [isPlaying, setPlayStatus] = useState(true);
   const [duration, changeDuration] = useState<number>(0);

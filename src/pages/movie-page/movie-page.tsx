@@ -23,7 +23,8 @@ const getRelatedMovies = (movie: Movie, movies: Array<Movie>) => {
 };
 
 const MoviePage: React.FC<Props> = ({ match }): JSX.Element => {
-  const movie = useCurrentMovie(match.params.id);
+  const movieId = Number(match.params.id);
+  const movie = useCurrentMovie(movieId);
   const movies = useAllMovies();
   return (
     <>

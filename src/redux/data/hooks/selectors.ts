@@ -60,8 +60,8 @@ export const useShowedMovies = (): Array<Movie> => {
   return useSelector(getShowedMovies);
 };
 
-export const useCurrentMovie = (id: string): Movie => {
-  return useSelector(getCurrentMovie(id));
+export const useCurrentMovie = (id: number): Movie => {
+  return useSelector(getCurrentMovie(id)) as Movie;
 };
 
 export const useErrorMessage = (): string => {
