@@ -4,16 +4,12 @@ import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import Genres from "./genres";
 import { movies } from "../../mock/movies";
-import NameSpace from "../../redux/name-space";
 
 const mockStore = configureStore([]);
 
 it(`Should Genres List render correctly`, () => {
   const store = mockStore({
-    [NameSpace.APP]: {
-      currentGenre: `All genres`,
-    },
-    [NameSpace.DATA]: {
+    DATA: {
       movies,
     },
   });
@@ -21,7 +17,7 @@ it(`Should Genres List render correctly`, () => {
   const tree = renderer
     .create(
       <Provider store={store}>
-        <Genres />
+        <Genres  currentGenre={`All genres`}/>
       </Provider>
     )
     .toJSON();

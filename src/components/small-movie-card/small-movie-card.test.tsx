@@ -9,16 +9,14 @@ it(`Should Movie Card render correctly`, () => {
     .create(
       <Router>
         <SmallMovieCard
-          onSmallCardMovieClick={() => {}}
           movie={movies[0]}
-          onHover={() => {}}
         />
       </Router>,
       {
         createNodeMock: () => {
           return {};
         },
-      }
+      },
     )
     .toJSON();
 

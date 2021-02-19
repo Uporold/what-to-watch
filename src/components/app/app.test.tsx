@@ -10,14 +10,14 @@ const mockStore = configureStore([]);
 
 it(`Render App`, () => {
   const store = mockStore({
-    [NameSpace.APP]: {
+    APP: {
       currentGenre: `All genres`,
     },
-    [NameSpace.USER]: {
+    USER: {
       authorizationStatus: false,
       isAuthorizationLoading: false,
     },
-    [NameSpace.DATA]: {
+    DATA: {
       isDataLoading: false,
       movies,
       promoMovie: movies[0],
@@ -33,7 +33,7 @@ it(`Render App`, () => {
         createNodeMock: () => {
           return {};
         },
-      }
+      },
     )
     .toJSON();
 

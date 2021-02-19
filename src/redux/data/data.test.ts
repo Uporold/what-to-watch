@@ -55,8 +55,8 @@ it(`Reducer should update movies by load movies`, () => {
       {
         type: ActionType.LOAD_MOVIES,
         payload: movies,
-      }
-    )
+      },
+    ),
   ).toEqual({
     movies,
   });
@@ -71,8 +71,8 @@ it(`Reducer should update favorite movies by load favorite movies`, () => {
       {
         type: ActionType.LOAD_FAVORITE_MOVIES,
         payload: movies,
-      }
-    )
+      },
+    ),
   ).toEqual({
     favoriteMovies: movies,
   });
@@ -87,8 +87,8 @@ it(`Reducer should update favorite movies by load promo movie`, () => {
       {
         type: ActionType.LOAD_PROMO_MOVIE,
         payload: movies[0],
-      }
-    )
+      },
+    ),
   ).toEqual({
     promoMovie: movies[0],
   });
@@ -103,8 +103,8 @@ it(`Reducer should update movie reviews by load movie reviews`, () => {
       {
         type: ActionType.LOAD_MOVIE_REVIEWS,
         payload: reviews,
-      }
-    )
+      },
+    ),
   ).toEqual({
     movieReviews: reviews,
   });
@@ -119,8 +119,8 @@ it(`Reducer should update showed movies count by show more movies`, () => {
       {
         type: ActionType.SHOW_MORE_MOVIES,
         payload: 4,
-      }
-    )
+      },
+    ),
   ).toEqual({
     showedMoviesCount: 8,
   });
@@ -135,8 +135,8 @@ it(`Reducer should finish movies loading correctly`, () => {
       {
         type: ActionType.FINISH_LOADING,
         payload: false,
-      }
-    )
+      },
+    ),
   ).toEqual({
     isDataLoading: false,
   });
@@ -151,8 +151,8 @@ it(`Reducer should finish favorite movies loading correctly`, () => {
       {
         type: ActionType.FINISH_FAVORITES_LOADING,
         payload: false,
-      }
-    )
+      },
+    ),
   ).toEqual({
     isFavoritesLoading: false,
   });
@@ -168,8 +168,8 @@ it(`Reducer should update favorite movies`, () => {
       {
         type: ActionType.UPDATE_FAVORITE_STATUS,
         payload: movies[0],
-      }
-    )
+      },
+    ),
   ).toEqual({
     movies,
     promoMovie: [],
@@ -185,8 +185,8 @@ it(`Reducer should send error status correctly`, () => {
       {
         type: ActionType.SET_SENDING_ERROR_STATUS,
         payload: true,
-      }
-    )
+      },
+    ),
   ).toEqual({
     isSendingError: true,
   });
@@ -201,8 +201,8 @@ it(`Reducer should send review sending status correctly`, () => {
       {
         type: ActionType.SET_REVIEW_SENDING_STATUS,
         payload: true,
-      }
-    )
+      },
+    ),
   ).toEqual({
     isReviewSending: true,
   });
@@ -217,8 +217,8 @@ it(`Reducer should load error message`, () => {
       {
         type: ActionType.SET_ERROR_MESSAGE,
         payload: `Testing error message`,
-      }
-    )
+      },
+    ),
   ).toEqual({
     errorMessage: `Testing error message`,
   });

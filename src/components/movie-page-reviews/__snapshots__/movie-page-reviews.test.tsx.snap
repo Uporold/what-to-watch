@@ -16,39 +16,6 @@ exports[`Should Movie Page Reviews render correctly 1`] = `
         <p
           className="review__text"
         >
-          Unfortunately we don't have a reliable way to tell the true ratings of a movie.
-        </p>
-        <footer
-          className="review__details"
-        >
-          <cite
-            className="review__author"
-          >
-            Zak
-          </cite>
-          <time
-            className="review__date"
-            dateTime="2020-07-29"
-          >
-            July 29, 2020
-          </time>
-        </footer>
-      </blockquote>
-      <div
-        className="review__rating"
-      >
-        3.7
-      </div>
-    </div>
-    <div
-      className="review"
-    >
-      <blockquote
-        className="review__quote"
-      >
-        <p
-          className="review__text"
-        >
           I personally found this movie to be boring. Definitely one of the most boring movies I've ever seen.
         </p>
         <footer

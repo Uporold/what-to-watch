@@ -14,7 +14,7 @@ it(`Should Movies List render correctly`, () => {
         createNodeMock: () => {
           return {};
         },
-      }
+      },
     )
     .toJSON();
 

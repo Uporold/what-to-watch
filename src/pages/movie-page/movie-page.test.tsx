@@ -1,36 +1,37 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import { BrowserRouter as Router } from "react-router-dom";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
-import VideoPlayer from "./video-player";
-import NameSpace from "../../redux/name-space";
+import MoviePage from "./movie-page";
 import { movies } from "../../mock/movies";
+import { reviews } from "../../mock/reviews";
 
 const mockStore = configureStore([]);
 
-it(`VideoPlayer component render`, () => {
+it(`Should Movie Page render correctly`, () => {
   const store = mockStore({
-    [NameSpace.DATA]: {
+    DATA: {
       movies,
+      movieReviews: reviews,
     },
-    [NameSpace.USER]: {
+    USER: {
       authorizationStatus: false,
     },
   });
-
   const tree = renderer
     .create(
       <Router>
         <Provider store={store}>
-          <VideoPlayer match={{ params: { id: 1 } }} />
+          {/* @ts-ignore */}
+          <MoviePage match={{ params: { id: `1` } }} />
         </Provider>
       </Router>,
       {
         createNodeMock: () => {
           return {};
         },
-      }
+      },
     )
     .toJSON();
 

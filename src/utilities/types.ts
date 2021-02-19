@@ -52,11 +52,11 @@ export interface ReviewPure {
 export interface User {
   id: number;
   name: string;
-  avatar: string;
 }
 
 export interface UserLogged extends User {
   email: string;
+  avatar: string;
 }
 
 export interface LoginData {

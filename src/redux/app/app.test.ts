@@ -16,8 +16,8 @@ it(`Reducer should change current genre by a given value`, () => {
       {
         type: ActionType.SET_GENRE,
         payload: `Comedy`,
-      }
-    )
+      },
+    ),
   ).toEqual({
     currentGenre: `Comedy`,
   });

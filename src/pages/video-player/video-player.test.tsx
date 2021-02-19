@@ -3,30 +3,29 @@ import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-import SignIn from "./sign-in";
-import NameSpace from "../../redux/name-space";
+import VideoPlayer from "./video-player";
+import { movies } from "../../mock/movies";
 
 const mockStore = configureStore([]);
 
-it(`Sign in page component render`, () => {
+it(`VideoPlayer component render`, () => {
   const store = mockStore({
-    [NameSpace.USER]: {
+    DATA: {
+      movies,
+    },
+    USER: {
       authorizationStatus: false,
     },
   });
 
   const tree = renderer
     .create(
+      <Provider store={store}>
       <Router>
-        <Provider store={store}>
-          <SignIn />
-        </Provider>
-      </Router>,
-      {
-        createNodeMock: () => {
-          return {};
-        },
-      }
+          {/* @ts-ignore */}
+          <VideoPlayer match={{ params: { id: `1` } }} />
+      </Router>
+      </Provider>
     )
     .toJSON();
 

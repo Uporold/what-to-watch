@@ -12,10 +12,10 @@ const mockStore = configureStore([]);
 
 it(`Should render correctly`, () => {
   const store = mockStore({
-    [NameSpace.APP]: {
+    APP: {
       currentGenre: `All genres`,
     },
-    [NameSpace.DATA]: {
+    DATA: {
       movies,
     },
   });
@@ -31,7 +31,7 @@ it(`Should render correctly`, () => {
         createNodeMock: () => {
           return {};
         },
-      }
+      },
     )
     .toJSON();
 

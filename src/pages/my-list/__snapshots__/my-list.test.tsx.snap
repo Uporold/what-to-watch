@@ -37,7 +37,6 @@ exports[`Favorites page component render 1`] = `
     >
       My list
        
-       
     </h1>
     <div
       className="user-block"

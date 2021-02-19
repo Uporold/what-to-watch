@@ -10,7 +10,7 @@ it(`Breadcrumbs component render correctly`, () => {
     .create(
       <Router history={history}>
         <Breadcrumbs movie={movies[0]} />
-      </Router>
+      </Router>,
     )
     .toJSON();
 

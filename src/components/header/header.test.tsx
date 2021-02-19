@@ -21,7 +21,7 @@ const userData = {
 describe(`Header tests`, () => {
   it(`Render Header on Main Page or Movie Page without login`, () => {
     const store = mockStore({
-      [NameSpace.USER]: {
+      USER: {
         authorizationStatus: false,
       },
     });
@@ -32,7 +32,7 @@ describe(`Header tests`, () => {
           <Provider store={store}>
             <Header />
           </Provider>
-        </Router>
+        </Router>,
       )
       .toJSON();
 
@@ -41,7 +41,7 @@ describe(`Header tests`, () => {
 
   it(`Render Header on Main Page or Movie Page with login`, () => {
     const store = mockStore({
-      [NameSpace.USER]: {
+      USER: {
         authorizationStatus: true,
         user: userData,
       },
@@ -53,7 +53,7 @@ describe(`Header tests`, () => {
           <Provider store={store}>
             <Header />
           </Provider>
-        </Router>
+        </Router>,
       )
       .toJSON();
 
@@ -62,7 +62,7 @@ describe(`Header tests`, () => {
 
   it(`Render Header on Review Page`, () => {
     const store = mockStore({
-      [NameSpace.USER]: {
+      USER: {
         authorizationStatus: true,
         user: userData,
       },
@@ -76,7 +76,7 @@ describe(`Header tests`, () => {
               <Breadcrumbs movie={movies[0]} />
             </Header>
           </Provider>
-        </Router>
+        </Router>,
       )
       .toJSON();
 
@@ -85,11 +85,11 @@ describe(`Header tests`, () => {
 
   it(`Render Header on Favorites Page`, () => {
     const store = mockStore({
-      [NameSpace.USER]: {
+      USER: {
         authorizationStatus: true,
         user: userData,
       },
-      [NameSpace.DATA]: {
+      DATA: {
         favoriteMovies: movies,
       },
     });
@@ -100,7 +100,7 @@ describe(`Header tests`, () => {
           <Provider store={store}>
             <Header isFavoritesPage />
           </Provider>
-        </Router>
+        </Router>,
       )
       .toJSON();
 
@@ -109,7 +109,7 @@ describe(`Header tests`, () => {
 
   it(`Render Header on Login Page`, () => {
     const store = mockStore({
-      [NameSpace.USER]: {
+      USER: {
         authorizationStatus: false,
       },
     });
@@ -120,7 +120,7 @@ describe(`Header tests`, () => {
           <Provider store={store}>
             <Header isLoginPage />
           </Provider>
-        </Router>
+        </Router>,
       )
       .toJSON();
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import { TIME_IN_SECONDS } from "../../utilities/const";
 import history from "../../history";
@@ -59,7 +59,9 @@ const VideoPlayer: React.FC<Props> = ({ match }): JSX.Element => {
 
   const onFullscreenClickHandler = () => {
     if (videoRef.current !== null) {
-      videoRef.current.requestFullscreen();
+      videoRef.current
+        .requestFullscreen()
+        .then(() => console.log("video fullscreen"));
     }
   };
 

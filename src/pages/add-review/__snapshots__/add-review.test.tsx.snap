@@ -118,13 +118,13 @@ exports[`Add Review tests Render Add Review page 1`] = `
       >
         <div
           className="rating__stars"
-          onChange={[Function]}
         >
           <input
             className="rating__input"
             disabled={false}
             id="star-1"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={1}
           />
@@ -140,6 +140,7 @@ exports[`Add Review tests Render Add Review page 1`] = `
             disabled={false}
             id="star-2"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={2}
           />
@@ -155,6 +156,7 @@ exports[`Add Review tests Render Add Review page 1`] = `
             disabled={false}
             id="star-3"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={3}
           />
@@ -170,6 +172,7 @@ exports[`Add Review tests Render Add Review page 1`] = `
             disabled={false}
             id="star-4"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={4}
           />
@@ -185,6 +188,7 @@ exports[`Add Review tests Render Add Review page 1`] = `
             disabled={false}
             id="star-5"
             name="rating"
+            onChange={[Function]}
             type="radio"
             value={5}
           />

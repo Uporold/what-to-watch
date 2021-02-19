@@ -18,11 +18,11 @@ const userData = {
 
 it(`Favorites page component render`, () => {
   const store = mockStore({
-    [NameSpace.DATA]: {
+    DATA: {
       favoriteMovies: movies,
       isFavoritesLoading: false,
     },
-    [NameSpace.USER]: {
+    USER: {
       authorizationStatus: true,
       user: userData,
     },
@@ -41,7 +41,7 @@ it(`Favorites page component render`, () => {
         createNodeMock: () => {
           return {};
         },
-      }
+      },
     )
     .toJSON();
 

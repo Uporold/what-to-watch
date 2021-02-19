@@ -1,8 +1,6 @@
 import React from "react";
 import moment from "moment";
-import PropTypes from "prop-types";
-import { projectPropTypes } from "../../utilities/project-prop-types";
-import {Review} from "../../utilities/types";
+import { Review } from "../../utilities/types";
 
 interface Props {
   slicedReviews: [Array<Review>, Array<Review>];

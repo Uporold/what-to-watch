@@ -12,7 +12,7 @@ it(`Should Movie Nav render correctly`, () => {
         currentNav={currentNav}
         onNavClick={() => {}}
         tabs={movieNavs}
-      />
+      />,
     )
     .toJSON();
 

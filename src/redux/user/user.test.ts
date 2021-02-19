@@ -16,11 +16,18 @@ const userData = {
   avatar: "https://4.react.pages.academy/img/test",
 };
 
+const userUnregistered = {
+  id: -1,
+  email: ``,
+  avatar: ``,
+  name: ``,
+};
+
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual({
     authorizationStatus: false,
     isAuthorizationLoading: true,
-    user: {},
+    user: userUnregistered,
   });
 });
 
@@ -33,8 +40,8 @@ it(`Reducer should change authorizationStatus by a given value`, () => {
       {
         type: ActionType.SET_AUTHORIZATION_STATUS,
         payload: true,
-      }
-    )
+      },
+    ),
   ).toEqual({
     authorizationStatus: true,
   });
@@ -47,8 +54,8 @@ it(`Reducer should change authorizationStatus by a given value`, () => {
       {
         type: ActionType.SET_AUTHORIZATION_STATUS,
         payload: false,
-      }
-    )
+      },
+    ),
   ).toEqual({
     authorizationStatus: false,
   });
@@ -61,8 +68,8 @@ it(`Reducer should change authorizationStatus by a given value`, () => {
       {
         type: ActionType.SET_AUTHORIZATION_STATUS,
         payload: true,
-      }
-    )
+      },
+    ),
   ).toEqual({
     authorizationStatus: true,
   });
@@ -75,8 +82,8 @@ it(`Reducer should change authorizationStatus by a given value`, () => {
       {
         type: ActionType.SET_AUTHORIZATION_STATUS,
         payload: false,
-      }
-    )
+      },
+    ),
   ).toEqual({
     authorizationStatus: false,
   });
@@ -91,8 +98,8 @@ it(`Reducer should change isAuthorizationLoading after receiving data from serve
       {
         type: ActionType.FINISH_AUTHORIZATION,
         payload: false,
-      }
-    )
+      },
+    ),
   ).toEqual({
     isAuthorizationLoading: false,
   });
@@ -102,13 +109,13 @@ it(`Reducer should get user data`, () => {
   expect(
     reducer(
       {
-        user: {},
+        user: userUnregistered,
       },
       {
         type: ActionType.GET_USER_DATA,
         payload: userData,
-      }
-    )
+      },
+    ),
   ).toEqual({
     user: userData,
   });
